@@ -771,10 +771,46 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     </div>
   </div>
   <div class="card">
-    <div class="card-hd"><div class="card-title">Activity Heatmap</div><div style="font-size:.62rem;color:var(--text2)">Last 16 weeks</div></div>
-    <div style="display:flex;gap:2px;margin-bottom:4px;font-family:var(--mono);font-size:.52rem;color:var(--text3)" id="hmMonths"></div>
-    <div style="overflow-x:auto"><div class="heatmap" id="heatmap"></div></div>
-    <div class="row" style="margin-top:7px;font-size:.56rem;color:var(--text3);gap:4px">Less<div class="hm-cell hm-0" style="width:9px;height:9px"></div><div class="hm-cell hm-1" style="width:9px;height:9px"></div><div class="hm-cell hm-2" style="width:9px;height:9px"></div><div class="hm-cell hm-3" style="width:9px;height:9px"></div><div class="hm-cell hm-4" style="width:9px;height:9px"></div>More</div>
+    <div class="card-hd">
+      <div class="card-title">Activity Heatmap</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="font-size:.62rem;color:var(--text2)">Last 16 weeks</div>
+        <div class="tab-row" style="scale:.88;transform-origin:right">
+          <div class="tab active" id="lgTabDaily" onclick="switchLgTab('daily',this)">Daily</div>
+          <div class="tab" id="lgTabWeekly" onclick="switchLgTab('weekly',this)">Weekly</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start">
+      <!-- LEFT: heatmap (unchanged) -->
+      <div>
+        <div style="display:flex;gap:2px;margin-bottom:4px;font-family:var(--mono);font-size:.52rem;color:var(--text3)" id="hmMonths"></div>
+        <div style="overflow-x:auto"><div class="heatmap" id="heatmap"></div></div>
+        <div class="row" style="margin-top:7px;font-size:.56rem;color:var(--text3);gap:4px">Less<div class="hm-cell hm-0" style="width:9px;height:9px"></div><div class="hm-cell hm-1" style="width:9px;height:9px"></div><div class="hm-cell hm-2" style="width:9px;height:9px"></div><div class="hm-cell hm-3" style="width:9px;height:9px"></div><div class="hm-cell hm-4" style="width:9px;height:9px"></div>More</div>
+      </div>
+      <!-- RIGHT: line graph -->
+      <div>
+        <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px" id="lgTitle">Daily Focus (min)</div>
+        <div style="position:relative;width:100%">
+          <svg id="actLineSvg" viewBox="0 0 400 110" style="width:100%;height:110px;overflow:visible;display:block">
+            <defs>
+              <linearGradient id="lgGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e8ff47" stop-opacity=".35"/>
+                <stop offset="100%" stop-color="#e8ff47" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <!-- tooltip -->
+          <div id="lgTooltip" style="position:absolute;background:var(--s1);border:1px solid var(--border2);border-radius:8px;padding:5px 9px;font-family:var(--mono);font-size:.62rem;color:var(--text);pointer-events:none;display:none;z-index:10;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.5)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.54rem;color:var(--text3);margin-top:3px" id="lgXLabels"></div>
+        <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+          <div style="font-size:.62rem;color:var(--text2)">Avg: <span id="lgAvgVal" style="color:var(--yellow);font-weight:700">—</span></div>
+          <div style="font-size:.62rem;color:var(--text2)">Peak: <span id="lgPeakVal" style="color:var(--green);font-weight:700">—</span></div>
+          <div style="font-size:.62rem;color:var(--text2)">Active days: <span id="lgActiveDays" style="color:var(--blue);font-weight:700">—</span></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card">
     <div class="card-hd">
@@ -1965,6 +2001,127 @@ function renderHeatmap(){
   for(let w=0;w<WEEKS;w++){const d=new Date();d.setDate(d.getDate()-(WEEKS-1-w)*7);const m=d.toLocaleDateString('en',{month:'short'});const div=document.createElement('div');div.style.cssText='flex:7;font-family:var(--mono);font-size:.5rem;color:var(--text3)';div.textContent=shown.has(m)?'':m;shown.add(m);hmM.appendChild(div)}
   hmM.style.display='flex';hmM.style.gap='2px';
   for(let w=0;w<WEEKS;w++){const col=document.createElement('div');col.className='hm-col';for(let day=0;day<7;day++){const offset=(WEEKS-1-w)*7+(6-day);const d=new Date();d.setDate(d.getDate()-offset);const k=dateKey(d);const v=dayMap[k]||0,lvl=v===0?0:v<25?1:v<50?2:v<100?3:4;const cell=document.createElement('div');cell.className=`hm-cell hm-${lvl}`;cell.title=`${k}: ${v}m`;col.appendChild(cell)}hm.appendChild(col)}
+  renderActivityLine();
+}
+
+/* ── ACTIVITY LINE GRAPH ── */
+let _lgTab='daily'; // 'daily' | 'weekly'
+
+function switchLgTab(tab,el){
+  _lgTab=tab;
+  document.querySelectorAll('#lgTabDaily,#lgTabWeekly').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderActivityLine();
+}
+
+function renderActivityLine(){
+  const svg=$('actLineSvg');if(!svg)return;
+  const tooltip=$('lgTooltip');
+  const W=400,H=110,PAD={t:12,b:8,l:6,r:6};
+  const innerW=W-PAD.l-PAD.r,innerH=H-PAD.t-PAD.b;
+
+  // Build data points
+  const DAYS=112; // 16 weeks
+  const dayMap={};
+  D.sessions.filter(s=>s.type==='focus').forEach(s=>{dayMap[s.date]=(dayMap[s.date]||0)+s.duration});
+
+  let points=[],labels=[];
+  if(_lgTab==='daily'){
+    for(let i=DAYS-1;i>=0;i--){
+      const d=new Date();d.setDate(d.getDate()-i);
+      const k=dateKey(d);
+      points.push({k,v:dayMap[k]||0,label:d.toLocaleDateString('en',{month:'short',day:'numeric'})});
+    }
+    // Show every 14th label
+    labels=points.filter((_,i)=>i%14===0||i===points.length-1).map(p=>p.label.slice(0,6));
+    $('lgTitle').textContent='Daily Focus — last 16 weeks (min)';
+  } else {
+    for(let w=15;w>=0;w--){
+      const d=new Date();d.setDate(d.getDate()-w*7);
+      const weekStart=new Date(d);weekStart.setDate(d.getDate()-d.getDay()+1);
+      let wMin=0;
+      for(let dd=0;dd<7;dd++){const wd=new Date(weekStart);wd.setDate(weekStart.getDate()+dd);wMin+=dayMap[dateKey(wd)]||0}
+      const label=weekStart.toLocaleDateString('en',{month:'short',day:'numeric'});
+      points.push({k:dateKey(weekStart),v:wMin,label});
+    }
+    labels=points.map(p=>p.label.slice(0,6));
+    $('lgTitle').textContent='Weekly Focus — last 16 weeks (min)';
+  }
+
+  const vals=points.map(p=>p.v);
+  const maxV=Math.max(1,...vals);
+  const activeDays=(_lgTab==='daily'?vals:vals).filter(v=>v>0).length;
+  const avg=Math.round(vals.filter(v=>v>0).reduce((a,b)=>a+b,0)/Math.max(1,activeDays));
+  const peak=Math.max(...vals);
+
+  $('lgAvgVal').textContent=avg+'m';
+  $('lgPeakVal').textContent=peak+'m';
+  $('lgActiveDays').textContent=activeDays+(_lgTab==='daily'?' days':' weeks');
+
+  // X labels
+  const xlEl=$('lgXLabels');if(xlEl){xlEl.innerHTML='';labels.forEach(l=>{const s=document.createElement('span');s.textContent=l;xlEl.appendChild(s)})}
+
+  // SVG path
+  const n=points.length;
+  const toX=i=>PAD.l+(i/(n-1))*innerW;
+  const toY=v=>PAD.t+innerH-(v/maxV)*innerH;
+
+  // Grid lines (3 horizontal)
+  let svgHtml='';
+  [0.25,0.5,0.75,1].forEach(f=>{
+    const y=PAD.t+innerH*(1-f);
+    const vLabel=Math.round(maxV*f);
+    svgHtml+=`<line x1="${PAD.l}" y1="${y}" x2="${W-PAD.r}" y2="${y}" stroke="var(--border)" stroke-width=".5" stroke-dasharray="3,3"/>`;
+    svgHtml+=`<text x="${PAD.l}" y="${y-2}" fill="var(--text3)" font-size="7" font-family="JetBrains Mono">${vLabel}m</text>`;
+  });
+
+  // Area path
+  if(n>1){
+    const pathD=points.map((p,i)=>`${i===0?'M':'L'}${toX(i).toFixed(1)},${toY(p.v).toFixed(1)}`).join(' ');
+    const areaD=`M${toX(0).toFixed(1)},${toY(0).toFixed(1)} ${points.map((p,i)=>`L${toX(i).toFixed(1)},${toY(p.v).toFixed(1)}`).join(' ')} L${toX(n-1).toFixed(1)},${(PAD.t+innerH).toFixed(1)} L${toX(0).toFixed(1)},${(PAD.t+innerH).toFixed(1)} Z`;
+    svgHtml+=`<path d="${areaD}" fill="url(#lgGrad)"/>`;
+    svgHtml+=`<path d="${pathD}" fill="none" stroke="#e8ff47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+    // Dots — only on non-zero days, and only show if not too dense
+    const step=_lgTab==='daily'?7:1;
+    points.forEach((p,i)=>{
+      if(p.v===0)return;
+      if(_lgTab==='daily'&&i%step!==0&&i!==n-1)return;
+      const cx=toX(i).toFixed(1),cy=toY(p.v).toFixed(1);
+      const col=p.v>=100?'var(--green)':p.v>=50?'var(--yellow)':'var(--amber)';
+      svgHtml+=`<circle cx="${cx}" cy="${cy}" r="3" fill="${col}" stroke="var(--bg)" stroke-width="1.5" data-i="${i}"/>`;
+    });
+  } else {
+    svgHtml+=`<text x="${W/2}" y="${H/2}" fill="var(--text3)" text-anchor="middle" font-size="10" font-family="JetBrains Mono">No sessions yet</text>`;
+  }
+
+  // Today marker (daily mode)
+  if(_lgTab==='daily'){
+    const todayIdx=points.findIndex(p=>p.k===todayKey());
+    if(todayIdx>=0&&points[todayIdx].v>0){
+      const tx=toX(todayIdx).toFixed(1);
+      svgHtml+=`<line x1="${tx}" y1="${PAD.t}" x2="${tx}" y2="${PAD.t+innerH}" stroke="var(--coral)" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>`;
+    }
+  }
+
+  svg.innerHTML=`<defs><linearGradient id="lgGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8ff47" stop-opacity=".35"/><stop offset="100%" stop-color="#e8ff47" stop-opacity="0"/></linearGradient></defs>${svgHtml}`;
+
+  // Hover interaction
+  svg.onmousemove=e=>{
+    if(!tooltip||n<2)return;
+    const rect=svg.getBoundingClientRect();
+    const mx=(e.clientX-rect.left)*(W/rect.width);
+    const rawI=(mx-PAD.l)/innerW*(n-1);
+    const i=Math.max(0,Math.min(n-1,Math.round(rawI)));
+    const p=points[i];
+    tooltip.style.display='block';
+    tooltip.innerHTML=`<div style="color:var(--text2);margin-bottom:2px">${p.label}</div><div style="color:var(--yellow);font-weight:700">${p.v>=60?Math.floor(p.v/60)+'h '+p.v%60+'m':p.v+'m'}</div>`;
+    // Position tooltip
+    const tx=toX(i)*(rect.width/W);
+    const left=Math.min(tx,rect.width-120);
+    tooltip.style.left=left+'px';
+    tooltip.style.top='-10px';
+  };
+  svg.onmouseleave=()=>{if(tooltip)tooltip.style.display='none'};
 }
 function changeDailyGoal(delta){D.dailyGoal=Math.max(1,Math.min(12,(D.dailyGoal||4)+delta));saveD();renderStats()}
 
