@@ -22,13 +22,13 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:14px}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden;display:flex}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden;display:flex;height:100vh}
 body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(ellipse at 20% 50%,rgba(79,158,255,.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(167,139,250,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
 
 /* ── SIDEBAR ── */
-.sidebar{width:208px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:relative;z-index:10}
+.sidebar{width:208px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:relative;z-index:10;height:100vh;overflow:hidden}
 .logo{padding:18px 16px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
 .logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#4f9eff,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;box-shadow:0 0 16px rgba(79,158,255,.3)}
 .logo-name{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--text);line-height:1}
@@ -44,13 +44,13 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .streak-card{background:linear-gradient(135deg,rgba(251,113,133,.08),rgba(251,113,133,.02));border:1px solid rgba(251,113,133,.18);border-radius:var(--r);padding:10px 11px;display:flex;align-items:center;justify-content:space-between}
 
 /* ── MAIN ── */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;z-index:1}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;z-index:1;height:100vh;min-width:0}
 .topbar{padding:12px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(11,15,26,.8);backdrop-filter:blur(12px);flex-shrink:0}
 .topbar-title{font-family:'Instrument Serif',serif;font-size:1.3rem;color:var(--text)}
 .topbar-date{font-size:.64rem;color:var(--text3);margin-top:1px;font-family:var(--mono)}
 .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;cursor:pointer}
-.content{flex:1;overflow-y:auto;padding:18px 20px 40px}
-.page{display:none;flex-direction:column;gap:16px;animation:fadeUp .2s ease}
+.content{flex:1;overflow-y:auto;overflow-x:auto;padding:18px 20px 40px;min-height:0}
+.page{display:none;flex-direction:column;gap:16px;animation:fadeUp .2s ease;min-width:0}
 .page.active{display:flex}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
@@ -65,9 +65,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .card-title{font-size:.82rem;font-weight:700;color:var(--text)}
 
 /* ── GRIDS ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;min-width:0}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;min-width:0}
 
 /* ── PROGRESS ── */
 .prog-track{background:var(--s3);border-radius:999px;height:5px;overflow:hidden;margin-bottom:5px}
@@ -91,6 +91,12 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .btn-ghost{background:var(--s2);border:1px solid var(--border2);color:var(--text2)}
 .btn-ghost:hover{color:var(--text);border-color:var(--border)}
 .btn-sm{padding:5px 11px;font-size:.66rem}
+/* Utility mini-buttons for edit/delete in lists */
+.del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.88rem;padding:0 3px;line-height:1;transition:color .15s;flex-shrink:0}
+.del-btn:hover{color:var(--coral)}
+.edit-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.72rem;padding:0 3px;line-height:1;transition:color .15s;flex-shrink:0}
+.edit-btn:hover{color:var(--yellow)}
+.edit-inline{background:var(--s2);border:1px solid var(--yellow);border-radius:6px;color:var(--text);font-family:var(--sans);font-size:.74rem;padding:3px 8px;outline:none;flex:1}
 .btn-icon{width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border2);background:var(--s2);color:var(--text2);cursor:pointer;transition:all .15s;flex-shrink:0}
 .btn-icon:hover{color:var(--coral);border-color:rgba(251,113,133,.3)}
 .btn-icon svg{width:13px;height:13px}
@@ -297,24 +303,45 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .log-dur{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--yellow)}
 .log-empty{text-align:center;padding:32px;color:var(--text3);font-size:.76rem}
 
+/* ── ABOUT PANEL ── */
+.about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1500;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.about-overlay.open{display:flex}
+.about-box{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r3);padding:32px 28px;max-width:340px;width:90%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.8);animation:fadeUp .2s ease}
+.about-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:#fff;margin:0 auto 16px;box-shadow:0 0 28px rgba(79,158,255,.4)}
+.about-name{font-family:'Instrument Serif',serif;font-size:1.5rem;color:var(--text);margin-bottom:4px}
+.about-badge{display:inline-block;background:var(--yellow-lo);color:var(--yellow);border:1px solid rgba(232,255,71,.2);border-radius:99px;padding:3px 12px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.about-desc{font-size:.76rem;color:var(--text2);line-height:1.6;margin-bottom:20px}
+.about-close{width:100%;background:var(--s2);border:1px solid var(--border2);color:var(--text2);border-radius:var(--r);padding:10px;font-family:var(--sans);font-size:.76rem;font-weight:700;cursor:pointer;transition:all .15s}
+.about-close:hover{background:var(--yellow);color:#08090d;border-color:var(--yellow)}
+
+/* ── SYLLABUS EDITOR — rebuilt ── */
+.syl-subj-block{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:14px}
+.syl-subj-hdr{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.syl-add-row{display:flex;gap:6px;margin-bottom:10px}
+.syl-ch-list{display:flex;flex-direction:column;gap:6px}
+.syl-ch-item{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.syl-ch-main{display:flex;align-items:center;gap:8px;padding:9px 11px}
+.syl-status-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border2);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;transition:all .15s}
+.syl-ch-name{flex:1;background:transparent;border:none;border-bottom:1px solid transparent;color:var(--text);font-family:var(--sans);font-size:.78rem;font-weight:600;padding:2px 4px;outline:none;transition:border-color .15s;min-width:0}
+.syl-ch-name:focus{border-bottom-color:var(--yellow)}
+.syl-del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem;padding:0 4px;flex-shrink:0;transition:color .15s;line-height:1}
+.syl-del-btn:hover{color:var(--coral)}
+.syl-toggle-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.7rem;padding:0 4px;flex-shrink:0;transition:color .15s}
+.syl-toggle-btn:hover{color:var(--text)}
+.syl-crit-panel{display:none;padding:10px 12px 12px;border-top:1px solid var(--border);background:var(--bg)}
+.syl-crit-panel.open{display:block}
+.syl-crit-label{font-size:.58rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;font-family:var(--mono);margin-bottom:8px}
+.syl-crit-btns{display:flex;flex-wrap:wrap;gap:6px}
+.syl-crit-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--s2);color:var(--text2);transition:all .18s;font-family:var(--sans);white-space:nowrap}
+.syl-crit-btn.active{color:white}
+
 /* ── MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;overflow-y:auto;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:block}
-.modal-box{max-width:700px;margin:0 auto;background:var(--s1);border:1px solid var(--border2);border-radius:var(--r3);padding:22px;position:relative}
-.modal-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
+.modal-box{max-width:680px;margin:0 auto;background:var(--s1);border:1px solid var(--border2);border-radius:var(--r3);padding:20px;position:relative}
+.modal-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px}
 .modal-title{font-family:'Instrument Serif',serif;font-size:1.2rem;color:var(--text)}
-.modal-sub{font-size:.66rem;color:var(--text2);margin-top:2px}
-.ch-editor-subj{margin-bottom:18px;background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:14px}
-.ch-editor-hdr{display:flex;align-items:center;gap:9px;margin-bottom:12px;flex-wrap:wrap}
-.ch-editor-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto;margin-bottom:10px}
-.ch-editor-item{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.ch-item-top{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;transition:background .15s}
-.ch-item-top:hover{background:var(--s2)}
-.ch-item-expand{display:none;padding:10px 12px;border-top:1px solid var(--border);background:var(--bg2)}
-.ch-item-expand.open{display:block}
-.crit-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:0}
-.crit-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:8px;font-size:.7rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--s2);color:var(--text2);transition:all .18s;font-family:var(--sans)}
-.crit-btn.on{border-color:currentColor}
+.modal-sub{font-size:.64rem;color:var(--text2);margin-top:2px}
 
 /* ── GLOBAL UTILS ── */
 .flash{position:fixed;inset:0;background:var(--yellow);opacity:0;pointer-events:none;z-index:999}
@@ -327,6 +354,18 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <body>
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"><span id="toastIcon">🍅</span><span id="toastMsg">Done!</span></div>
+
+<!-- Custom Confirm Dialog (replaces browser confirm() which breaks in WebView/APK) -->
+<div id="confirmOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:#10151f;border:1px solid #26385a;border-radius:18px;padding:24px 22px;max-width:320px;width:90%;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.8)">
+    <div style="font-size:.84rem;font-weight:700;color:#e2eaf8;margin-bottom:6px" id="confirmTitle">Are you sure?</div>
+    <div style="font-size:.74rem;color:#6b84aa;margin-bottom:20px" id="confirmMsg">This action cannot be undone.</div>
+    <div style="display:flex;gap:10px">
+      <button onclick="confirmResolve(false)" style="flex:1;background:#151d2e;border:1px solid #26385a;color:#6b84aa;border-radius:9px;padding:10px;font-family:inherit;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='#3a4f6a'" onmouseout="this.style.borderColor='#26385a'">Cancel</button>
+      <button onclick="confirmResolve(true)" id="confirmOkBtn" style="flex:1;background:#fb7185;border:none;color:#08090d;border-radius:9px;padding:10px;font-family:inherit;font-size:.76rem;font-weight:800;cursor:pointer;transition:all .15s" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Delete</button>
+    </div>
+  </div>
+</div>
 
 <!-- ════════ SIDEBAR ════════ -->
 <div class="sidebar">
@@ -371,7 +410,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <div class="main">
   <div class="topbar">
     <div><div class="topbar-title" id="pageTitle">Pomodoro Timer</div><div class="topbar-date" id="pageDate"></div></div>
-    <div class="row"><div class="avatar">A</div></div>
+    <div class="row"><div class="avatar" onclick="openAbout()" title="About" style="cursor:pointer">A</div></div>
   </div>
   <div class="content">
 
@@ -430,10 +469,13 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <div class="page" id="page-command">
   <div class="g3">
     <div class="card">
-      <div class="card-label">Daily Innings</div>
-      <div class="row" style="margin-bottom:10px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div class="card-label" style="margin-bottom:0">Daily Innings</div>
+        <button class="btn btn-ghost btn-sm" onclick="clearAllTasks()" style="font-size:.6rem;color:var(--text3)">Clear All</button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <span class="prog-pct" id="taskPct">0%</span>
-        <span style="font-size:.66rem;color:var(--text2);margin-left:auto" id="taskCount">0 / 0</span>
+        <span style="font-size:.66rem;color:var(--text2)" id="taskCount">0 / 0</span>
       </div>
       <div class="prog-track" style="margin-bottom:12px"><div class="prog-fill" id="taskBar" style="width:0%"></div></div>
       <div class="inp-row"><input class="inp" id="taskInput" placeholder="Add a target for today…"/><button class="btn btn-y btn-sm" onclick="addTask()">+</button></div>
@@ -453,7 +495,10 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
       <div class="verdict" id="rrrVerdict">Enter scores to calculate</div>
     </div>
     <div class="card">
-      <div class="card-label">Mock Test Log</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div class="card-label" style="margin-bottom:0">Mock Test Log</div>
+        <button class="btn btn-ghost btn-sm" onclick="clearAllMocks()" style="font-size:.6rem;color:var(--text3)">Clear All</button>
+      </div>
       <div class="inp-row" style="flex-wrap:wrap;gap:4px">
         <input class="inp" id="mockSubj" placeholder="Subject" style="flex:2;min-width:70px"/>
         <input class="inp inp-mono" type="number" id="mockMarks" placeholder="Got" style="flex:1;min-width:46px"/>
@@ -502,7 +547,10 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
   <div class="g2">
     <div class="card">
-      <div class="card-label">Weak Spots — Diagnosis</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div class="card-label" style="margin-bottom:0">Weak Spots — Diagnosis</div>
+        <button class="btn btn-ghost btn-sm" onclick="clearAllWeak()" style="font-size:.6rem;color:var(--text3)">Clear All</button>
+      </div>
       <div class="inp-row">
         <input class="inp" id="weakTopic" placeholder="Chapter / Topic…" style="flex:2"/>
         <select class="sel" id="weakTag"><option value="concept">Concept Error</option><option value="silly">Silly Mistake</option><option value="time">Time Issue</option></select>
@@ -511,7 +559,10 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
       <div class="weak-list" id="weakList"></div>
     </div>
     <div class="card">
-      <div class="card-label">Revision Scheduler — Spaced Intervals</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div class="card-label" style="margin-bottom:0">Revision Scheduler — Spaced Intervals</div>
+        <button class="btn btn-ghost btn-sm" onclick="clearAllRevisions()" style="font-size:.6rem;color:var(--text3)">Clear All</button>
+      </div>
       <div class="inp-row"><input class="inp" id="revTopic" placeholder="Topic to schedule…"/><button class="btn btn-y btn-sm" onclick="addRevision()">+ Rev</button></div>
       <div class="rev-list" id="revList"></div>
     </div>
@@ -565,7 +616,8 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
       <div class="card-title">➕ Log a Mock / Test</div>
       <div class="pill pill-y">Analytics auto-update</div>
     </div>
-    <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr;gap:7px;margin-bottom:7px">
+    <div style="overflow-x:auto">
+    <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr;gap:7px;margin-bottom:7px;min-width:400px">
       <div><div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Test Name</div><input class="inp" id="ptName" placeholder="e.g. Pre-Board 1"/></div>
       <div><div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Subject</div>
         <select class="sel" id="ptSubj" style="width:100%">
@@ -574,13 +626,14 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         </select></div>
       <div><div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Date</div><input class="inp" type="date" id="ptDate" style="font-family:var(--mono)"/></div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px;min-width:400px">
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--text3);text-transform:uppercase;margin-bottom:3px">Score</div><input class="inp inp-mono" type="number" id="ptScore" placeholder="78" min="0"/></div>
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--text3);text-transform:uppercase;margin-bottom:3px">Out of</div><input class="inp inp-mono" type="number" id="ptTotal" placeholder="100" min="1"/></div>
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--green);text-transform:uppercase;margin-bottom:3px">Correct</div><input class="inp inp-mono" type="number" id="ptCorrect" placeholder="62" min="0"/></div>
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--coral);text-transform:uppercase;margin-bottom:3px">Wrong</div><input class="inp inp-mono" type="number" id="ptWrong" placeholder="14" min="0"/></div>
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--text3);text-transform:uppercase;margin-bottom:3px">Skipped</div><input class="inp inp-mono" type="number" id="ptSkip" placeholder="4" min="0"/></div>
       <div><div style="font-family:var(--mono);font-size:.5rem;color:var(--cyan);text-transform:uppercase;margin-bottom:3px">Sec/Q</div><input class="inp inp-mono" type="number" id="ptTpq" placeholder="85" min="0"/></div>
+    </div>
     </div>
     <div class="row"><button class="btn btn-y" onclick="addPerfTest()">Log Test</button><span style="font-size:.66rem;color:var(--coral);font-family:var(--mono)" id="ptError"></span></div>
   </div>
@@ -589,7 +642,8 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   <div id="perfEmpty" style="display:none;text-align:center;padding:36px;color:var(--text3);font-size:.78rem;background:var(--s1);border:1px solid var(--border);border-radius:var(--r2)">📊 No test data yet. Log your first test above!</div>
 
   <!-- ANALYTICS (shown when data exists) -->
-  <div id="perfAnalytics" style="display:flex;flex-direction:column;gap:16px">
+  <div style="overflow-x:auto;min-width:0">
+  <div id="perfAnalytics" style="display:flex;flex-direction:column;gap:16px;min-width:620px">
 
     <!-- FORM INDICATOR BANNER -->
     <div class="form-banner peak" id="formBanner">
@@ -605,14 +659,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <div class="g2">
       <div class="card">
         <div class="card-hd"><div class="card-title">📈 Score Trend</div><div class="pill pill-green" id="trendPill">Improving ↑</div></div>
-        <svg class="trend-svg-wrap" id="trendSvg" viewBox="0 0 500 70" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="tGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#e8ff47" stop-opacity=".45"/>
-              <stop offset="100%" stop-color="#e8ff47" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <svg class="trend-svg-wrap" id="trendSvg" viewBox="0 0 500 70" preserveAspectRatio="none"></svg>
         <div class="row" style="margin-top:3px;font-family:var(--mono);font-size:.56rem;color:var(--text3);flex-wrap:wrap" id="trendLabels"></div>
       </div>
       <div class="card">
@@ -626,14 +673,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <div class="g2">
       <div class="card">
         <div class="card-hd"><div class="card-title">🎯 Accuracy Over Time</div><div class="pill pill-blue">Line chart</div></div>
-        <svg id="accTimeSvg" viewBox="0 0 400 80" style="width:100%;height:80px;overflow:visible">
-          <defs>
-            <linearGradient id="accGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#4f9eff" stop-opacity=".4"/>
-              <stop offset="100%" stop-color="#4f9eff" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <svg id="accTimeSvg" viewBox="0 0 400 80" style="width:100%;height:80px;overflow:visible"></svg>
         <div style="display:flex;font-family:var(--mono);font-size:.54rem;color:var(--text3);flex-wrap:wrap;gap:4px;margin-top:3px" id="accTimeLabels"></div>
       </div>
       <div class="card">
@@ -693,12 +733,42 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     </div>
 
   </div><!-- /perfAnalytics -->
+  </div><!-- /overflow-x scroller -->
 </div>
 
 <!-- ══ SESSION LOG PAGE ══ -->
 <div class="page" id="page-log">
+  <!-- Manual add session -->
+  <div class="card" style="border-color:rgba(232,255,71,.15)">
+    <div class="card-hd" style="margin-bottom:10px">
+      <div class="card-title">➕ Add Session Manually</div>
+      <div style="font-size:.62rem;color:var(--text2)">For sessions you forgot to track</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:7px;align-items:end">
+      <div>
+        <div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Subject</div>
+        <select class="sel" id="manSubj" style="width:100%">
+          <option value="math">📐 Mathematics</option>
+          <option value="sci">🔬 Science</option>
+          <option value="eng">📚 English</option>
+          <option value="sst">🌍 Social Sci</option>
+          <option value="hindi">📝 Hindi</option>
+          <option value="ai">🤖 AI / CS</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Duration (min)</div>
+        <input class="inp inp-mono" type="number" id="manDur" value="25" min="1" max="120"/>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Date</div>
+        <input class="inp" type="date" id="manDate" style="font-family:var(--mono)"/>
+      </div>
+      <button class="btn btn-y" onclick="addManualSession()" style="height:34px;padding:0 16px">Add</button>
+    </div>
+  </div>
   <div class="card">
-    <div class="card-hd"><div class="card-title">Session Log</div><button class="btn btn-ghost btn-sm" onclick="clearLog()">Clear All</button></div>
+    <div class="card-hd"><div class="card-title">Session Log</div><button class="btn btn-ghost btn-sm" onclick="clearLog()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear All</button></div>
     <div class="log-list" id="logList"><div class="log-empty">No sessions yet. Start the timer! 🍅</div></div>
   </div>
 </div>
@@ -706,11 +776,35 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   </div><!-- /content -->
 </div><!-- /main -->
 
+<!-- ══ ABOUT MODAL ══ -->
+<div class="about-overlay" id="aboutOverlay" onclick="if(event.target===this)closeAbout()">
+  <div class="about-box">
+    <div class="about-avatar">A</div>
+    <div class="about-name">Arnav Singh</div>
+    <div class="about-badge">Developer</div>
+    <div class="about-desc">
+      Built with ❤️ for CBSE Class 10 students.<br/>
+      <strong style="color:var(--yellow)">FocusFlow</strong> — your complete study OS for boards preparation.
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:18px;flex-wrap:wrap">
+      <span style="background:var(--blue-lo);color:var(--blue);border:1px solid rgba(79,158,255,.2);border-radius:8px;padding:4px 10px;font-size:.66rem;font-weight:700">Pomodoro Timer</span>
+      <span style="background:var(--green-lo);color:var(--green);border:1px solid rgba(52,211,153,.2);border-radius:8px;padding:4px 10px;font-size:.66rem;font-weight:700">Syllabus Tracker</span>
+      <span style="background:var(--amber-lo);color:var(--amber);border:1px solid rgba(251,191,36,.2);border-radius:8px;padding:4px 10px;font-size:.66rem;font-weight:700">Performance Analytics</span>
+      <span style="background:var(--purple-lo);color:var(--purple);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:4px 10px;font-size:.66rem;font-weight:700">Spaced Revision</span>
+    </div>
+    <div style="font-size:.62rem;color:var(--text3);font-family:var(--mono);margin-bottom:16px">Version 1.0 · CBSE 10th Study OS</div>
+    <button class="about-close" onclick="closeAbout()">Close</button>
+  </div>
+</div>
+
 <!-- ══ SYLLABUS EDITOR MODAL ══ -->
 <div class="modal-overlay" id="syllabusModal">
   <div class="modal-box">
     <div class="modal-hd">
-      <div><div class="modal-title">✏️ Edit Syllabus</div><div class="modal-sub">Add/remove chapters · Click a chapter to expand criteria checklist · All changes saved instantly</div></div>
+      <div>
+        <div class="modal-title">✏️ Edit Syllabus</div>
+        <div class="modal-sub">Add/remove chapters · Tap status button to cycle · Expand ▾ for criteria</div>
+      </div>
       <button class="btn btn-ghost btn-sm" onclick="closeSyllabusModal()">✕ Close</button>
     </div>
     <div id="syllabusEditorBody"></div>
@@ -731,6 +825,26 @@ function today(){return new Date().toISOString().split('T')[0]}
 function daysDiff(dateStr){const d=new Date(dateStr),n=new Date();n.setHours(0,0,0,0);d.setHours(0,0,0,0);return Math.round((n-d)/86400000)}
 function showToast(icon,msg){$('toastIcon').textContent=icon;$('toastMsg').textContent=msg;const t=$('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 function flashScreen(){const f=$('flash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go')}
+
+/* Custom confirm — replaces browser confirm() which is blocked in Android WebView/APK */
+let _confirmCb=null;
+function askConfirm(title,msg,okLabel,cb){
+  $('confirmTitle').textContent=title||'Are you sure?';
+  $('confirmMsg').textContent=msg||'This action cannot be undone.';
+  $('confirmOkBtn').textContent=okLabel||'Confirm';
+  _confirmCb=cb;
+  const ov=$('confirmOverlay');
+  ov.style.display='flex';
+}
+function confirmResolve(ok){
+  $('confirmOverlay').style.display='none';
+  if(ok&&_confirmCb)_confirmCb();
+  _confirmCb=null;
+}
+
+/* About panel */
+function openAbout(){$('aboutOverlay').classList.add('open')}
+function closeAbout(){$('aboutOverlay').classList.remove('open')}
 
 /* ══════════════════════════════════════════════════════
    CONSTANTS
@@ -781,7 +895,7 @@ function showPage(id){
   $('pageTitle').textContent=PAGE_TITLES[id]||id;
   if(id==='stats')renderStats();
   if(id==='performance')renderPerformance();
-  if(id==='log')renderLog();
+  if(id==='log'){if($('manDate'))$('manDate').value=todayKey();renderLog()}
   if(id==='command'){renderTasks();renderSyllabus();renderWeak();renderRevisions();calcRRR();renderMockLog()}
 }
 function updateDate(){const n=new Date();$('pageDate').textContent=n.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
@@ -875,15 +989,32 @@ function renderTasks(){
   const list=$('taskList');list.innerHTML='';
   tasks.forEach((t,i)=>{
     const el=document.createElement('div');el.className='task-item'+(t.done?' done':'');
-    el.innerHTML=`<div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${i})"></div><span class="task-text">${t.text}</span><button class="task-del" onclick="deleteTask(${i})">×</button>`;
+    el.innerHTML=`<div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${i})"></div><span class="task-text" id="taskTxt_${i}">${t.text}</span>
+      <button class="edit-btn" title="Edit" onclick="editTask(${i})">✏️</button>
+      <button class="task-del" onclick="deleteTask(${i})">×</button>`;
     list.appendChild(el);
   });
   const done=tasks.filter(t=>t.done).length,total=tasks.length,pct=total?Math.round(done/total*100):0;
   $('taskPct').textContent=pct+'%';$('taskCount').textContent=`${done} / ${total}`;$('taskBar').style.width=pct+'%';
 }
+function editTask(i){
+  const span=$(`taskTxt_${i}`);if(!span)return;
+  const old=tasks[i].text;
+  const inp=document.createElement('input');inp.className='edit-inline';inp.value=old;
+  span.replaceWith(inp);inp.focus();
+  const save=()=>{const v=inp.value.trim();if(v)tasks[i].text=v;saveTasks();renderTasks()};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){tasks[i].text=old;renderTasks()}});
+}
 function addTask(){const v=$('taskInput').value.trim();if(!v)return;tasks.push({text:v,done:false});$('taskInput').value='';saveTasks();renderTasks()}
 function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();renderTasks()}
 function deleteTask(i){tasks.splice(i,1);saveTasks();renderTasks()}
+function clearAllTasks(){
+  if(!tasks.length){showToast('ℹ️','No tasks to clear');return}
+  askConfirm('Clear all tasks?','All tasks for today will be deleted.','Clear All',()=>{
+    tasks=[];saveTasks();renderTasks();showToast('🗑️','All tasks cleared');
+  });
+}
 $('taskInput').addEventListener('keydown',e=>e.key==='Enter'&&addTask());
 
 /* Syllabus */
@@ -929,87 +1060,153 @@ function renderSyllabus(){
 }
 function cycleSyllabus(key,i){const ch=getChapters(key)[i];ch.status=((ch.status||0)+1)%3;saveSyllabus();renderSyllabus()}
 
-/* Syllabus Modal */
+/* Syllabus Modal — rebuilt clean */
 function openSyllabusModal(){$('syllabusModal').classList.add('open');renderSyllabusEditor()}
 function closeSyllabusModal(){$('syllabusModal').classList.remove('open');renderSyllabus()}
 
 function renderSyllabusEditor(){
-  const body=$('syllabusEditorBody');body.innerHTML='';
+  const body=$('syllabusEditorBody');
+  body.innerHTML='';
+
   SYLLABUS_DEF.forEach(subj=>{
     const chs=getChapters(subj.key);
-    const sec=document.createElement('div');sec.className='ch-editor-subj';
-    sec.innerHTML=`<div class="ch-editor-hdr">
-      <div style="width:10px;height:10px;border-radius:50%;background:${subj.color};flex-shrink:0"></div>
-      <div style="font-size:.86rem;font-weight:800;color:var(--text);flex:1">${subj.name}</div>
-      <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">${chs.length} chapters</span>
-    </div>
-    <div class="inp-row" style="margin-bottom:10px">
-      <input class="inp" id="addCh_${subj.key}" placeholder="Chapter name (e.g. Ch1 — Real Numbers)" style="flex:1"/>
-      <button class="btn btn-y btn-sm" onclick="addChapter('${subj.key}')">+ Add</button>
-    </div>
-    <div class="ch-editor-list" id="chList_${subj.key}"></div>`;
-    body.appendChild(sec);
+
+    const block=document.createElement('div');
+    block.className='syl-subj-block';
+
+    // Subject header
+    block.innerHTML=`
+      <div class="syl-subj-hdr">
+        <div style="width:10px;height:10px;border-radius:50%;background:${subj.color};flex-shrink:0"></div>
+        <div style="font-size:.86rem;font-weight:800;color:var(--text);flex:1">${subj.name}</div>
+        <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">${chs.length} ch</span>
+      </div>
+      <div class="syl-add-row">
+        <input class="inp" id="addCh_${subj.key}" placeholder="New chapter name…" style="flex:1"/>
+        <button class="btn btn-y btn-sm" onclick="addChapter('${subj.key}')">+ Add</button>
+      </div>
+      <div class="syl-ch-list" id="chList_${subj.key}"></div>`;
+
+    body.appendChild(block);
     renderChList(subj.key);
+
+    // Enter key to add
     const inp=document.getElementById(`addCh_${subj.key}`);
-    if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter')addChapter(subj.key)});
+    if(inp) inp.addEventListener('keydown',e=>{if(e.key==='Enter')addChapter(subj.key)});
   });
 }
 
 function renderChList(key){
   const chs=getChapters(key);
-  const list=$(`chList_${key}`);if(!list)return;list.innerHTML='';
-  if(!chs.length){list.innerHTML=`<div style="color:var(--text3);font-size:.7rem;text-align:center;padding:8px">No chapters yet.</div>`;return}
+  const list=$(`chList_${key}`);
+  if(!list)return;
+  list.innerHTML='';
+
+  if(!chs.length){
+    list.innerHTML=`<div style="color:var(--text3);font-size:.72rem;text-align:center;padding:10px 0">No chapters yet. Add one above.</div>`;
+    return;
+  }
+
+  const STATUS_COLORS={0:'var(--text3)',1:'var(--blue)',2:'var(--green)'};
+  const STATUS_ICONS={0:'○',1:'◑',2:'✓'};
+  const STATUS_BG={0:'transparent',1:'rgba(79,158,255,.1)',2:'rgba(52,211,153,.1)'};
+  const STATUS_BORDER={0:'var(--border2)',1:'var(--blue)',2:'var(--green)'};
+  const STATUS_LABELS={0:'Not started',1:'In progress',2:'Completed'};
+
   chs.forEach((ch,i)=>{
-    const item=document.createElement('div');item.className='ch-editor-item';
-    const sColors={0:'var(--text3)',1:'var(--blue)',2:'var(--green)'};
-    const sIcons={0:'○',1:'◑',2:'✓'};
-    const topHtml=`<div class="ch-item-top" onclick="toggleChExpand('${key}',${i})">
-      <button onclick="event.stopPropagation();cycleChStatus('${key}',${i})" title="Cycle status"
-        style="background:none;border:1px solid var(--border2);border-radius:5px;width:22px;height:22px;font-size:.7rem;color:${sColors[ch.status||0]};cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700">${sIcons[ch.status||0]}</button>
-      <input value="${ch.name}" onclick="event.stopPropagation()" onchange="renameChapter('${key}',${i},this.value)"
-        style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:.76rem;font-weight:600;padding:1px 4px;outline:none;transition:border-color .15s"
-        onfocus="this.style.borderBottomColor='var(--yellow)'" onblur="this.style.borderBottomColor='var(--border)'"/>
-      <div style="display:flex;gap:3px;margin-right:6px">${CRITERIA.filter(cr=>ch.criteria&&ch.criteria[cr.key]).map(cr=>`<span style="font-size:.6rem;color:${cr.color}">${cr.label}</span>`).join('')}</div>
-      <span style="font-size:.58rem;color:var(--text3);margin-right:6px">▾</span>
-      <button onclick="event.stopPropagation();deleteChapter('${key}',${i})"
-        style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:.95rem;padding:0 3px;transition:color .15s;flex-shrink:0"
-        onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--text3)'">×</button>
-    </div>`;
-    const critHtml=`<div class="ch-item-expand" id="chExpand_${key}_${i}">
-      <div style="font-size:.62rem;color:var(--text3);margin-bottom:7px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase">Criteria Completed</div>
-      <div class="crit-row">
-        ${CRITERIA.map(cr=>`<button class="crit-btn ${(ch.criteria&&ch.criteria[cr.key])?'on':''}" id="crit_${key}_${i}_${cr.key}"
-          style="${(ch.criteria&&ch.criteria[cr.key])?'color:'+cr.color+';background:'+cr.color+'18;border-color:'+cr.color:''}"
-          onclick="toggleCrit('${key}',${i},'${cr.key}',this)">${cr.label} ${cr.title}</button>`).join('')}
+    const s=ch.status||0;
+    const item=document.createElement('div');
+    item.className='syl-ch-item';
+
+    // Count completed criteria
+    const critDone=CRITERIA.filter(cr=>ch.criteria&&ch.criteria[cr.key]).length;
+
+    item.innerHTML=`
+      <div class="syl-ch-main">
+        <button class="syl-status-btn"
+          style="color:${STATUS_COLORS[s]};background:${STATUS_BG[s]};border-color:${STATUS_BORDER[s]}"
+          onclick="sylCycleStatus('${key}',${i})"
+          title="Status: ${STATUS_LABELS[s]} — click to change">
+          ${STATUS_ICONS[s]}
+        </button>
+        <input class="syl-ch-name" value="${ch.name.replace(/"/g,'&quot;')}"
+          onchange="renameChapter('${key}',${i},this.value)"
+          placeholder="Chapter name"/>
+        <span style="font-family:var(--mono);font-size:.58rem;color:${critDone>0?'var(--yellow)':'var(--text3)'};flex-shrink:0;min-width:18px;text-align:center"
+          title="${critDone} criteria done">${critDone>0?critDone+'✓':''}</span>
+        <button class="syl-toggle-btn" onclick="sylToggleCrit('${key}',${i})" title="Show/hide criteria">▾</button>
+        <button class="syl-del-btn" onclick="deleteChapter('${key}',${i})" title="Delete chapter">×</button>
       </div>
-    </div>`;
-    item.innerHTML=topHtml+critHtml;
+      <div class="syl-crit-panel" id="sylCrit_${key}_${i}">
+        <div class="syl-crit-label">Mark criteria as done:</div>
+        <div class="syl-crit-btns">
+          ${CRITERIA.map(cr=>{
+            const done=ch.criteria&&ch.criteria[cr.key];
+            return`<button class="syl-crit-btn${done?' active':''}"
+              style="${done?`background:${cr.color};border-color:${cr.color};color:#08090d`:''}"
+              onclick="sylToggleCritBtn('${key}',${i},'${cr.key}',this)">
+              ${cr.label} ${cr.title}
+            </button>`;
+          }).join('')}
+        </div>
+      </div>`;
+
     list.appendChild(item);
   });
 }
 
-function toggleChExpand(key,i){const el=$(`chExpand_${key}_${i}`);if(el)el.classList.toggle('open')}
-
-function addChapter(key){
-  const inp=document.getElementById(`addCh_${key}`);if(!inp)return;
-  const name=inp.value.trim();if(!name)return;
-  getChapters(key).push({name,status:0,criteria:{ncert:false,pyq:false,exemplar:false,notes:false,revision:false}});
-  inp.value='';saveSyllabus();renderChList(key);
+function sylCycleStatus(key,i){
+  const ch=getChapters(key)[i];
+  ch.status=((ch.status||0)+1)%3;
+  saveSyllabus();
+  renderChList(key);
 }
-function deleteChapter(key,i){if(!confirm('Delete this chapter?'))return;getChapters(key).splice(i,1);saveSyllabus();renderChList(key)}
-function renameChapter(key,i,val){getChapters(key)[i].name=val.trim();saveSyllabus()}
-function cycleChStatus(key,i){const ch=getChapters(key)[i];ch.status=((ch.status||0)+1)%3;saveSyllabus();renderChList(key)}
-function toggleCrit(key,i,critKey,btn){
+
+function sylToggleCrit(key,i){
+  const panel=$(`sylCrit_${key}_${i}`);
+  if(panel)panel.classList.toggle('open');
+}
+
+function sylToggleCritBtn(key,i,critKey,btn){
   const ch=getChapters(key)[i];
   if(!ch.criteria)ch.criteria={ncert:false,pyq:false,exemplar:false,notes:false,revision:false};
   ch.criteria[critKey]=!ch.criteria[critKey];
   saveSyllabus();
   const cr=CRITERIA.find(c=>c.key===critKey);
-  if(ch.criteria[critKey]){btn.classList.add('on');btn.style.color=cr.color;btn.style.background=cr.color+'18';btn.style.borderColor=cr.color}
-  else{btn.classList.remove('on');btn.style.color='';btn.style.background='';btn.style.borderColor=''}
-  // refresh the criteria summary in the top bar
-  renderChList(key);
+  if(ch.criteria[critKey]){
+    btn.classList.add('active');
+    btn.style.background=cr.color;btn.style.borderColor=cr.color;btn.style.color='#08090d';
+  } else {
+    btn.classList.remove('active');
+    btn.style.background='';btn.style.borderColor='';btn.style.color='';
+  }
+  // update criteria count badge without full re-render
+  const critDone=CRITERIA.filter(c=>ch.criteria&&ch.criteria[c.key]).length;
+  const badge=btn.closest('.syl-ch-item').querySelector('.syl-ch-main span[title]');
+  if(badge){badge.textContent=critDone>0?critDone+'✓':'';badge.style.color=critDone>0?'var(--yellow)':'var(--text3)';}
 }
+
+function addChapter(key){
+  const inp=document.getElementById(`addCh_${key}`);
+  if(!inp)return;
+  const name=inp.value.trim();
+  if(!name)return;
+  getChapters(key).push({name,status:0,criteria:{ncert:false,pyq:false,exemplar:false,notes:false,revision:false}});
+  inp.value='';
+  saveSyllabus();
+  renderChList(key);
+  // update chapter count in header
+  const hdr=inp.closest('.syl-subj-block').querySelector('.syl-subj-hdr span');
+  if(hdr)hdr.textContent=getChapters(key).length+' ch';
+}
+function deleteChapter(key,i){
+  const chName=getChapters(key)[i]?getChapters(key)[i].name:'this chapter';
+  askConfirm('Delete chapter?',chName+' will be removed.','Delete',()=>{
+    getChapters(key).splice(i,1);saveSyllabus();renderChList(key);
+  });
+}
+function renameChapter(key,i,val){getChapters(key)[i].name=val.trim()||getChapters(key)[i].name;saveSyllabus()}
+function cycleChStatus(key,i){sylCycleStatus(key,i)} // alias kept for backwards compat
 
 /* Weak Areas */
 let weakAreas=loadLS('weakAreas',[]);
@@ -1017,12 +1214,30 @@ function renderWeak(){
   const list=$('weakList');list.innerHTML='';
   weakAreas.forEach((w,i)=>{
     const el=document.createElement('div');el.className='weak-item';el.dataset.tag=w.tag;
-    el.innerHTML=`<span style="flex:1">${w.topic}</span><span class="tag-chip ${w.tag}">${w.tag==='concept'?'Concept':w.tag==='silly'?'Silly':'Time'}</span><button class="task-del" style="opacity:1;margin-left:7px" onclick="removeWeak(${i})">×</button>`;
+    el.innerHTML=`<span style="flex:1" id="weakTxt_${i}">${w.topic}</span>
+      <span class="tag-chip ${w.tag}">${w.tag==='concept'?'Concept':w.tag==='silly'?'Silly':'Time'}</span>
+      <button class="edit-btn" onclick="editWeak(${i})" title="Edit">✏️</button>
+      <button class="del-btn" onclick="removeWeak(${i})">×</button>`;
     list.appendChild(el);
   });
 }
+function editWeak(i){
+  const span=$(`weakTxt_${i}`);if(!span)return;
+  const old=weakAreas[i].topic;
+  const inp=document.createElement('input');inp.className='edit-inline';inp.value=old;
+  span.replaceWith(inp);inp.focus();
+  const save=()=>{const v=inp.value.trim();if(v)weakAreas[i].topic=v;saveLS('weakAreas',weakAreas);renderWeak()};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){weakAreas[i].topic=old;renderWeak()}});
+}
 function addWeak(){const t=$('weakTopic').value.trim();if(!t)return;weakAreas.push({topic:t,tag:$('weakTag').value});$('weakTopic').value='';saveLS('weakAreas',weakAreas);renderWeak()}
 function removeWeak(i){weakAreas.splice(i,1);saveLS('weakAreas',weakAreas);renderWeak()}
+function clearAllWeak(){
+  if(!weakAreas.length){showToast('ℹ️','No weak spots to clear');return}
+  askConfirm('Clear all weak spots?','All flagged topics will be removed.','Clear All',()=>{
+    weakAreas=[];saveLS('weakAreas',weakAreas);renderWeak();showToast('🗑️','Weak spots cleared');
+  });
+}
 $('weakTopic').addEventListener('keydown',e=>e.key==='Enter'&&addWeak());
 
 /* Revision */
@@ -1035,13 +1250,33 @@ function renderRevisions(){
     const od=daysDiff(r.nextRev);const cls=od>=0?(od>=2?'due':'soon'):'ok';
     const lbl=od>=0?`Due ${od===0?'today':od+'d ago'}`:`In ${Math.abs(od)}d`;
     const el=document.createElement('div');el.className='rev-item';
-    el.innerHTML=`<span class="rev-topic">${r.topic}</span><span class="rev-date">${fmtDate(r.lastRevised)}</span><span class="rev-next ${cls}">${lbl}</span><button class="rev-mark-btn" onclick="markRevised(${i})">Done</button><button class="task-del" style="opacity:1" onclick="removeRev(${i})">×</button>`;
+    el.innerHTML=`<span class="rev-topic" id="revTxt_${i}">${r.topic}</span>
+      <span class="rev-date">${fmtDate(r.lastRevised)}</span>
+      <span class="rev-next ${cls}">${lbl}</span>
+      <button class="rev-mark-btn" onclick="markRevised(${i})">Done</button>
+      <button class="edit-btn" onclick="editRevision(${i})" title="Rename">✏️</button>
+      <button class="del-btn" onclick="removeRev(${i})">×</button>`;
     list.appendChild(el);
   });
+}
+function editRevision(i){
+  const span=$(`revTxt_${i}`);if(!span)return;
+  const old=revisions[i].topic;
+  const inp=document.createElement('input');inp.className='edit-inline';inp.value=old;inp.style.width='90px';
+  span.replaceWith(inp);inp.focus();
+  const save=()=>{const v=inp.value.trim();if(v)revisions[i].topic=v;saveLS('revisions',revisions);renderRevisions()};
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){revisions[i].topic=old;renderRevisions()}});
 }
 function addRevision(){const t=$('revTopic').value.trim();if(!t)return;const td=today();revisions.push({topic:t,lastRevised:td,revCount:0,nextRev:nextRevDate(td,0)});$('revTopic').value='';saveLS('revisions',revisions);renderRevisions()}
 function markRevised(i){revisions[i].lastRevised=today();revisions[i].revCount=Math.min(revisions[i].revCount+1,RINTERVALS.length-1);revisions[i].nextRev=nextRevDate(today(),revisions[i].revCount);saveLS('revisions',revisions);renderRevisions()}
 function removeRev(i){revisions.splice(i,1);saveLS('revisions',revisions);renderRevisions()}
+function clearAllRevisions(){
+  if(!revisions.length){showToast('ℹ️','No revisions to clear');return}
+  askConfirm('Clear all revisions?','All revision topics will be removed.','Clear All',()=>{
+    revisions=[];saveLS('revisions',revisions);renderRevisions();showToast('🗑️','Revision list cleared');
+  });
+}
 $('revTopic').addEventListener('keydown',e=>e.key==='Enter'&&addRevision());
 
 /* RRR */
@@ -1067,14 +1302,35 @@ function renderMockLog(){
     let trend='—';if(i>0){const pp=mocks[i-1].total>0?Math.round(mocks[i-1].marks/mocks[i-1].total*100):0;trend=pct>pp?'↑':pct<pp?'↓':'→'}
     const tc=trend==='↑'?'var(--green)':trend==='↓'?'var(--coral)':'var(--text2)';
     const el=document.createElement('div');el.className='mock-log-item';
-    el.innerHTML=`<span style="flex:1;font-weight:600;font-size:.74rem">${m.subj}</span><span style="font-family:var(--mono);font-weight:500;color:${pct>=85?'var(--green)':pct>=70?'var(--amber)':'var(--coral)'}">${m.marks}/${m.total} (${pct}%)</span><span style="color:${tc}">${trend}</span><span style="font-family:var(--mono);font-size:.56rem;color:var(--text3)">${fmtDate(m.date)}</span><button class="task-del" style="opacity:1" onclick="removeMock(${i})">×</button>`;
+    el.innerHTML=`<span style="flex:1;font-weight:600;font-size:.74rem">${m.subj}</span>
+      <span style="font-family:var(--mono);font-weight:500;color:${pct>=85?'var(--green)':pct>=70?'var(--amber)':'var(--coral)'}">${m.marks}/${m.total} (${pct}%)</span>
+      <span style="color:${tc}">${trend}</span>
+      <span style="font-family:var(--mono);font-size:.56rem;color:var(--text3)">${fmtDate(m.date)}</span>
+      <button class="edit-btn" onclick="editMock(${i})" title="Edit">✏️</button>
+      <button class="del-btn" onclick="removeMock(${i})">×</button>`;
     list.appendChild(el);
   });
   if(mocks.length>0){const avg=Math.round(tot/mocks.length);const ae=$('mockAvg');ae.textContent=avg+'%';ae.style.color=avg>=85?'var(--green)':avg>=70?'var(--amber)':'var(--coral)'}
   else{$('mockAvg').textContent='—';$('mockAvg').style.color='var(--text2)'}
 }
+function editMock(i){
+  const m=mocks[i];
+  const newMarks=prompt(`Edit marks for "${m.subj}" (current: ${m.marks}/${m.total})\nEnter new marks:`,m.marks);
+  if(newMarks===null)return;
+  const newTotal=prompt('Enter new total:',m.total);
+  if(newTotal===null)return;
+  const nm=parseFloat(newMarks),nt=parseFloat(newTotal);
+  if(isNaN(nm)||isNaN(nt)||nt<=0){showToast('⚠️','Invalid values');return}
+  mocks[i].marks=nm;mocks[i].total=nt;saveLS('mocks',mocks);renderMockLog();showToast('✏️','Entry updated');
+}
 function addMock(){const subj=$('mockSubj').value.trim(),marks=parseFloat($('mockMarks').value),total=parseFloat($('mockTotal').value);if(!subj||isNaN(marks)||isNaN(total)||total<=0)return;mocks.push({subj,marks,total,date:today()});$('mockSubj').value='';$('mockMarks').value='';$('mockTotal').value='';saveLS('mocks',mocks);renderMockLog()}
 function removeMock(i){mocks.splice(i,1);saveLS('mocks',mocks);renderMockLog()}
+function clearAllMocks(){
+  if(!mocks.length){showToast('ℹ️','No mock entries to clear');return}
+  askConfirm('Clear mock log?','All command center mock entries will be deleted.','Clear All',()=>{
+    mocks=[];saveLS('mocks',mocks);renderMockLog();showToast('🗑️','Mock log cleared');
+  });
+}
 
 /* ══════════════════════════════════════════════════════
    STATS
@@ -1183,8 +1439,17 @@ function addPerfTest(){
   $('ptName').value='';$('ptScore').value='';$('ptTotal').value='';$('ptCorrect').value='';$('ptWrong').value='';$('ptSkip').value='';$('ptTpq').value='';$('ptDate').value=todayKey();
   showToast('📊','Test logged! Charts updated.');renderPerformance();
 }
-function deletePerfTest(i){if(!confirm('Delete this test?'))return;MOCK_DATA.splice(i,1);saveLS('mockTests_v5',MOCK_DATA);renderPerformance()}
-function clearAllTests(){if(!confirm('Clear ALL test records?'))return;MOCK_DATA.length=0;saveLS('mockTests_v5',MOCK_DATA);renderPerformance();showToast('🗑️','Cleared')}
+function deletePerfTest(i){
+  askConfirm('Delete test?',`"${MOCK_DATA[i]?.name||'this test'}" will be permanently deleted.`,'Delete',()=>{
+    MOCK_DATA.splice(i,1);saveLS('mockTests_v5',MOCK_DATA);renderPerformance();showToast('🗑️','Test deleted');
+  });
+}
+function clearAllTests(){
+  if(!MOCK_DATA.length){showToast('ℹ️','No test records to clear');return}
+  askConfirm('Clear all test records?','All performance records and charts will be reset.','Clear All',()=>{
+    MOCK_DATA.length=0;saveLS('mockTests_v5',MOCK_DATA);renderPerformance();showToast('🗑️','All test records cleared');
+  });
+}
 
 function renderPerformance(){
   initPerfForm();
@@ -1337,9 +1602,36 @@ function renderMockPerfTable(){
     const acc=m.total>0?Math.round(m.correct/m.total*100):0;
     const cls=m.score>=80?'sc-a':m.score>=65?'sc-b':'sc-c';
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="color:var(--text3);font-family:var(--mono)">${MOCK_DATA.length-ri}</td><td style="font-weight:600">${m.name}</td><td>${subj.emoji} ${subj.name.slice(0,8)}</td><td><span class="score-pill ${cls}">${m.score}/${m.total}</span></td><td style="font-family:var(--mono);font-weight:700;color:${acc>=80?'var(--green)':acc>=65?'var(--amber)':'var(--coral)'}">${acc}%</td><td style="font-family:var(--mono)">${m.tpq?m.tpq+'s':'—'}</td><td style="color:var(--text2)">${new Date(m.date+'T12:00:00').toLocaleDateString('en',{month:'short',day:'numeric',year:'2-digit'})}</td><td><button onclick="deletePerfTest(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:.9rem;padding:0 3px" onmouseover="this.style.color='var(--coral)'" onmouseout="this.style.color='var(--text3)'">×</button></td>`;
+    tr.innerHTML=`
+      <td style="color:var(--text3);font-family:var(--mono)">${MOCK_DATA.length-ri}</td>
+      <td style="font-weight:600">${m.name}</td>
+      <td>${subj.emoji} ${subj.name.slice(0,8)}</td>
+      <td><span class="score-pill ${cls}">${m.score}/${m.total}</span></td>
+      <td style="font-family:var(--mono);font-weight:700;color:${acc>=80?'var(--green)':acc>=65?'var(--amber)':'var(--coral)'}">${acc}%</td>
+      <td style="font-family:var(--mono)">${m.tpq?m.tpq+'s':'—'}</td>
+      <td style="color:var(--text2)">${new Date(m.date+'T12:00:00').toLocaleDateString('en',{month:'short',day:'numeric',year:'2-digit'})}</td>
+      <td style="white-space:nowrap">
+        <button class="edit-btn" title="Edit" onclick="editPerfTest(${i})" style="margin-right:4px">✏️</button>
+        <button class="del-btn" onclick="deletePerfTest(${i})">×</button>
+      </td>`;
     tbody.appendChild(tr);
   });
+}
+
+function editPerfTest(i){
+  const m=MOCK_DATA[i];
+  const name=prompt('Test name:',m.name);if(name===null)return;
+  const score=prompt('Score (marks obtained):',m.score);if(score===null)return;
+  const total=prompt('Out of (total marks):',m.total);if(total===null)return;
+  const correct=prompt('Correct answers:',m.correct);if(correct===null)return;
+  const wrong=prompt('Wrong answers:',m.wrong);if(wrong===null)return;
+  const tpq=prompt('Seconds per question (0 if unknown):',m.tpq||0);if(tpq===null)return;
+  const ns=parseFloat(score),nt=parseFloat(total),nc=parseFloat(correct),nw=parseFloat(wrong);
+  if(isNaN(ns)||isNaN(nt)||nt<=0||isNaN(nc)||isNaN(nw)){showToast('⚠️','Invalid values — edit cancelled');return}
+  MOCK_DATA[i]={...m,name:name.trim()||m.name,score:ns,total:nt,correct:nc,wrong:nw,tpq:parseFloat(tpq)||0};
+  saveLS('mockTests_v5',MOCK_DATA);
+  renderPerformance();
+  showToast('✏️','Test record updated!');
 }
 
 /* TPQ */
@@ -1382,16 +1674,37 @@ function renderImprovement(){
 function renderLog(){
   const list=$('logList');list.innerHTML='';
   if(!D.sessions.length){list.innerHTML='<div class="log-empty">No sessions yet. Start the timer! 🍅</div>';return}
-  [...D.sessions].reverse().slice(0,60).forEach(s=>{
+  const reversed=[...D.sessions].reverse().slice(0,60);
+  reversed.forEach((s,ri)=>{
+    const realIdx=D.sessions.length-1-ri;
     const subj=SUBJECTS.find(x=>x.id===s.subj)||{name:s.subj,emoji:'📝',color:'var(--yellow)'};
     const time=new Date(s.completedAt).toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'});
     const ds=s.date===todayKey()?'Today':new Date(s.date+'T12:00:00').toLocaleDateString('en',{month:'short',day:'numeric'});
     const item=document.createElement('div');item.className='log-item';
-    item.innerHTML=`<div class="log-icon" style="background:${subj.color}16">${subj.emoji}</div><div style="flex:1"><div class="log-name">${subj.name} — Focus</div><div class="log-meta">${ds} · ${time}</div></div><div class="log-dur">${s.duration}m</div>`;
+    item.innerHTML=`<div class="log-icon" style="background:${subj.color}16">${subj.emoji}</div>
+      <div style="flex:1"><div class="log-name">${subj.name} — Focus${s.manual?' <span style="font-size:.56rem;color:var(--text3);font-family:var(--mono)">(manual)</span>':''}</div><div class="log-meta">${ds} · ${time}</div></div>
+      <div class="log-dur">${s.duration}m</div>
+      <button class="del-btn" style="margin-left:8px" onclick="deleteSession(${realIdx})" title="Delete this session">×</button>`;
     list.appendChild(item);
   });
 }
-function clearLog(){if(!confirm('Clear all session history?'))return;D.sessions=[];saveD();renderLog();renderStats();refreshSidebar();showToast('🗑️','Cleared')}
+function deleteSession(i){
+  D.sessions.splice(i,1);saveD();renderLog();renderStats();refreshSidebar();showToast('🗑️','Session removed');
+}
+function addManualSession(){
+  const subj=$('manSubj').value;
+  const dur=parseInt($('manDur').value)||25;
+  const date=$('manDate').value||todayKey();
+  if(dur<1||dur>480){showToast('⚠️','Duration must be 1–480 min');return}
+  D.sessions.push({date,subj,duration:dur,completedAt:new Date(date+'T12:00:00').toISOString(),type:'focus',manual:true});
+  saveD();renderLog();renderStats();refreshSidebar();showToast('✅','Session added manually');
+}
+function clearLog(){
+  if(!D.sessions.length){showToast('ℹ️','No sessions to clear');return}
+  askConfirm('Clear session history?','All focus sessions will be permanently deleted.','Clear All',()=>{
+    D.sessions=[];saveD();renderLog();renderStats();refreshSidebar();showToast('🗑️','Session log cleared');
+  });
+}
 
 /* ══════════════════════════════════════════════════════
    SIDEBAR
@@ -1413,6 +1726,7 @@ totalMs=modeMs('focus');
 updateDisplay(totalMs);
 calcRRR();
 initPerfForm();
+if($('manDate'))$('manDate').value=todayKey();
 if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
 </script>
 </body>
