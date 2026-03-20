@@ -324,6 +324,11 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .syl-status-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border2);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;transition:all .15s}
 .syl-ch-name{flex:1;background:transparent;border:none;border-bottom:1px solid transparent;color:var(--text);font-family:var(--sans);font-size:.78rem;font-weight:600;padding:2px 4px;outline:none;transition:border-color .15s;min-width:0}
 .syl-ch-name:focus{border-bottom-color:var(--yellow)}
+.syl-drag-handle{display:flex;align-items:center;justify-content:center;width:20px;flex-shrink:0;cursor:grab;color:var(--text3);font-size:.7rem;padding:0 2px;user-select:none;-webkit-user-select:none;touch-action:none}
+.syl-drag-handle:active{cursor:grabbing}
+.syl-drag-handle:hover{color:var(--text2)}
+.syl-ch-item.dragging{opacity:.35;border:1px dashed var(--yellow)!important;background:var(--bg)!important}
+.syl-ch-item.drag-over{border-color:var(--yellow)!important;box-shadow:0 0 0 1px var(--yellow);transform:scale(1.01)}
 .syl-del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem;padding:0 4px;flex-shrink:0;transition:color .15s;line-height:1}
 .syl-del-btn:hover{color:var(--coral)}
 .syl-toggle-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.7rem;padding:0 4px;flex-shrink:0;transition:color .15s}
@@ -1117,12 +1122,15 @@ function renderChList(key){
     const s=ch.status||0;
     const item=document.createElement('div');
     item.className='syl-ch-item';
+    item.dataset.key=key;
+    item.dataset.idx=i;
 
     // Count completed criteria
     const critDone=CRITERIA.filter(cr=>ch.criteria&&ch.criteria[cr.key]).length;
 
     item.innerHTML=`
       <div class="syl-ch-main">
+        <div class="syl-drag-handle" title="Drag to reorder">⠿</div>
         <button class="syl-status-btn"
           style="color:${STATUS_COLORS[s]};background:${STATUS_BG[s]};border-color:${STATUS_BORDER[s]}"
           onclick="sylCycleStatus('${key}',${i})"
@@ -1152,6 +1160,7 @@ function renderChList(key){
       </div>`;
 
     list.appendChild(item);
+    initDrag(item, key);
   });
 }
 
@@ -1207,6 +1216,101 @@ function deleteChapter(key,i){
 }
 function renameChapter(key,i,val){getChapters(key)[i].name=val.trim()||getChapters(key)[i].name;saveSyllabus()}
 function cycleChStatus(key,i){sylCycleStatus(key,i)} // alias kept for backwards compat
+
+/* ── DRAG & DROP chapter reorder (mouse + touch) ── */
+let _drag={el:null,key:null,fromIdx:null,clone:null,startY:0,startScroll:0};
+
+function initDrag(item, key){
+  const handle=item.querySelector('.syl-drag-handle');
+  if(!handle)return;
+
+  // Mouse drag
+  handle.addEventListener('mousedown',e=>{
+    e.preventDefault();
+    startDrag(item,key,e.clientY);
+    const onMove=e2=>moveDrag(e2.clientY);
+    const onUp=()=>{endDrag();document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp)};
+    document.addEventListener('mousemove',onMove);
+    document.addEventListener('mouseup',onUp);
+  });
+
+  // Touch drag
+  handle.addEventListener('touchstart',e=>{
+    e.preventDefault();
+    startDrag(item,key,e.touches[0].clientY);
+    const onMove=e2=>{e2.preventDefault();moveDrag(e2.touches[0].clientY)};
+    const onEnd=()=>{endDrag();document.removeEventListener('touchmove',onMove);document.removeEventListener('touchend',onEnd)};
+    document.addEventListener('touchmove',onMove,{passive:false});
+    document.addEventListener('touchend',onEnd);
+  },{passive:false});
+}
+
+function startDrag(el,key,clientY){
+  _drag.el=el;
+  _drag.key=key;
+  _drag.fromIdx=parseInt(el.dataset.idx);
+  _drag.startY=clientY;
+  el.classList.add('dragging');
+
+  // Create floating clone
+  const rect=el.getBoundingClientRect();
+  const clone=el.cloneNode(true);
+  clone.style.cssText=`position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;z-index:9999;pointer-events:none;opacity:.85;border:1px solid var(--yellow);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.5);transition:none;background:var(--s1)`;
+  document.body.appendChild(clone);
+  _drag.clone=clone;
+  _drag.cloneTop=rect.top;
+}
+
+function moveDrag(clientY){
+  if(!_drag.el||!_drag.clone)return;
+  const dy=clientY-_drag.startY;
+  _drag.clone.style.top=(_drag.cloneTop+dy)+'px';
+
+  // Find which item we're hovering over
+  const list=_drag.el.parentElement;
+  if(!list)return;
+  const items=[...list.querySelectorAll('.syl-ch-item:not(.dragging)')];
+  items.forEach(it=>it.classList.remove('drag-over'));
+
+  const target=items.find(it=>{
+    const r=it.getBoundingClientRect();
+    return clientY>=r.top&&clientY<=r.bottom;
+  });
+  if(target)target.classList.add('drag-over');
+}
+
+function endDrag(){
+  if(!_drag.el)return;
+  const el=_drag.el;
+  const list=el.parentElement;
+  const clone=_drag.clone;
+
+  // Clean up clone
+  if(clone)clone.remove();
+  el.classList.remove('dragging');
+
+  if(!list){_drag={el:null,key:null,fromIdx:null,clone:null,startY:0};return}
+
+  // Find drop target
+  const items=[...list.querySelectorAll('.syl-ch-item:not(.dragging)')];
+  const target=items.find(it=>it.classList.contains('drag-over'));
+  items.forEach(it=>it.classList.remove('drag-over'));
+
+  if(target&&target!==el){
+    const key=_drag.key;
+    const fromIdx=_drag.fromIdx;
+    const toIdx=parseInt(target.dataset.idx);
+    const chs=getChapters(key);
+    // Move chapter in array
+    const [moved]=chs.splice(fromIdx,1);
+    chs.splice(toIdx,0,moved);
+    saveSyllabus();
+    renderChList(key);
+    showToast('↕️','Chapter reordered');
+  }
+
+  _drag={el:null,key:null,fromIdx:null,clone:null,startY:0,cloneTop:0};
+}
 
 /* Weak Areas */
 let weakAreas=loadLS('weakAreas',[]);
