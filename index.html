@@ -498,6 +498,21 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .xp-milestone-name{font-size:.74rem;font-weight:700;color:var(--text)}
 .xp-milestone-xp{font-family:var(--mono);font-size:.64rem;color:var(--text3);margin-top:1px}
 .xp-milestone-check{margin-left:auto;font-size:.78rem;color:var(--green)}
+/* ══ STUDY JOURNAL ══ */
+.journal-entry{background:var(--s1);border:1px solid var(--border);border-radius:var(--r2);padding:14px;transition:border-color .18s;position:relative;overflow:hidden}
+.journal-entry:hover{border-color:var(--border2)}
+.journal-entry::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:var(--r2) 0 0 var(--r2)}
+.journal-date-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.journal-date-lbl{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--text)}
+.journal-mood-big{font-size:1.2rem;line-height:1}
+.journal-section{margin-bottom:7px}
+.journal-section-lbl{font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.journal-section-text{font-size:.74rem;color:var(--text2);line-height:1.55}
+.journal-stats-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.journal-stat-chip{padding:2px 8px;border-radius:99px;font-family:var(--mono);font-size:.6rem;font-weight:700}
+.mood-btn{font-size:1.4rem;cursor:pointer;border:2px solid transparent;border-radius:8px;padding:2px 4px;transition:all .15s;background:none}
+.mood-btn:hover{transform:scale(1.2)}
+.mood-btn.selected{border-color:var(--yellow);background:var(--yellow-lo)}
 </style>
 </head>
 <body>
@@ -557,8 +572,8 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <div class="nav-item" onclick="showPage('report')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Weekly Report
     </div>
-    <div class="nav-item" onclick="showPage('predictor')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="6 7 12 4 18 7"/></svg>Marks Predictor
+    <div class="nav-item" onclick="showPage('journal')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Study Journal
     </div>
     <div class="nav-item" onclick="showPage('badges')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Badges
@@ -625,8 +640,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
           <button class="btn btn-y" id="btnStart" onclick="startTimer()">▶ Start</button>
           <button class="btn btn-ghost" id="btnPause" onclick="pauseTimer()" disabled>⏸ Pause</button>
           <div class="btn-icon" onclick="resetTimer()" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.35"/></svg></div>
-          <div class="btn-icon" onclick="skipTimer()" title="Skip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></div>
+          <div class="btn-icon" onclick="skipTimer()" title="Skip to break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></div>
         </div>
+        <button class="btn" id="btnEndSave" onclick="endAndSave()" style="display:none;width:100%;background:var(--green);color:#08090d;font-size:.72rem">✅ End &amp; Save Progress</button>
         <div style="font-size:.66rem;color:var(--text2);text-align:center">
           Studying: <span id="activeSubjLabel" style="color:var(--yellow);font-weight:700">—</span>
         </div>
@@ -792,14 +808,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
       <div>
         <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px" id="lgTitle">Daily Focus (min)</div>
         <div style="position:relative;width:100%">
-          <svg id="actLineSvg" viewBox="0 0 400 110" style="width:100%;height:110px;overflow:visible;display:block">
-            <defs>
-              <linearGradient id="lgGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#e8ff47" stop-opacity=".35"/>
-                <stop offset="100%" stop-color="#e8ff47" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <svg id="actLineSvg" viewBox="0 0 400 110" style="width:100%;height:110px;overflow:visible;display:block"></svg>
           <!-- tooltip -->
           <div id="lgTooltip" style="position:absolute;background:var(--s1);border:1px solid var(--border2);border-radius:8px;padding:5px 9px;font-family:var(--mono);font-size:.62rem;color:var(--text);pointer-events:none;display:none;z-index:10;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.5)"></div>
         </div>
@@ -1067,41 +1076,62 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   </div>
 </div>
 
-<!-- ══ MARKS PREDICTOR PAGE ══ -->
-<div class="page" id="page-predictor">
+<!-- ══ STUDY JOURNAL PAGE ══ -->
+<div class="page" id="page-journal">
+  <!-- Write today's entry -->
   <div class="card card-glow">
-    <div class="card-hd"><div class="card-title">🎯 Predict Your Board Score</div><div class="pill pill-y">Based on your mock test data</div></div>
-    <div style="font-size:.72rem;color:var(--text2);margin-bottom:14px">Enter your expected effort level for each subject (1–10) or use your mock average.</div>
-    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px" id="predInputs"></div>
-    <div class="g2" style="margin-bottom:10px">
-      <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Syllabus Coverage %</div>
-        <input class="inp inp-mono" type="number" id="predSyllabus" placeholder="75" min="0" max="100" value="75"/></div>
-      <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Days Left to Study</div>
-        <input class="inp inp-mono" type="number" id="predDaysLeft" placeholder="30" min="0" value="30"/></div>
+    <div class="card-hd">
+      <div>
+        <div class="card-title">📓 Today's Entry</div>
+        <div style="font-size:.62rem;color:var(--text2);margin-top:2px" id="journalTodayDate"></div>
+      </div>
+      <div class="row" style="gap:8px">
+        <div id="journalMoodRow" style="display:flex;gap:4px"></div>
+      </div>
     </div>
-    <button class="btn btn-y" onclick="runPredictor()" style="width:100%;padding:12px">🔮 Predict My Score</button>
+    <!-- Stats auto-pulled from today -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="journalTodayStats"></div>
+    <div style="margin-bottom:10px">
+      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">What did you study today?</div>
+      <textarea id="journalWhat" placeholder="e.g. Finished Ch6 Triangles, practised 20 PYQs from Science…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:64px;transition:border-color .2s" onfocus="this.style.borderColor='var(--yellow)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Doubts / Problems faced</div>
+      <textarea id="journalDoubts" placeholder="e.g. Confused about coordinate geometry formula, need to revise…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:48px;transition:border-color .2s" onfocus="this.style.borderColor='var(--coral)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+    <div style="margin-bottom:12px">
+      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Tomorrow's targets</div>
+      <textarea id="journalTargets" placeholder="e.g. Complete Ch7 Coordinate Geometry, solve 3 maths papers…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:48px;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+    <div class="row" style="gap:10px">
+      <button class="btn btn-y" onclick="saveJournalEntry()" style="flex:1">💾 Save Entry</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearJournalForm()">Clear</button>
+    </div>
   </div>
 
-  <div id="predResultSection" style="display:none;flex-direction:column;gap:16px">
-    <div class="pred-result">
-      <div style="font-size:.64rem;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;font-family:var(--mono)">Predicted Total</div>
-      <div class="pred-score" id="predScore">—</div>
-      <div class="pred-grade-lbl" id="predGrade"></div>
-      <div class="pred-range" id="predRange"></div>
+  <!-- Streak + stats banner -->
+  <div class="g2">
+    <div class="card" style="background:linear-gradient(135deg,var(--s1),rgba(232,255,71,.04));border-color:rgba(232,255,71,.15)">
+      <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Journal Streak</div>
+      <div style="font-family:var(--mono);font-size:3rem;font-weight:700;color:var(--yellow);line-height:1" id="journalStreak">0</div>
+      <div style="font-size:.66rem;color:var(--text2);margin-top:4px">days written 📓</div>
     </div>
     <div class="card">
-      <div class="card-title" style="margin-bottom:12px">Subject-wise Prediction</div>
-      <div class="pred-breakdown" id="predBreakdown"></div>
-    </div>
-    <div class="card">
-      <div class="card-title" style="margin-bottom:12px">💡 Improvement Tips</div>
-      <div id="predTips" style="display:flex;flex-direction:column;gap:7px"></div>
+      <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">This Week's Mood</div>
+      <div id="journalWeekMoods" style="display:flex;gap:6px;flex-wrap:wrap"></div>
     </div>
   </div>
 
+  <!-- Past entries -->
   <div class="card">
-    <div class="card-hd"><div class="card-title">Prediction History</div><button class="btn btn-ghost btn-sm" onclick="clearPredHistory()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear</button></div>
-    <div class="pred-history-list" id="predHistoryList"><div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No predictions yet. Run your first prediction above!</div></div>
+    <div class="card-hd">
+      <div class="card-title">📚 Past Entries</div>
+      <div class="row" style="gap:8px">
+        <input class="inp" id="journalSearch" placeholder="Search entries…" style="width:140px;flex:none" oninput="renderJournal()"/>
+        <button class="btn btn-ghost btn-sm" onclick="clearAllJournal()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear All</button>
+      </div>
+    </div>
+    <div id="journalList" style="display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto"></div>
   </div>
 </div>
 
@@ -1365,7 +1395,7 @@ let D=loadD();
 /* ══════════════════════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════════════════════ */
-const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log',countdown:'Exam Countdown',report:'Weekly Report',predictor:'Marks Predictor',badges:'Badges & XP',timetable:'Study Timetable',health:'Subject Health Dashboard',checklist:'Exam Day Checklist'};
+const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log',countdown:'Exam Countdown',report:'Weekly Report',journal:'Study Journal',badges:'Badges & XP',timetable:'Study Timetable',health:'Subject Health Dashboard',checklist:'Exam Day Checklist'};
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1378,7 +1408,7 @@ function showPage(id){
   if(id==='command'){renderTasks();renderSyllabus();renderWeak();renderRevisions();calcRRR();renderMockLog()}
   if(id==='countdown'){renderCountdown()}
   if(id==='report'){renderReport()}
-  if(id==='predictor'){renderPredInputs();renderPredHistory()}
+  if(id==='journal'){renderJournal()}
   if(id==='badges'){renderBadges()}
   if(id==='timetable'){renderTimetable()}
   if(id==='health'){renderHealthAndTrack()}
@@ -1430,10 +1460,21 @@ function onComplete(skipped){
 }
 function updateDisplay(ms){const sec=Math.max(0,Math.ceil(ms/1000));$('tDigits').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
 function updateRing(ms){$('ringProg').style.strokeDashoffset=CIRC*(1-(totalMs>0?ms/totalMs:1))}
-function setBS(st){const bs=$('btnStart'),bp=$('btnPause');
-  if(st==='running'){bs.textContent='▶ Running';bs.disabled=true;bp.disabled=false}
-  else if(st==='paused'){bs.textContent='▶ Resume';bs.disabled=false;bp.disabled=true}
-  else{bs.textContent='▶ Start';bs.disabled=false;bp.disabled=true}
+function setBS(st){
+  const bs=$('btnStart'),bp=$('btnPause'),be=$('btnEndSave');
+  if(st==='running'){bs.textContent='▶ Running';bs.disabled=true;bp.disabled=false;if(currentMode==='focus'&&be)be.style.display='block'}
+  else if(st==='paused'){bs.textContent='▶ Resume';bs.disabled=false;bp.disabled=true;if(currentMode==='focus'&&be)be.style.display='block'}
+  else{bs.textContent='▶ Start';bs.disabled=false;bp.disabled=true;if(be)be.style.display='none'}
+}
+function endAndSave(){
+  // Save partial session with elapsed time
+  const elapsed=totalMs>0?Math.round((totalMs-(remainMs||Math.max(0,endTime-Date.now())))/60000):0;
+  if(elapsed<1){showToast('⚠️','Less than 1 min elapsed — nothing to save');resetTimer();return}
+  clearInterval(timerInterval);timerInterval=null;isRunning=false;isPaused=false;
+  D.sessions.push({date:todayKey(),subj:D.activeSubj,duration:elapsed,completedAt:new Date().toISOString(),type:'focus',partial:true});
+  saveD();flashScreen();showToast('✅',elapsed+'m saved! Good effort.');
+  updateSessionDots();refreshSidebar();checkAndAwardBadges();
+  resetTimer();
 }
 function updateSessionDots(){
   const n=D.settings.interval,c=$('sDots');c.innerHTML='';
@@ -2189,8 +2230,11 @@ function renderFormIndicator(){
   $('formDot').className='form-dot '+cls;
   const desc={peak:'Scores improving, high accuracy, great momentum!',stable:'Consistent performance. Push harder to reach peak.',low:'Need more practice. Review weak topics urgently.'};
   $('formDesc').textContent=desc[cls];
-  const totalQ=MOCK_DATA.reduce((a,m)=>a+m.total,0),totalC=MOCK_DATA.reduce((a,m)=>a+m.correct,0);
-  const accV=totalQ>0?Math.round(totalC/totalQ*100):0;
+  const totalC=MOCK_DATA.reduce((a,m)=>a+m.correct,0);
+  const totalW=MOCK_DATA.reduce((a,m)=>a+m.wrong,0);
+  const totalSk=MOCK_DATA.reduce((a,m)=>a+(m.skip||0),0);
+  const totalAttempted=totalC+totalW+totalSk;
+  const accV=totalAttempted>0?Math.round(totalC/totalAttempted*100):totalC===0&&totalW===0?Math.round(MOCK_DATA.reduce((a,m)=>a+(m.total>0?m.score/m.total*100:0),0)/Math.max(1,MOCK_DATA.length)):0;
   $('formStats').innerHTML=`
     <div style="text-align:center"><div class="form-stat-val">${avg(scores).toFixed(1)}%</div><div class="form-stat-lbl">Avg Score</div></div>
     <div style="text-align:center"><div class="form-stat-val">${accV}%</div><div class="form-stat-lbl">Accuracy</div></div>
@@ -2254,10 +2298,12 @@ function renderSubjScoreChart(){
   labelsEl.style.cssText='display:flex;gap:0;flex-wrap:wrap';
 }
 
+function calcAcc(m){const att=(m.correct||0)+(m.wrong||0)+(m.skip||0);return att>0?Math.round((m.correct||0)/att*100):m.total>0?Math.round(m.score/m.total*100):0}
+
 /* Accuracy Over Time */
 function renderAccuracyOverTime(){
   const svg=$('accTimeSvg'),labelsEl=$('accTimeLabels');labelsEl.innerHTML='';
-  const data=MOCK_DATA.map(m=>({acc:m.total>0?Math.round(m.correct/m.total*100):0,name:m.name}));
+  const data=MOCK_DATA.map(m=>({acc:calcAcc(m),name:m.name}));
   if(data.length<2){svg.innerHTML='<text x="200" y="45" fill="var(--text3)" text-anchor="middle" font-family="JetBrains Mono" font-size="10">Add ≥2 tests</text>';return}
   const n=data.length,W=400,H=80;
   const accs=data.map(d=>d.acc);const minA=Math.max(0,Math.min(...accs)-10),maxA=100;
@@ -2291,9 +2337,9 @@ function renderScoreDist(){
 /* Subject Accuracy Grid */
 function renderSubjAccuracy(){
   const grid=$('subjAccGrid');grid.innerHTML='';
-  const map={};MOCK_DATA.forEach(m=>{if(!map[m.subj])map[m.subj]={c:0,t:0};map[m.subj].c+=m.correct;map[m.subj].t+=m.total});
+  const map={};MOCK_DATA.forEach(m=>{const att=(m.correct||0)+(m.wrong||0)+(m.skip||0);if(!map[m.subj])map[m.subj]={c:0,att:0,sc:0,t:0};map[m.subj].c+=(m.correct||0);map[m.subj].att+=att;map[m.subj].sc+=m.score;map[m.subj].t+=m.total;});
   SUBJECTS.forEach(s=>{
-    const d=map[s.id];const acc=d?Math.round(d.c/d.t*100):null;
+    const d=map[s.id];const acc=d?(d.att>0?Math.round(d.c/d.att*100):d.t>0?Math.round(d.sc/d.t*100):null):null;
     const col=acc===null?'var(--text3)':acc>=80?'var(--green)':acc>=65?'var(--amber)':'var(--coral)';
     const c=document.createElement('div');c.className='sa-card';
     c.innerHTML=`<div class="sa-name">${s.emoji} ${s.name}</div><div class="sa-val" style="color:${col}">${acc!==null?acc+'%':'—'}</div><div style="font-size:.56rem;color:var(--text3)">${acc!==null?'accuracy':'no data'}</div>`;
@@ -2307,7 +2353,7 @@ function renderMockPerfTable(){
   [...MOCK_DATA].reverse().forEach((m,ri)=>{
     const i=MOCK_DATA.length-1-ri;
     const subj=SUBJECTS.find(s=>s.id===m.subj)||{name:m.subj,emoji:'📝'};
-    const acc=m.total>0?Math.round(m.correct/m.total*100):0;
+    const acc=calcAcc(m);
     const cls=m.score>=80?'sc-a':m.score>=65?'sc-b':'sc-c';
     const tr=document.createElement('tr');
     tr.innerHTML=`
@@ -2644,110 +2690,138 @@ function renderReport(){
 }
 
 /* ══════════════════════════════════════════════════════
-   MARKS PREDICTOR
+   STUDY JOURNAL
 ══════════════════════════════════════════════════════ */
-let predHistory=loadLS('predHistory_v1',[]);
+const MOODS=[{e:'😄',l:'Great'},{e:'🙂',l:'Good'},{e:'😐',l:'Okay'},{e:'😔',l:'Tired'},{e:'😤',l:'Stressed'},{e:'🔥',l:'Focused'}];
+let journals=loadLS('journals_v1',[]);
+let _journalMood=null;
 
-function renderPredInputs(){
-  const wrap=$('predInputs');if(!wrap)return;wrap.innerHTML='';
-  SUBJECTS.forEach(s=>{
-    const mockAvg=MOCK_DATA.filter(m=>m.subj===s.id).map(m=>m.score);
-    const avg=mockAvg.length?Math.round(mockAvg.reduce((a,b)=>a+b,0)/mockAvg.length):null;
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:10px';
-    row.innerHTML=`
-      <div style="font-size:.76rem;font-weight:600;color:var(--text);width:120px;flex-shrink:0">${s.emoji} ${s.name}</div>
-      <input type="range" id="predSlider_${s.id}" min="0" max="100" value="${avg||60}"
-        style="flex:1;accent-color:${s.color};height:4px"
-        oninput="$('predSliderVal_${s.id}').textContent=this.value+'%'"/>
-      <span id="predSliderVal_${s.id}" style="font-family:var(--mono);font-size:.72rem;color:${s.color};width:36px;text-align:right;flex-shrink:0">${avg||60}%</span>
-      ${avg!==null?`<span style="font-size:.58rem;color:var(--text3);font-family:var(--mono)">(mock avg: ${avg}%)</span>`:''}`;
-    wrap.appendChild(row);
-  });
-}
+function saveJournals(){saveLS('journals_v1',journals)}
 
-function runPredictor(){
-  const syllabus=parseInt($('predSyllabus').value)||75;
-  const daysLeft=parseInt($('predDaysLeft').value)||30;
+function renderJournal(){
+  const td=todayKey();
+  $('journalTodayDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
-  // Calculate per-subject predictions
-  const breakdown=SUBJECTS.map(s=>{
-    const base=parseInt(document.getElementById('predSlider_'+s.id)?.value||60);
-    // Factors: base score, syllabus coverage, days left boost
-    const sylFactor=syllabus/100;
-    const dayFactor=Math.min(1,0.7+daysLeft/100);
-    const pred=Math.min(100,Math.round(base*sylFactor*dayFactor+(daysLeft>60?5:0)));
-    return{...s,pred,base};
-  });
+  // Mood selector
+  const mr=$('journalMoodRow');if(mr){mr.innerHTML='';MOODS.forEach(m=>{const btn=document.createElement('button');btn.className='mood-btn'+(_journalMood===m.e?' selected':'');btn.title=m.l;btn.textContent=m.e;btn.onclick=()=>{_journalMood=_journalMood===m.e?null:m.e;renderJournalMoodRow()};mr.appendChild(btn)})}
 
-  const total=Math.round(breakdown.reduce((a,s)=>a+s.pred,0)/SUBJECTS.length);
-  const totalMarks=Math.round(total*5); // 5 subjects × 100 = 500
-
-  // Grade
-  let grade,gradeColor;
-  if(total>=90){grade='A1 — Outstanding 🏆';gradeColor='var(--green)'}
-  else if(total>=80){grade='A2 — Excellent 🌟';gradeColor='var(--green)'}
-  else if(total>=70){grade='B1 — Very Good 👍';gradeColor='var(--blue)'}
-  else if(total>=60){grade='B2 — Good 📈';gradeColor='var(--blue)'}
-  else if(total>=50){grade='C1 — Average ⚡';gradeColor='var(--amber)'}
-  else{grade='Needs Improvement 📚';gradeColor='var(--coral)'}
-
-  $('predScore').textContent=totalMarks+'/500';
-  $('predGrade').innerHTML=`<span style="color:${gradeColor}">${grade}</span>`;
-  $('predRange').textContent=`Avg per subject: ~${total}% | Range: ${Math.max(0,totalMarks-30)}–${Math.min(500,totalMarks+30)}`;
-  $('predResultSection').style.display='flex';
-
-  // Breakdown bars
-  const bkd=$('predBreakdown');bkd.innerHTML='';
-  breakdown.forEach(s=>{
-    const row=document.createElement('div');row.className='pred-subj-row';
-    row.innerHTML=`<div class="pred-subj-name">${s.emoji} ${s.name}</div><div class="pred-track"><div class="pred-fill" style="background:${s.color};width:0%" data-w="${s.pred}"></div></div><div class="pred-val">${s.pred}%</div>`;
-    bkd.appendChild(row);
-    setTimeout(()=>{row.querySelector('.pred-fill').style.width=s.pred+'%'},60);
-  });
-
-  // Tips
-  const tips=$('predTips');tips.innerHTML='';
-  const weakSubjs=breakdown.filter(s=>s.pred<70).sort((a,b)=>a.pred-b.pred);
-  if(weakSubjs.length){
-    weakSubjs.forEach(s=>{
-      const div=document.createElement('div');
-      div.style.cssText='display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--s2);border-radius:var(--r);font-size:.74rem';
-      div.innerHTML=`<span style="font-size:.9rem;flex-shrink:0">${s.emoji}</span><div><strong style="color:${s.color}">${s.name}</strong> — predicted ${s.pred}%. Focus more sessions on this subject and complete remaining chapters.</div>`;
-      tips.appendChild(div);
+  // Auto-fill today stats
+  const statsEl=$('journalTodayStats');if(statsEl){
+    const todaySess=D.sessions.filter(s=>s.date===td&&s.type==='focus');
+    const focusMin=todaySess.reduce((a,s)=>a+s.duration,0);
+    const tasksToday=loadLS('tasks_'+td,[]);
+    const tasksDone=tasksToday.filter(t=>t.done).length;
+    const mockToday=MOCK_DATA.filter(m=>m.date===td);
+    statsEl.innerHTML='';
+    [{label:focusMin+'m focus',color:'var(--blue)'},{label:todaySess.length+' sessions',color:'var(--yellow)'},{label:tasksDone+'/'+tasksToday.length+' tasks',color:'var(--green)'},{label:mockToday.length?' test logged':'no test',color:mockToday.length?'var(--coral)':'var(--text3)'}].forEach(c=>{
+      const chip=document.createElement('div');chip.className='journal-stat-chip';chip.style.cssText=`background:${c.color}18;color:${c.color};border:1px solid ${c.color}33`;chip.textContent=c.label;statsEl.appendChild(chip);
     });
-  } else {
-    tips.innerHTML='<div style="color:var(--green);font-size:.74rem;padding:8px">✅ All subjects looking strong! Maintain consistency and revise weak chapters.</div>';
   }
-  if(syllabus<80){const d=document.createElement('div');d.style.cssText='display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--amber-lo);border-radius:var(--r);font-size:.74rem;color:var(--amber)';d.innerHTML='<span>⚠️</span> Syllabus coverage is below 80%. Finishing more chapters can significantly boost your score.';tips.appendChild(d)}
 
-  // Save to history
-  predHistory.unshift({date:todayKey(),total,totalMarks,grade,syllabus,daysLeft,breakdown:breakdown.map(s=>({id:s.id,pred:s.pred}))});
-  if(predHistory.length>10)predHistory.pop();
-  saveLS('predHistory_v1',predHistory);
-  renderPredHistory();
-  showToast('🔮','Prediction complete!');
-  checkAndAwardBadges();
-}
+  // Pre-fill if existing entry today
+  const existing=journals.find(j=>j.date===td);
+  if(existing){
+    if($('journalWhat'))$('journalWhat').value=existing.what||'';
+    if($('journalDoubts'))$('journalDoubts').value=existing.doubts||'';
+    if($('journalTargets'))$('journalTargets').value=existing.targets||'';
+    _journalMood=existing.mood||null;
+    renderJournalMoodRow();
+  }
 
-function renderPredHistory(){
-  const list=$('predHistoryList');if(!list)return;
-  if(!predHistory.length){list.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No predictions yet.</div>';return}
-  list.innerHTML='';
-  predHistory.forEach((p,i)=>{
-    const item=document.createElement('div');item.className='pred-history-item';
+  // Journal streak
+  let streak=0;const d=new Date();
+  while(journals.some(j=>j.date===dateKey(d))){streak++;d.setDate(d.getDate()-1)}
+  const jsEl=$('journalStreak');if(jsEl)jsEl.textContent=streak;
+
+  // Week moods
+  const wm=$('journalWeekMoods');if(wm){wm.innerHTML='';const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];for(let i=6;i>=0;i--){const dd=new Date();dd.setDate(dd.getDate()-i);const dk=dateKey(dd);const je=journals.find(j=>j.date===dk);const dow=days[(dd.getDay()+6)%7];const div=document.createElement('div');div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px';div.innerHTML=`<div style="font-size:.52rem;color:var(--text3);font-family:var(--mono)">${dow}</div><div style="font-size:1.2rem" title="${je?je.mood+' · '+je.date:'No entry'}">${je&&je.mood?je.mood:'·'}</div>`;wm.appendChild(div)}}
+
+  // Entry list with search
+  const search=($('journalSearch')?.value||'').toLowerCase();
+  const list=$('journalList');if(!list)return;list.innerHTML='';
+  const filtered=[...journals].filter(j=>!search||[j.what,j.doubts,j.targets].some(t=>t&&t.toLowerCase().includes(search))).sort((a,b)=>b.date.localeCompare(a.date));
+  if(!filtered.length){list.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:24px">'+( journals.length?'No entries match your search.':'Start writing your first entry above! 📓')+'</div>';return}
+  filtered.forEach(j=>{
+    const moodObj=MOODS.find(m=>m.e===j.mood);
+    const moodColor={Great:'var(--green)',Good:'var(--blue)',Okay:'var(--text2)',Tired:'var(--amber)',Stressed:'var(--coral)',Focused:'var(--yellow)'}[moodObj?.l]||'var(--yellow)';
+    // Session/task data for that day
+    const daySess=D.sessions.filter(s=>s.date===j.date&&s.type==='focus');
+    const dayMin=daySess.reduce((a,s)=>a+s.duration,0);
+    const dayTasks=loadLS('tasks_'+j.date,[]);
+    const item=document.createElement('div');item.className='journal-entry';
+    item.style.cssText+=`border-left:3px solid ${moodColor}`;
     item.innerHTML=`
-      <div style="flex:1"><div style="font-weight:600">${p.totalMarks}/500</div><div style="font-size:.62rem;color:var(--text3)">${new Date(p.date+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div></div>
-      <div style="font-size:.68rem;color:${p.total>=80?'var(--green)':p.total>=60?'var(--amber)':'var(--coral)'};font-weight:700">${p.grade.split('—')[0].trim()}</div>
-      <button class="del-btn" onclick="deletePredHistory(${i})">×</button>`;
+      <div class="journal-date-hd">
+        <div>
+          <div class="journal-date-lbl">${new Date(j.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}</div>
+          <div style="font-size:.6rem;color:var(--text3);margin-top:1px">${dayMin?dayMin+'m focus · ':''} ${dayTasks.length?dayTasks.filter(t=>t.done).length+'/'+dayTasks.length+' tasks':''}${j.mockScore?' · Mock: '+j.mockScore:''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${j.mood?`<div style="font-size:1.4rem" title="${moodObj?.l||''}">${j.mood}</div>`:''}
+          <button class="edit-btn" onclick="editJournalEntry('${j.date}')" title="Edit">✏️</button>
+          <button class="del-btn" onclick="deleteJournalEntry('${j.date}')">×</button>
+        </div>
+      </div>
+      ${j.what?`<div class="journal-section"><div class="journal-section-lbl">📚 Studied</div><div class="journal-section-text">${j.what}</div></div>`:''}
+      ${j.doubts?`<div class="journal-section"><div class="journal-section-lbl">❓ Doubts</div><div class="journal-section-text" style="color:var(--coral)">${j.doubts}</div></div>`:''}
+      ${j.targets?`<div class="journal-section"><div class="journal-section-lbl">🎯 Tomorrow's Targets</div><div class="journal-section-text" style="color:var(--green)">${j.targets}</div></div>`:''}`;
     list.appendChild(item);
   });
 }
-function deletePredHistory(i){predHistory.splice(i,1);saveLS('predHistory_v1',predHistory);renderPredHistory()}
-function clearPredHistory(){
-  if(!predHistory.length){showToast('ℹ️','No history to clear');return}
-  askConfirm('Clear prediction history?','All saved predictions will be deleted.','Clear',()=>{
-    predHistory=[];saveLS('predHistory_v1',predHistory);renderPredHistory();showToast('🗑️','Cleared');
+
+function renderJournalMoodRow(){
+  const mr=$('journalMoodRow');if(!mr)return;
+  mr.querySelectorAll('.mood-btn').forEach((btn,i)=>{btn.className='mood-btn'+(MOODS[i].e===_journalMood?' selected':'')});
+}
+
+function saveJournalEntry(){
+  const what=($('journalWhat')?.value||'').trim();
+  const doubts=($('journalDoubts')?.value||'').trim();
+  const targets=($('journalTargets')?.value||'').trim();
+  if(!what&&!doubts&&!targets&&!_journalMood){showToast('⚠️','Write something before saving!');return}
+  const td=todayKey();
+  // Pull today's mock score if any
+  const todayMock=MOCK_DATA.filter(m=>m.date===td);
+  const mockScore=todayMock.length?todayMock[todayMock.length-1].score+'/'+todayMock[todayMock.length-1].total:null;
+  const existing=journals.findIndex(j=>j.date===td);
+  const entry={date:td,mood:_journalMood,what,doubts,targets,mockScore,savedAt:new Date().toISOString()};
+  if(existing>=0)journals[existing]=entry;
+  else journals.unshift(entry);
+  saveJournals();
+  showToast('📓','Journal entry saved!');
+  checkAndAwardBadges();
+  renderJournal();
+}
+
+function clearJournalForm(){
+  if($('journalWhat'))$('journalWhat').value='';
+  if($('journalDoubts'))$('journalDoubts').value='';
+  if($('journalTargets'))$('journalTargets').value='';
+  _journalMood=null;renderJournalMoodRow();
+}
+
+function editJournalEntry(date){
+  const j=journals.find(e=>e.date===date);if(!j)return;
+  if($('journalWhat'))$('journalWhat').value=j.what||'';
+  if($('journalDoubts'))$('journalDoubts').value=j.doubts||'';
+  if($('journalTargets'))$('journalTargets').value=j.targets||'';
+  _journalMood=j.mood||null;
+  renderJournalMoodRow();
+  // Scroll to form
+  const form=document.querySelector('#page-journal .card-glow');if(form)form.scrollIntoView({behavior:'smooth',block:'start'});
+  showToast('✏️','Edit the entry and tap Save');
+}
+
+function deleteJournalEntry(date){
+  askConfirm('Delete entry?','This journal entry will be permanently removed.','Delete',()=>{
+    journals=journals.filter(j=>j.date!==date);saveJournals();renderJournal();showToast('🗑️','Entry deleted');
+  });
+}
+
+function clearAllJournal(){
+  if(!journals.length){showToast('ℹ️','No entries to clear');return}
+  askConfirm('Clear all journal entries?','All entries will be permanently deleted.','Clear All',()=>{
+    journals=[];saveJournals();renderJournal();showToast('🗑️','Journal cleared');
   });
 }
 
@@ -2902,6 +2976,8 @@ function resetTimetable(){
    SUBJECT HEALTH DASHBOARD
 ══════════════════════════════════════════════════════ */
 function renderHealth(){
+  // Always reload fresh from localStorage so health reflects latest syllabus edits
+  syllabusData=migrateSyllabus(loadLS('syllabus_v5',null));
   const grid=$('healthGrid');if(!grid)return;grid.innerHTML='';
   const rankData=[];
 
@@ -3144,8 +3220,8 @@ const ALL_BADGES=[
   {id:'subject_done',  icon:'✅', name:'Subject Master',   cat:'Syllabus',xpReq:350,  desc:'Complete ALL chapters in one subject',            check:()=>SYLLABUS_DEF.some(s=>{const c=getChapters(s.key);return c.length>0&&c.every(x=>x.status===2)})},
   {id:'criteria_5',    icon:'🔬', name:'Deep Diver',       cat:'Syllabus',xpReq:200,  desc:'Complete all criteria for 5 chapters',            check:()=>SYLLABUS_DEF.reduce((a,s)=>a+getChapters(s.key).filter(c=>c.criteria&&Object.values(c.criteria).filter(Boolean).length===5).length,0)>=5},
   // ── TOOLS ──
-  {id:'first_pred',    icon:'🔮', name:'Fortune Teller',   cat:'Tools',   xpReq:0,    desc:'Run your first marks prediction',                 check:()=>predHistory.length>=1},
-  {id:'preds_5',       icon:'🧿', name:'Oracle',           cat:'Tools',   xpReq:250,  desc:'Run 5 marks predictions',                         check:()=>predHistory.length>=5},
+  {id:'first_pred',    icon:'📓', name:'First Entry',      cat:'Tools',   xpReq:0,    desc:'Write your first journal entry',                  check:()=>journals.length>=1},
+  {id:'preds_5',       icon:'📔', name:'Journaler',        cat:'Tools',   xpReq:250,  desc:'Write 10 journal entries',                        check:()=>journals.length>=10},
   {id:'first_exam',    icon:'📅', name:'Planner',          cat:'Tools',   xpReq:0,    desc:'Add your first exam to countdown',                check:()=>exams.length>=1},
   {id:'timetable_full',icon:'🗺️', name:'Architect',        cat:'Tools',   xpReq:200,  desc:'Fill 10+ timetable slots',                        check:()=>Object.keys(ttData).filter(k=>ttData[k]).length>=10},
   {id:'checklist_done',icon:'✔️', name:'Battle Ready',     cat:'Tools',   xpReq:100,  desc:'Check off all items in any checklist category',   check:()=>Object.values(checklistData).some(items=>items.length>0&&items.every(i=>i.checked))},
@@ -3171,7 +3247,7 @@ function calcXP(){
     + computeStreak()*XP_TABLE.streak_day
     + totalChaptersDone()*XP_TABLE.chapter_done
     + MOCK_DATA.length*XP_TABLE.test_logged
-    + predHistory.length*XP_TABLE.prediction_run
+    + journals.length*XP_TABLE.prediction_run
     + tt_slots*XP_TABLE.timetable_slot
     + cl_done*XP_TABLE.checklist_item
     + xpData.earned.length*XP_TABLE.badge_earned;
