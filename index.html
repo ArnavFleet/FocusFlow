@@ -354,13 +354,167 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 @keyframes flashA{0%{opacity:.2}100%{opacity:0}}
 .toast{position:fixed;bottom:18px;right:18px;z-index:1000;background:var(--s1);border:1px solid var(--border2);border-radius:var(--r2);padding:9px 15px;display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.6);transform:translateY(14px);opacity:0;transition:all .22s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
+
+/* ══ EXAM COUNTDOWN ══ */
+.countdown-big{text-align:center;padding:28px 0 20px}
+.countdown-days{font-family:var(--mono);font-size:5rem;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--yellow),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.countdown-label{font-size:.72rem;color:var(--text2);letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+.countdown-sub{font-size:.68rem;color:var(--text3);margin-top:4px;font-family:var(--mono)}
+.exam-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto}
+.exam-item{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:10px 13px;transition:border-color .18s}
+.exam-item:hover{border-color:var(--border2)}
+.exam-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.exam-name{flex:1;font-size:.78rem;font-weight:600;color:var(--text)}
+.exam-date-lbl{font-family:var(--mono);font-size:.68rem;color:var(--text2)}
+.exam-days-badge{font-family:var(--mono);font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px;flex-shrink:0}
+.exam-days-badge.urgent{background:var(--coral-lo);color:var(--coral)}
+.exam-days-badge.soon{background:var(--amber-lo);color:var(--amber)}
+.exam-days-badge.ok{background:var(--green-lo);color:var(--green)}
+.exam-days-badge.past{background:var(--s3);color:var(--text3)}
+
+/* ══ WEEKLY REPORT ══ */
+.report-week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.week-nav-btn{background:var(--s2);border:1px solid var(--border2);color:var(--text2);border-radius:9px;padding:6px 14px;font-family:var(--sans);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s}
+.week-nav-btn:hover{background:var(--yellow);color:#08090d;border-color:var(--yellow)}
+.week-range{font-family:var(--mono);font-size:.76rem;color:var(--text);font-weight:600}
+.report-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}
+.report-day-col{display:flex;flex-direction:column;align-items:center;gap:5px}
+.report-day-name{font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+.report-day-bar-wrap{width:100%;height:80px;display:flex;align-items:flex-end;justify-content:center}
+.report-day-bar{width:70%;border-radius:4px 4px 2px 2px;background:var(--s3);transition:height .5s cubic-bezier(.34,1.56,.64,1);min-height:0}
+.report-day-val{font-family:var(--mono);font-size:.56rem;color:var(--text2)}
+.report-day-col.today .report-day-name{color:var(--yellow)}
+.report-day-col.today .report-day-bar{background:var(--yellow)}
+.report-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.report-stat{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:12px;text-align:center}
+.report-stat-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:3px}
+.report-stat-lbl{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.report-subj-row{display:flex;flex-direction:column;gap:7px}
+.report-grade{display:inline-block;padding:2px 9px;border-radius:6px;font-family:var(--mono);font-size:.66rem;font-weight:700}
+
+/* ══ MARKS PREDICTOR ══ */
+.predictor-form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.pred-field label{display:block;font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.pred-field input,.pred-field select{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:7px 10px;font-family:var(--mono);font-size:.9rem;color:var(--text);outline:none;transition:border-color .18s}
+.pred-field input:focus,.pred-field select:focus{border-color:var(--yellow)}
+.pred-result{background:linear-gradient(135deg,var(--s2),rgba(232,255,71,.04));border:1px solid rgba(232,255,71,.18);border-radius:var(--r2);padding:18px;text-align:center;margin-bottom:14px}
+.pred-score{font-family:var(--mono);font-size:3rem;font-weight:700;color:var(--yellow);line-height:1;margin-bottom:4px}
+.pred-grade-lbl{font-size:.76rem;font-weight:700;margin-bottom:8px}
+.pred-range{font-family:var(--mono);font-size:.68rem;color:var(--text2)}
+.pred-breakdown{display:flex;flex-direction:column;gap:7px}
+.pred-subj-row{display:flex;align-items:center;gap:10px}
+.pred-subj-name{font-size:.74rem;font-weight:600;color:var(--text);width:110px;flex-shrink:0}
+.pred-track{flex:1;height:6px;background:var(--s3);border-radius:99px;overflow:hidden}
+.pred-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.pred-val{font-family:var(--mono);font-size:.68rem;color:var(--text2);width:40px;text-align:right;flex-shrink:0}
+.pred-history-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto}
+.pred-history-item{display:flex;align-items:center;gap:10px;background:var(--s2);border-radius:var(--r);padding:8px 12px;font-size:.72rem}
+
+/* ══ BADGES ══ */
+.badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.badge-card{background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:16px 10px;text-align:center;transition:all .25s;position:relative;overflow:hidden}
+.badge-card.earned{background:linear-gradient(135deg,var(--s2),rgba(232,255,71,.06));border-color:rgba(232,255,71,.25)}
+.badge-card.earned::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(232,255,71,.08),transparent 70%)}
+.badge-card.locked{opacity:.45;filter:grayscale(.6)}
+.badge-icon{font-size:2rem;margin-bottom:8px;display:block;transition:transform .2s}
+.badge-card.earned:hover .badge-icon{transform:scale(1.15)}
+.badge-name{font-size:.7rem;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.2}
+.badge-desc{font-size:.58rem;color:var(--text3);line-height:1.3}
+.badge-card.earned .badge-name{color:var(--yellow)}
+.badge-earned-stamp{position:absolute;top:6px;right:7px;font-size:.52rem;background:var(--green-lo);color:var(--green);border:1px solid rgba(52,211,153,.2);border-radius:99px;padding:1px 6px;font-family:var(--mono);font-weight:700}
+.xp-bar-wrap{background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px}
+.xp-bar-track{height:10px;background:var(--s3);border-radius:99px;overflow:hidden;margin:8px 0 5px}
+.xp-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--yellow),var(--amber));transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+/* ══ STUDY TIMETABLE ══ */
+.tt-grid{display:grid;grid-template-columns:70px repeat(7,1fr);gap:2px;font-size:.66rem;min-width:580px}
+.tt-header{background:var(--s2);border-radius:6px;padding:7px 4px;text-align:center;font-weight:700;font-family:var(--mono);font-size:.6rem;color:var(--text2);letter-spacing:.06em}
+.tt-header.today{color:var(--yellow);background:var(--yellow-lo);border:1px solid rgba(232,255,71,.2)}
+.tt-time{background:var(--bg2);border-radius:6px;padding:7px 6px;font-family:var(--mono);font-size:.58rem;color:var(--text3);text-align:right;display:flex;align-items:center;justify-content:flex-end}
+.tt-cell{background:var(--s2);border-radius:6px;padding:4px;min-height:44px;cursor:pointer;transition:all .18s;border:1px solid transparent;position:relative;display:flex;align-items:center;justify-content:center}
+.tt-cell:hover{background:var(--s3);border-color:var(--border2)}
+.tt-cell.has-entry{border-color:transparent}
+.tt-cell-inner{font-size:.6rem;font-weight:700;text-align:center;line-height:1.3;padding:2px}
+.tt-add-hint{font-size:.56rem;color:var(--text3);text-align:center;opacity:0;transition:opacity .15s}
+.tt-cell:hover .tt-add-hint{opacity:1}
+.tt-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tt-legend-item{display:flex;align-items:center;gap:5px;font-size:.64rem;color:var(--text2)}
+.tt-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+/* Timetable slot modal */
+.tt-slot-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1800;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.tt-slot-modal.open{display:flex}
+.tt-slot-box{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r3);padding:22px;max-width:320px;width:92%;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+
+/* ══ SUBJECT HEALTH ══ */
+.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.health-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r2);padding:16px;position:relative;overflow:hidden;transition:all .2s}
+.health-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.health-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r2) var(--r2) 0 0}
+.health-icon{font-size:1.6rem;margin-bottom:8px}
+.health-subj{font-size:.82rem;font-weight:800;color:var(--text);margin-bottom:12px}
+.health-stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.health-stat-label{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.health-stat-val{font-family:var(--mono);font-size:.76rem;font-weight:700}
+.health-mini-bar{height:4px;background:var(--s3);border-radius:99px;overflow:hidden;margin-bottom:10px}
+.health-mini-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.health-score{font-family:var(--mono);font-size:1.6rem;font-weight:700;line-height:1;margin-bottom:2px}
+.health-grade-badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.6rem;font-weight:700;font-family:var(--mono)}
+
+/* ══ EXAM DAY CHECKLIST ══ */
+.checklist-tabs{display:flex;gap:4px;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:3px;margin-bottom:14px}
+.checklist-tab{flex:1;text-align:center;padding:7px;font-size:.7rem;font-weight:700;color:var(--text2);border-radius:9px;cursor:pointer;transition:all .2s}
+.checklist-tab.active{background:var(--yellow);color:#08090d}
+.cl-section{margin-bottom:16px}
+.cl-section-title{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cl-section-title::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--yellow)}
+.cl-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--s2);border-radius:10px;margin-bottom:5px;transition:all .18s;border:1px solid transparent}
+.cl-item.checked{opacity:.55;background:var(--bg)}
+.cl-item.checked .cl-text{text-decoration:line-through}
+.cl-checkbox{width:18px;height:18px;border-radius:5px;border:2px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.cl-checkbox.checked{background:var(--green);border-color:var(--green)}
+.cl-checkbox.checked::after{content:'✓';font-size:.62rem;color:#08090d;font-weight:800}
+.cl-text{font-size:.76rem;flex:1;color:var(--text)}
+.cl-priority{font-size:.56rem;font-family:var(--mono);padding:1px 6px;border-radius:4px}
+.cl-priority.must{background:var(--coral-lo);color:var(--coral)}
+.cl-priority.good{background:var(--amber-lo);color:var(--amber)}
+.cl-priority.nice{background:var(--green-lo);color:var(--green)}
+.cl-progress{background:var(--s2);border-radius:var(--r2);padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.cl-progress-ring{position:relative;width:64px;height:64px;flex-shrink:0}
+.cl-ring-svg{transform:rotate(-90deg)}
+.cl-ring-track{fill:none;stroke:var(--s3);stroke-width:6}
+.cl-ring-fill{fill:none;stroke:var(--green);stroke-width:6;stroke-linecap:round;stroke-dasharray:170;stroke-dashoffset:170;transition:stroke-dashoffset .6s}
+.cl-ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.76rem;font-weight:700;color:var(--text)}
+
+/* ══ ENHANCED BADGES ══ */
+.badge-card{cursor:pointer}
+.badge-card.locked:hover{opacity:.6}
+.badge-xp-req{font-size:.58rem;color:var(--amber);font-family:var(--mono);margin-top:2px}
+.badge-category{font-size:.54rem;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+.badges-filter{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.badge-filter-btn{padding:4px 10px;border-radius:99px;font-size:.64rem;font-weight:700;cursor:pointer;border:1px solid var(--border2);background:var(--s2);color:var(--text2);transition:all .15s;font-family:var(--sans)}
+.badge-filter-btn.active{background:var(--yellow);color:#08090d;border-color:var(--yellow)}
+.xp-milestone{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--r);margin-bottom:6px;background:var(--s2);border:1px solid var(--border)}
+.xp-milestone.reached{background:linear-gradient(90deg,rgba(232,255,71,.08),transparent);border-color:rgba(232,255,71,.2)}
+.xp-milestone-icon{font-size:1.1rem;flex-shrink:0}
+.xp-milestone-name{font-size:.74rem;font-weight:700;color:var(--text)}
+.xp-milestone-xp{font-family:var(--mono);font-size:.64rem;color:var(--text3);margin-top:1px}
+.xp-milestone-check{margin-left:auto;font-size:.78rem;color:var(--green)}
 </style>
 </head>
 <body>
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"><span id="toastIcon">🍅</span><span id="toastMsg">Done!</span></div>
 
-<!-- Custom Confirm Dialog (replaces browser confirm() which breaks in WebView/APK) -->
+<!-- Reusable Edit Modal (replaces prompt() which breaks in WebView/APK) -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:#10151f;border:1px solid #26385a;border-radius:18px;padding:22px;max-width:360px;width:92%;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.8)">
+    <div style="font-size:.82rem;font-weight:700;color:#e2eaf8;margin-bottom:14px" id="editModalTitle">Edit</div>
+    <div id="editModalFields" style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px"></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="editModalResolve(false)" style="flex:1;background:#151d2e;border:1px solid #26385a;color:#6b84aa;border-radius:9px;padding:10px;font-family:inherit;font-size:.76rem;font-weight:700;cursor:pointer">Cancel</button>
+      <button onclick="editModalResolve(true)" style="flex:1;background:#e8ff47;border:none;color:#08090d;border-radius:9px;padding:10px;font-family:inherit;font-size:.76rem;font-weight:800;cursor:pointer">Save</button>
+    </div>
+  </div>
+</div>
 <div id="confirmOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
   <div style="background:#10151f;border:1px solid #26385a;border-radius:18px;padding:24px 22px;max-width:320px;width:90%;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.8)">
     <div style="font-size:.84rem;font-weight:700;color:#e2eaf8;margin-bottom:6px" id="confirmTitle">Are you sure?</div>
@@ -395,6 +549,29 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     </div>
     <div class="nav-item" onclick="showPage('log')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Session Log
+    </div>
+    <div class="nav-sec">Extras</div>
+    <div class="nav-item" onclick="showPage('countdown')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>Exam Countdown
+    </div>
+    <div class="nav-item" onclick="showPage('report')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Weekly Report
+    </div>
+    <div class="nav-item" onclick="showPage('predictor')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="6 7 12 4 18 7"/></svg>Marks Predictor
+    </div>
+    <div class="nav-item" onclick="showPage('badges')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Badges
+    </div>
+    <div class="nav-sec">Tools</div>
+    <div class="nav-item" onclick="showPage('timetable')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Timetable
+    </div>
+    <div class="nav-item" onclick="showPage('health')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Subject Health
+    </div>
+    <div class="nav-item" onclick="showPage('checklist')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Exam Checklist
     </div>
   </nav>
   <div class="sidebar-footer">
@@ -778,8 +955,234 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   </div>
 </div>
 
+<!-- ══ EXAM COUNTDOWN PAGE ══ -->
+<div class="page" id="page-countdown">
+  <div class="g2" style="align-items:start">
+    <!-- Add exam form -->
+    <div class="card card-glow">
+      <div class="card-hd"><div class="card-title">➕ Add Exam</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px">
+        <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Exam Name</div>
+          <input class="inp" id="exName" placeholder="e.g. Science Board Exam"/></div>
+        <div class="g2">
+          <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Subject</div>
+            <select class="sel" id="exSubj" style="width:100%">
+              <option value="math">📐 Mathematics</option>
+              <option value="sci">🔬 Science</option>
+              <option value="eng">📚 English</option>
+              <option value="sst">🌍 Social Science</option>
+              <option value="hindi">📝 Hindi</option>
+              <option value="ai">🤖 AI / CS</option>
+              <option value="all">🎓 All Subjects</option>
+            </select></div>
+          <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Date</div>
+            <input class="inp" type="date" id="exDate" style="font-family:var(--mono)"/></div>
+        </div>
+        <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Color</div>
+          <div style="display:flex;gap:7px" id="exColorPicker"></div></div>
+      </div>
+      <button class="btn btn-y" onclick="addExam()" style="width:100%">Add Exam</button>
+    </div>
+    <!-- Next exam big display -->
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,var(--s1),rgba(232,255,71,.04));border-color:rgba(232,255,71,.15)">
+      <div class="card-title" style="margin-bottom:4px">Next Exam</div>
+      <div class="countdown-big">
+        <div class="countdown-days" id="cdDays">—</div>
+        <div class="countdown-label" id="cdLabel">days remaining</div>
+        <div class="countdown-sub" id="cdName">No exams added yet</div>
+        <div class="countdown-sub" id="cdDate"></div>
+      </div>
+      <div id="cdProgressWrap" style="display:none">
+        <div class="prog-track" style="height:8px;margin:0 0 6px"><div class="prog-fill" id="cdProgressBar" style="width:0%;background:var(--yellow)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.6rem;color:var(--text3)" id="cdProgressLabel"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Exam list -->
+  <div class="card">
+    <div class="card-hd"><div class="card-title">All Exams</div><button class="btn btn-ghost btn-sm" onclick="clearAllExams()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear All</button></div>
+    <div class="exam-list" id="examList"><div style="color:var(--text3);font-size:.76rem;text-align:center;padding:20px">No exams added yet. Add your board exam dates above!</div></div>
+  </div>
+</div>
+
+<!-- ══ WEEKLY REPORT PAGE ══ -->
+<div class="page" id="page-report">
+  <div class="card">
+    <div class="report-week-nav">
+      <button class="week-nav-btn" onclick="reportWeekChange(-1)">← Prev</button>
+      <div class="week-range" id="reportWeekRange">This Week</div>
+      <button class="week-nav-btn" onclick="reportWeekChange(1)">Next →</button>
+    </div>
+    <div class="report-stat-row" id="reportStats"></div>
+    <div style="font-family:var(--mono);font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Daily Focus (minutes)</div>
+    <div class="report-grid" id="reportDayGrid"></div>
+    <div style="font-family:var(--mono);font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Subject Breakdown</div>
+    <div class="report-subj-row" id="reportSubjRow"></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">📋 Week Summary</div>
+      <div id="reportSummary" style="font-size:.76rem;color:var(--text2);line-height:1.7"></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">🏆 Best Day</div>
+      <div id="reportBestDay"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MARKS PREDICTOR PAGE ══ -->
+<div class="page" id="page-predictor">
+  <div class="card card-glow">
+    <div class="card-hd"><div class="card-title">🎯 Predict Your Board Score</div><div class="pill pill-y">Based on your mock test data</div></div>
+    <div style="font-size:.72rem;color:var(--text2);margin-bottom:14px">Enter your expected effort level for each subject (1–10) or use your mock average.</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px" id="predInputs"></div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Syllabus Coverage %</div>
+        <input class="inp inp-mono" type="number" id="predSyllabus" placeholder="75" min="0" max="100" value="75"/></div>
+      <div><div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Days Left to Study</div>
+        <input class="inp inp-mono" type="number" id="predDaysLeft" placeholder="30" min="0" value="30"/></div>
+    </div>
+    <button class="btn btn-y" onclick="runPredictor()" style="width:100%;padding:12px">🔮 Predict My Score</button>
+  </div>
+
+  <div id="predResultSection" style="display:none;flex-direction:column;gap:16px">
+    <div class="pred-result">
+      <div style="font-size:.64rem;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;font-family:var(--mono)">Predicted Total</div>
+      <div class="pred-score" id="predScore">—</div>
+      <div class="pred-grade-lbl" id="predGrade"></div>
+      <div class="pred-range" id="predRange"></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">Subject-wise Prediction</div>
+      <div class="pred-breakdown" id="predBreakdown"></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">💡 Improvement Tips</div>
+      <div id="predTips" style="display:flex;flex-direction:column;gap:7px"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div class="card-title">Prediction History</div><button class="btn btn-ghost btn-sm" onclick="clearPredHistory()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear</button></div>
+    <div class="pred-history-list" id="predHistoryList"><div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No predictions yet. Run your first prediction above!</div></div>
+  </div>
+</div>
+
+<!-- ══ BADGES PAGE ══ -->
+<div class="page" id="page-badges">
+  <div class="xp-bar-wrap">
+    <div class="row" style="justify-content:space-between;margin-bottom:2px">
+      <div style="font-size:.78rem;font-weight:700;color:var(--text)">Level <span id="xpLevel">1</span> — <span id="xpLevelName" style="color:var(--yellow)">Beginner</span></div>
+      <div style="font-family:var(--mono);font-size:.72rem;color:var(--text2)"><span id="xpCurrent">0</span> / <span id="xpNext">100</span> XP</div>
+    </div>
+    <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div></div>
+    <div style="font-size:.62rem;color:var(--text3)">Earn XP by completing focus sessions, finishing chapters, logging tests, and building streaks</div>
+  </div>
+  <div class="card">
+    <div class="card-hd"><div class="card-title">🏅 Achievements</div><div class="pill pill-green" id="badgeCount">0 earned</div></div>
+    <div class="badges-grid" id="badgesGrid"></div>
+  </div>
+  <div class="card">
+    <div class="card-hd"><div class="card-title">📋 XP Activity Log</div></div>
+    <div style="display:flex;flex-direction:column;gap:5px;max-height:240px;overflow-y:auto" id="xpLog"><div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">Complete sessions to earn XP!</div></div>
+  </div>
+</div>
+
+<!-- ══ EXAM COUNTDOWN PAGE ══ -->
+<!-- inserted via JS into page-countdown -->
+
+<!-- ══ STUDY TIMETABLE PAGE ══ -->
+<div class="page" id="page-timetable">
+  <div class="card card-glow">
+    <div class="card-hd">
+      <div class="card-title">📅 Weekly Study Timetable</div>
+      <div class="row" style="gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="resetTimetable()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Reset</button>
+        <div class="pill pill-y">Tap any slot to assign subject</div>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <div class="tt-grid" id="ttGrid"></div>
+    </div>
+    <div class="tt-legend" id="ttLegend"></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">📊 Subject Distribution</div>
+      <div style="display:flex;flex-direction:column;gap:8px" id="ttDistribution"></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px">⏰ Today's Schedule</div>
+      <div id="ttToday" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUBJECT HEALTH PAGE ══ -->
+<div class="page" id="page-health">
+  <div class="card" style="background:linear-gradient(135deg,var(--s1),rgba(79,158,255,.04));border-color:rgba(79,158,255,.18);margin-bottom:0">
+    <div class="card-title" style="margin-bottom:4px">📡 Subject Health Dashboard</div>
+    <div style="font-size:.72rem;color:var(--text2)">Live snapshot of each subject — syllabus done, mock performance, focus time, and predicted grade all in one place.</div>
+  </div>
+  <div class="health-grid" id="healthGrid"></div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:12px">🏆 Overall Rank</div>
+    <div id="healthRankList" style="display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- ══ EXAM DAY CHECKLIST PAGE ══ -->
+<div class="page" id="page-checklist">
+  <div class="cl-progress">
+    <div class="cl-progress-ring">
+      <svg class="cl-ring-svg" width="64" height="64" viewBox="0 0 64 64">
+        <circle class="cl-ring-track" cx="32" cy="32" r="27"/>
+        <circle class="cl-ring-fill" id="clRingFill" cx="32" cy="32" r="27"/>
+      </svg>
+      <div class="cl-ring-center" id="clRingPct">0%</div>
+    </div>
+    <div style="flex:1">
+      <div style="font-size:.9rem;font-weight:800;color:var(--text)" id="clProgressTitle">Get Ready!</div>
+      <div style="font-size:.7rem;color:var(--text2);margin-top:3px" id="clProgressSub">Start checking off items below</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap" id="clProgressPills"></div>
+    </div>
+    <div style="text-align:center">
+      <button class="btn btn-ghost btn-sm" onclick="resetChecklist()">Reset All</button>
+    </div>
+  </div>
+
+  <div class="checklist-tabs" id="clTabs"></div>
+
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-title" id="clSectionTitle">Evening Before</div>
+      <button class="btn btn-ghost btn-sm" onclick="addChecklistItem()" style="white-space:nowrap">+ Add Item</button>
+    </div>
+    <div id="clItemsContainer"></div>
+  </div>
+</div>
+
   </div><!-- /content -->
 </div><!-- /main -->
+
+<!-- ══ TIMETABLE SLOT MODAL ══ -->
+<div class="tt-slot-modal" id="ttSlotModal">
+  <div class="tt-slot-box">
+    <div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:4px" id="ttSlotTitle">Assign Subject</div>
+    <div style="font-size:.68rem;color:var(--text2);margin-bottom:14px" id="ttSlotSub">Pick a subject for this slot</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px" id="ttSlotSubjects"></div>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <div style="flex:1"><div style="font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Custom Label</div>
+        <input class="inp" id="ttCustomLabel" placeholder="e.g. Self Study, Break…"/></div>
+    </div>
+    <div style="display:flex;gap:9px">
+      <button onclick="ttSlotClear()" class="btn btn-ghost btn-sm" style="color:var(--coral)">Clear Slot</button>
+      <button onclick="closeTtModal()" class="btn btn-ghost" style="flex:1">Cancel</button>
+      <button onclick="ttSlotSave()" class="btn btn-y" style="flex:1">Save</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══ ABOUT MODAL ══ -->
 <div class="about-overlay" id="aboutOverlay" onclick="if(event.target===this)closeAbout()">
@@ -851,6 +1254,41 @@ function confirmResolve(ok){
 function openAbout(){$('aboutOverlay').classList.add('open')}
 function closeAbout(){$('aboutOverlay').classList.remove('open')}
 
+/* Edit Modal — replaces prompt() which is blocked in Android WebView/APK */
+let _editCb=null;
+function showEditModal(title, fields, cb){
+  // fields: [{id, label, type, value, placeholder}]
+  $('editModalTitle').textContent=title;
+  const wrap=$('editModalFields');wrap.innerHTML='';
+  fields.forEach(f=>{
+    const div=document.createElement('div');
+    div.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.54rem;color:#334766;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">${f.label}</div>
+      <input id="em_${f.id}" type="${f.type||'text'}" value="${f.value||''}" placeholder="${f.placeholder||''}"
+        style="width:100%;background:#151d2e;border:1px solid #26385a;border-radius:9px;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:#e2eaf8;outline:none;transition:border-color .18s"
+        onfocus="this.style.borderColor='#e8ff47'" onblur="this.style.borderColor='#26385a'"/>`;
+    wrap.appendChild(div);
+  });
+  _editCb=cb;
+  $('editModal').style.display='flex';
+  // Focus first input
+  setTimeout(()=>{const f=wrap.querySelector('input');if(f)f.focus()},80);
+  // Enter key submits
+  wrap.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')editModalResolve(true)});
+  });
+}
+function editModalResolve(ok){
+  $('editModal').style.display='none';
+  if(ok&&_editCb){
+    const vals={};
+    document.querySelectorAll('#editModalFields input').forEach(inp=>{
+      vals[inp.id.replace('em_','')]=inp.value.trim();
+    });
+    _editCb(vals);
+  }
+  _editCb=null;
+}
+
 /* ══════════════════════════════════════════════════════
    CONSTANTS
 ══════════════════════════════════════════════════════ */
@@ -891,7 +1329,7 @@ let D=loadD();
 /* ══════════════════════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════════════════════ */
-const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log'};
+const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log',countdown:'Exam Countdown',report:'Weekly Report',predictor:'Marks Predictor',badges:'Badges & XP',timetable:'Study Timetable',health:'Subject Health Dashboard',checklist:'Exam Day Checklist'};
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -902,6 +1340,13 @@ function showPage(id){
   if(id==='performance')renderPerformance();
   if(id==='log'){if($('manDate'))$('manDate').value=todayKey();renderLog()}
   if(id==='command'){renderTasks();renderSyllabus();renderWeak();renderRevisions();calcRRR();renderMockLog()}
+  if(id==='countdown'){renderCountdown()}
+  if(id==='report'){renderReport()}
+  if(id==='predictor'){renderPredInputs();renderPredHistory()}
+  if(id==='badges'){renderBadges()}
+  if(id==='timetable'){renderTimetable()}
+  if(id==='health'){renderHealthAndTrack()}
+  if(id==='checklist'){renderChecklist()}
 }
 function updateDate(){const n=new Date();$('pageDate').textContent=n.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 updateDate();setInterval(updateDate,60000);
@@ -939,6 +1384,7 @@ function onComplete(skipped){
   if(currentMode==='focus'&&!skipped){
     sessionCount++;D.sessions.push({date:todayKey(),subj:D.activeSubj,duration:D.settings.focus,completedAt:new Date().toISOString(),type:'focus'});
     saveD();flashScreen();showToast('🍅','Focus complete! Take a break.');updateSessionDots();refreshSidebar();
+    checkAndAwardBadges();
     const nm=sessionCount%D.settings.interval===0?'long':'short';
     if(D.settings.autoBreak){switchMode(nm);startTimer()}else switchMode(nm);
   }else if((currentMode==='short'||currentMode==='long')&&!skipped){
@@ -1419,13 +1865,14 @@ function renderMockLog(){
 }
 function editMock(i){
   const m=mocks[i];
-  const newMarks=prompt(`Edit marks for "${m.subj}" (current: ${m.marks}/${m.total})\nEnter new marks:`,m.marks);
-  if(newMarks===null)return;
-  const newTotal=prompt('Enter new total:',m.total);
-  if(newTotal===null)return;
-  const nm=parseFloat(newMarks),nt=parseFloat(newTotal);
-  if(isNaN(nm)||isNaN(nt)||nt<=0){showToast('⚠️','Invalid values');return}
-  mocks[i].marks=nm;mocks[i].total=nt;saveLS('mocks',mocks);renderMockLog();showToast('✏️','Entry updated');
+  showEditModal(`Edit Mock: ${m.subj}`,[
+    {id:'marks',label:'Marks Obtained',type:'number',value:m.marks,placeholder:'e.g. 78'},
+    {id:'total',label:'Out of (Total)',type:'number',value:m.total,placeholder:'e.g. 100'},
+  ],(vals)=>{
+    const nm=parseFloat(vals.marks),nt=parseFloat(vals.total);
+    if(isNaN(nm)||isNaN(nt)||nt<=0){showToast('⚠️','Invalid values');return}
+    mocks[i].marks=nm;mocks[i].total=nt;saveLS('mocks',mocks);renderMockLog();showToast('✏️','Entry updated');
+  });
 }
 function addMock(){const subj=$('mockSubj').value.trim(),marks=parseFloat($('mockMarks').value),total=parseFloat($('mockTotal').value);if(!subj||isNaN(marks)||isNaN(total)||total<=0)return;mocks.push({subj,marks,total,date:today()});$('mockSubj').value='';$('mockMarks').value='';$('mockTotal').value='';saveLS('mocks',mocks);renderMockLog()}
 function removeMock(i){mocks.splice(i,1);saveLS('mocks',mocks);renderMockLog()}
@@ -1541,7 +1988,7 @@ function addPerfTest(){
   MOCK_DATA.push({name,subj,score,total,correct,wrong,skip,tpq,date});
   saveLS('mockTests_v5',MOCK_DATA);
   $('ptName').value='';$('ptScore').value='';$('ptTotal').value='';$('ptCorrect').value='';$('ptWrong').value='';$('ptSkip').value='';$('ptTpq').value='';$('ptDate').value=todayKey();
-  showToast('📊','Test logged! Charts updated.');renderPerformance();
+  showToast('📊','Test logged! Charts updated.');renderPerformance();checkAndAwardBadges();
 }
 function deletePerfTest(i){
   askConfirm('Delete test?',`"${MOCK_DATA[i]?.name||'this test'}" will be permanently deleted.`,'Delete',()=>{
@@ -1724,18 +2171,19 @@ function renderMockPerfTable(){
 
 function editPerfTest(i){
   const m=MOCK_DATA[i];
-  const name=prompt('Test name:',m.name);if(name===null)return;
-  const score=prompt('Score (marks obtained):',m.score);if(score===null)return;
-  const total=prompt('Out of (total marks):',m.total);if(total===null)return;
-  const correct=prompt('Correct answers:',m.correct);if(correct===null)return;
-  const wrong=prompt('Wrong answers:',m.wrong);if(wrong===null)return;
-  const tpq=prompt('Seconds per question (0 if unknown):',m.tpq||0);if(tpq===null)return;
-  const ns=parseFloat(score),nt=parseFloat(total),nc=parseFloat(correct),nw=parseFloat(wrong);
-  if(isNaN(ns)||isNaN(nt)||nt<=0||isNaN(nc)||isNaN(nw)){showToast('⚠️','Invalid values — edit cancelled');return}
-  MOCK_DATA[i]={...m,name:name.trim()||m.name,score:ns,total:nt,correct:nc,wrong:nw,tpq:parseFloat(tpq)||0};
-  saveLS('mockTests_v5',MOCK_DATA);
-  renderPerformance();
-  showToast('✏️','Test record updated!');
+  showEditModal(`Edit Test: ${m.name}`,[
+    {id:'name',  label:'Test Name',          type:'text',  value:m.name,      placeholder:'e.g. Pre-Board 1'},
+    {id:'score', label:'Score (Marks Got)',   type:'number',value:m.score,     placeholder:'e.g. 78'},
+    {id:'total', label:'Out of (Total)',      type:'number',value:m.total,     placeholder:'e.g. 100'},
+    {id:'correct',label:'Correct Answers',   type:'number',value:m.correct,   placeholder:'e.g. 62'},
+    {id:'wrong', label:'Wrong Answers',       type:'number',value:m.wrong,     placeholder:'e.g. 14'},
+    {id:'tpq',   label:'Sec / Question',      type:'number',value:m.tpq||0,   placeholder:'e.g. 85'},
+  ],(vals)=>{
+    const ns=parseFloat(vals.score),nt=parseFloat(vals.total),nc=parseFloat(vals.correct),nw=parseFloat(vals.wrong);
+    if(!vals.name||isNaN(ns)||isNaN(nt)||nt<=0||isNaN(nc)||isNaN(nw)){showToast('⚠️','Invalid values');return}
+    MOCK_DATA[i]={...m,name:vals.name,score:ns,total:nt,correct:nc,wrong:nw,tpq:parseFloat(vals.tpq)||0};
+    saveLS('mockTests_v5',MOCK_DATA);renderPerformance();showToast('✏️','Test updated!');
+  });
 }
 
 /* TPQ */
@@ -1820,6 +2268,894 @@ function refreshSidebar(){
 }
 
 /* ══════════════════════════════════════════════════════
+   EXAM COUNTDOWN
+══════════════════════════════════════════════════════ */
+let exams=loadLS('exams_v1',[]);
+const EX_COLORS=['#e8ff47','#34d399','#fb7185','#4f9eff','#a78bfa','#fbbf24','#22d3ee','#f97316'];
+let selExColor=EX_COLORS[0];
+
+function initExColorPicker(){
+  const wrap=$('exColorPicker');if(!wrap)return;
+  wrap.innerHTML='';
+  EX_COLORS.forEach(c=>{
+    const b=document.createElement('div');
+    b.style.cssText=`width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;transition:transform .15s;border:2px solid ${c===selExColor?'#fff':'transparent'}`;
+    b.onclick=()=>{selExColor=c;initExColorPicker()};
+    wrap.appendChild(b);
+  });
+  // Set today+30 as default date
+  const d=new Date();d.setDate(d.getDate()+30);
+  if($('exDate')&&!$('exDate').value)$('exDate').value=d.toISOString().slice(0,10);
+}
+
+function addExam(){
+  const name=$('exName').value.trim();
+  const subj=$('exSubj').value;
+  const date=$('exDate').value;
+  if(!name){showToast('⚠️','Enter exam name');return}
+  if(!date){showToast('⚠️','Pick a date');return}
+  const d=new Date(date+'T12:00:00');
+  if(d<new Date()){showToast('⚠️','Date must be in the future');return}
+  exams.push({id:Date.now(),name,subj,date,color:selExColor});
+  exams.sort((a,b)=>new Date(a.date)-new Date(b.date));
+  saveLS('exams_v1',exams);
+  $('exName').value='';$('exDate').value='';
+  renderCountdown();showToast('📅','Exam added!');
+}
+
+function deleteExam(id){
+  askConfirm('Delete exam?','This exam will be removed.','Delete',()=>{
+    exams=exams.filter(e=>e.id!==id);saveLS('exams_v1',exams);renderCountdown();showToast('🗑️','Exam removed');
+  });
+}
+
+function editExam(id){
+  const ex=exams.find(e=>e.id===id);if(!ex)return;
+  showEditModal('Edit Exam',[
+    {id:'name', label:'Exam Name', type:'text', value:ex.name, placeholder:'e.g. Science Board Exam'},
+    {id:'date', label:'Date (YYYY-MM-DD)', type:'date', value:ex.date},
+  ],(vals)=>{
+    if(!vals.name){showToast('⚠️','Name cannot be empty');return}
+    if(!vals.date){showToast('⚠️','Pick a date');return}
+    ex.name=vals.name;ex.date=vals.date;
+    exams.sort((a,b)=>new Date(a.date)-new Date(b.date));
+    saveLS('exams_v1',exams);renderCountdown();showToast('✏️','Exam updated');
+  });
+}
+
+function clearAllExams(){
+  if(!exams.length){showToast('ℹ️','No exams to clear');return}
+  askConfirm('Clear all exams?','All exam dates will be deleted.','Clear All',()=>{
+    exams=[];saveLS('exams_v1',exams);renderCountdown();showToast('🗑️','Cleared');
+  });
+}
+
+function renderCountdown(){
+  initExColorPicker();
+  const list=$('examList');if(!list)return;
+  const now=new Date();now.setHours(0,0,0,0);
+  const SUBJ_MAP={math:'📐 Mathematics',sci:'🔬 Science',eng:'📚 English',sst:'🌍 Social Science',hindi:'📝 Hindi',ai:'🤖 AI/CS',all:'🎓 All Subjects'};
+
+  // Next upcoming exam
+  const upcoming=exams.filter(e=>new Date(e.date+'T12:00:00')>=now);
+  const next=upcoming[0];
+  if(next){
+    const daysLeft=Math.ceil((new Date(next.date+'T12:00:00')-now)/86400000);
+    $('cdDays').textContent=daysLeft;
+    $('cdLabel').textContent=daysLeft===1?'day remaining':'days remaining';
+    $('cdName').textContent=next.name;
+    $('cdDate').textContent=new Date(next.date+'T12:00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    $('cdProgressWrap').style.display='block';
+    // Assume exam prep started 90 days before
+    const total=90,elapsed=Math.max(0,90-daysLeft),pct=Math.min(100,Math.round(elapsed/total*100));
+    $('cdProgressBar').style.width=pct+'%';
+    $('cdProgressLabel').innerHTML=`<span>Started</span><span>${pct}% of prep time used</span><span>Exam Day</span>`;
+  } else {
+    $('cdDays').textContent='—';$('cdLabel').textContent='';
+    $('cdName').textContent='No upcoming exams';$('cdDate').textContent='';
+    $('cdProgressWrap').style.display='none';
+  }
+
+  // Exam list
+  if(!exams.length){list.innerHTML='<div style="color:var(--text3);font-size:.76rem;text-align:center;padding:20px">No exams added yet. Add your board exam dates above!</div>';return}
+  list.innerHTML='';
+  exams.forEach(ex=>{
+    const d=new Date(ex.date+'T12:00:00');
+    const daysLeft=Math.ceil((d-now)/86400000);
+    const isPast=daysLeft<0;
+    const badgeCls=isPast?'past':daysLeft<=7?'urgent':daysLeft<=30?'soon':'ok';
+    const badgeTxt=isPast?`${Math.abs(daysLeft)}d ago`:daysLeft===0?'Today!':daysLeft+'d left';
+    const item=document.createElement('div');item.className='exam-item';
+    item.innerHTML=`
+      <div class="exam-dot" style="background:${ex.color}"></div>
+      <div style="flex:1;min-width:0">
+        <div class="exam-name">${ex.name}</div>
+        <div class="exam-date-lbl">${SUBJ_MAP[ex.subj]||ex.subj} · ${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
+      </div>
+      <div class="exam-days-badge ${badgeCls}">${badgeTxt}</div>
+      <button class="edit-btn" onclick="editExam(${ex.id})" title="Edit" style="margin-left:6px">✏️</button>
+      <button class="del-btn" onclick="deleteExam(${ex.id})" title="Delete">×</button>`;
+    list.appendChild(item);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   WEEKLY REPORT
+══════════════════════════════════════════════════════ */
+let reportWeekOffset=0;
+
+function reportWeekChange(dir){
+  reportWeekOffset+=dir;
+  if(reportWeekOffset>0)reportWeekOffset=0; // can't go to future week
+  renderReport();
+}
+
+function getWeekRange(offset){
+  const now=new Date();
+  const day=now.getDay();
+  const mon=new Date(now);mon.setDate(now.getDate()-day+1+offset*7);mon.setHours(0,0,0,0);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);sun.setHours(23,59,59,999);
+  return{mon,sun};
+}
+
+function renderReport(){
+  const{mon,sun}=getWeekRange(reportWeekOffset);
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const todayStr=todayKey();
+
+  // Label
+  const isThisWeek=reportWeekOffset===0;
+  $('reportWeekRange').textContent=isThisWeek?'This Week':
+    mon.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' – '+sun.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+
+  // Filter sessions
+  const weekSess=D.sessions.filter(s=>s.type==='focus'&&new Date(s.date+'T12:00:00')>=mon&&new Date(s.date+'T12:00:00')<=sun);
+
+  // Per-day minutes
+  const dayMins=[0,0,0,0,0,0,0];
+  weekSess.forEach(s=>{
+    const d=new Date(s.date+'T12:00:00');
+    const dow=(d.getDay()+6)%7; // 0=Mon
+    dayMins[dow]+=s.duration;
+  });
+  const maxMin=Math.max(1,...dayMins);
+  const totalMin=dayMins.reduce((a,b)=>a+b,0);
+  const totalSess=weekSess.length;
+  const avgDay=(totalMin/7).toFixed(0);
+  const bestDayIdx=dayMins.indexOf(Math.max(...dayMins));
+
+  // Stats row
+  const statsData=[
+    {val:totalMin>=60?Math.floor(totalMin/60)+'h '+totalMin%60+'m':totalMin+'m',lbl:'Total Focus'},
+    {val:totalSess,lbl:'Sessions'},
+    {val:avgDay+'m',lbl:'Daily Avg'},
+    {val:dayMins.filter(d=>d>0).length+'/7',lbl:'Active Days'},
+  ];
+  $('reportStats').innerHTML=statsData.map(s=>`<div class="report-stat"><div class="report-stat-val">${s.val}</div><div class="report-stat-lbl">${s.lbl}</div></div>`).join('');
+
+  // Day bars
+  const grid=$('reportDayGrid');grid.innerHTML='';
+  dayMins.forEach((m,i)=>{
+    const date=new Date(mon);date.setDate(mon.getDate()+i);
+    const ds=date.toISOString().slice(0,10);
+    const isTd=ds===todayStr&&isThisWeek;
+    const pct=Math.round((m/maxMin)*100);
+    const col=document.createElement('div');col.className='report-day-col'+(isTd?' today':'');
+    col.innerHTML=`<div class="report-day-name">${days[i]}</div>
+      <div class="report-day-bar-wrap"><div class="report-day-bar" style="height:0%;background:${isTd?'var(--yellow)':m>0?'var(--blue)':'var(--s3)'}" data-h="${pct}"></div></div>
+      <div class="report-day-val">${m>0?(m>=60?Math.floor(m/60)+'h':m+'m'):'—'}</div>`;
+    grid.appendChild(col);
+  });
+  setTimeout(()=>{document.querySelectorAll('.report-day-bar[data-h]').forEach(b=>{b.style.height=Math.max(parseInt(b.dataset.h),b.dataset.h>0?8:0)+'%'})},40);
+
+  // Subject breakdown
+  const subjMap={};SUBJECTS.forEach(s=>{subjMap[s.id]=0});
+  weekSess.forEach(s=>{if(subjMap[s.subj]!==undefined)subjMap[s.subj]+=s.duration});
+  const maxSubj=Math.max(1,...Object.values(subjMap));
+  const subjRow=$('reportSubjRow');subjRow.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const v=subjMap[s.id]||0;
+    const row=document.createElement('div');row.className='sbr';
+    row.innerHTML=`<div class="sbr-name">${s.emoji} ${s.name.slice(0,10)}</div><div class="sbr-track"><div class="sbr-fill" style="background:${s.color};width:0%" data-w="${(v/maxSubj*100).toFixed(1)}"></div></div><div class="sbr-val">${v>=60?Math.floor(v/60)+'h':v+'m'}</div>`;
+    subjRow.appendChild(row);
+    setTimeout(()=>{row.querySelector('.sbr-fill').style.width=row.querySelector('.sbr-fill').dataset.w+'%'},60);
+  });
+
+  // Summary text
+  let grade='',gradeColor='';
+  if(totalMin>=300){grade='🏆 Excellent week!';gradeColor='var(--green)'}
+  else if(totalMin>=150){grade='👍 Good effort!';gradeColor='var(--blue)'}
+  else if(totalMin>=60){grade='📈 Keep going!';gradeColor='var(--amber)'}
+  else{grade='🌱 Just getting started';gradeColor='var(--text2)'}
+
+  const topSubjId=Object.entries(subjMap).sort((a,b)=>b[1]-a[1])[0];
+  const topSubj=SUBJECTS.find(s=>s.id===topSubjId?.[0]);
+  $('reportSummary').innerHTML=`
+    <div style="color:${gradeColor};font-weight:700;font-size:.82rem;margin-bottom:8px">${grade}</div>
+    ${totalSess?`<div>✅ You completed <strong>${totalSess} focus sessions</strong> this week.</div>`:'<div>No sessions logged this week yet.</div>'}
+    ${totalMin>0?`<div>⏱ Total focus time: <strong>${totalMin>=60?Math.floor(totalMin/60)+'h '+totalMin%60+'m':totalMin+' min'}</strong></div>`:''}
+    ${topSubj&&topSubjId[1]>0?`<div>📚 Most studied: <strong style="color:${topSubj.color}">${topSubj.name}</strong></div>`:''}
+    ${dayMins.filter(d=>d>0).length>=5?'<div>🔥 5+ active days — great consistency!</div>':''}`;
+
+  // Best day card
+  $('reportBestDay').innerHTML=dayMins[bestDayIdx]>0?`
+    <div style="text-align:center;padding:8px 0">
+      <div style="font-size:2rem;margin-bottom:4px">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][bestDayIdx]}</div>
+      <div style="font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--yellow)">${dayMins[bestDayIdx]>=60?Math.floor(dayMins[bestDayIdx]/60)+'h '+dayMins[bestDayIdx]%60+'m':dayMins[bestDayIdx]+'m'}</div>
+      <div style="font-size:.66rem;color:var(--text3);margin-top:3px">best focus day</div>
+    </div>`:'<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No data yet</div>';
+}
+
+/* ══════════════════════════════════════════════════════
+   MARKS PREDICTOR
+══════════════════════════════════════════════════════ */
+let predHistory=loadLS('predHistory_v1',[]);
+
+function renderPredInputs(){
+  const wrap=$('predInputs');if(!wrap)return;wrap.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const mockAvg=MOCK_DATA.filter(m=>m.subj===s.id).map(m=>m.score);
+    const avg=mockAvg.length?Math.round(mockAvg.reduce((a,b)=>a+b,0)/mockAvg.length):null;
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:10px';
+    row.innerHTML=`
+      <div style="font-size:.76rem;font-weight:600;color:var(--text);width:120px;flex-shrink:0">${s.emoji} ${s.name}</div>
+      <input type="range" id="predSlider_${s.id}" min="0" max="100" value="${avg||60}"
+        style="flex:1;accent-color:${s.color};height:4px"
+        oninput="$('predSliderVal_${s.id}').textContent=this.value+'%'"/>
+      <span id="predSliderVal_${s.id}" style="font-family:var(--mono);font-size:.72rem;color:${s.color};width:36px;text-align:right;flex-shrink:0">${avg||60}%</span>
+      ${avg!==null?`<span style="font-size:.58rem;color:var(--text3);font-family:var(--mono)">(mock avg: ${avg}%)</span>`:''}`;
+    wrap.appendChild(row);
+  });
+}
+
+function runPredictor(){
+  const syllabus=parseInt($('predSyllabus').value)||75;
+  const daysLeft=parseInt($('predDaysLeft').value)||30;
+
+  // Calculate per-subject predictions
+  const breakdown=SUBJECTS.map(s=>{
+    const base=parseInt(document.getElementById('predSlider_'+s.id)?.value||60);
+    // Factors: base score, syllabus coverage, days left boost
+    const sylFactor=syllabus/100;
+    const dayFactor=Math.min(1,0.7+daysLeft/100);
+    const pred=Math.min(100,Math.round(base*sylFactor*dayFactor+(daysLeft>60?5:0)));
+    return{...s,pred,base};
+  });
+
+  const total=Math.round(breakdown.reduce((a,s)=>a+s.pred,0)/SUBJECTS.length);
+  const totalMarks=Math.round(total*5); // 5 subjects × 100 = 500
+
+  // Grade
+  let grade,gradeColor;
+  if(total>=90){grade='A1 — Outstanding 🏆';gradeColor='var(--green)'}
+  else if(total>=80){grade='A2 — Excellent 🌟';gradeColor='var(--green)'}
+  else if(total>=70){grade='B1 — Very Good 👍';gradeColor='var(--blue)'}
+  else if(total>=60){grade='B2 — Good 📈';gradeColor='var(--blue)'}
+  else if(total>=50){grade='C1 — Average ⚡';gradeColor='var(--amber)'}
+  else{grade='Needs Improvement 📚';gradeColor='var(--coral)'}
+
+  $('predScore').textContent=totalMarks+'/500';
+  $('predGrade').innerHTML=`<span style="color:${gradeColor}">${grade}</span>`;
+  $('predRange').textContent=`Avg per subject: ~${total}% | Range: ${Math.max(0,totalMarks-30)}–${Math.min(500,totalMarks+30)}`;
+  $('predResultSection').style.display='flex';
+
+  // Breakdown bars
+  const bkd=$('predBreakdown');bkd.innerHTML='';
+  breakdown.forEach(s=>{
+    const row=document.createElement('div');row.className='pred-subj-row';
+    row.innerHTML=`<div class="pred-subj-name">${s.emoji} ${s.name}</div><div class="pred-track"><div class="pred-fill" style="background:${s.color};width:0%" data-w="${s.pred}"></div></div><div class="pred-val">${s.pred}%</div>`;
+    bkd.appendChild(row);
+    setTimeout(()=>{row.querySelector('.pred-fill').style.width=s.pred+'%'},60);
+  });
+
+  // Tips
+  const tips=$('predTips');tips.innerHTML='';
+  const weakSubjs=breakdown.filter(s=>s.pred<70).sort((a,b)=>a.pred-b.pred);
+  if(weakSubjs.length){
+    weakSubjs.forEach(s=>{
+      const div=document.createElement('div');
+      div.style.cssText='display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--s2);border-radius:var(--r);font-size:.74rem';
+      div.innerHTML=`<span style="font-size:.9rem;flex-shrink:0">${s.emoji}</span><div><strong style="color:${s.color}">${s.name}</strong> — predicted ${s.pred}%. Focus more sessions on this subject and complete remaining chapters.</div>`;
+      tips.appendChild(div);
+    });
+  } else {
+    tips.innerHTML='<div style="color:var(--green);font-size:.74rem;padding:8px">✅ All subjects looking strong! Maintain consistency and revise weak chapters.</div>';
+  }
+  if(syllabus<80){const d=document.createElement('div');d.style.cssText='display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--amber-lo);border-radius:var(--r);font-size:.74rem;color:var(--amber)';d.innerHTML='<span>⚠️</span> Syllabus coverage is below 80%. Finishing more chapters can significantly boost your score.';tips.appendChild(d)}
+
+  // Save to history
+  predHistory.unshift({date:todayKey(),total,totalMarks,grade,syllabus,daysLeft,breakdown:breakdown.map(s=>({id:s.id,pred:s.pred}))});
+  if(predHistory.length>10)predHistory.pop();
+  saveLS('predHistory_v1',predHistory);
+  renderPredHistory();
+  showToast('🔮','Prediction complete!');
+  checkAndAwardBadges();
+}
+
+function renderPredHistory(){
+  const list=$('predHistoryList');if(!list)return;
+  if(!predHistory.length){list.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No predictions yet.</div>';return}
+  list.innerHTML='';
+  predHistory.forEach((p,i)=>{
+    const item=document.createElement('div');item.className='pred-history-item';
+    item.innerHTML=`
+      <div style="flex:1"><div style="font-weight:600">${p.totalMarks}/500</div><div style="font-size:.62rem;color:var(--text3)">${new Date(p.date+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div></div>
+      <div style="font-size:.68rem;color:${p.total>=80?'var(--green)':p.total>=60?'var(--amber)':'var(--coral)'};font-weight:700">${p.grade.split('—')[0].trim()}</div>
+      <button class="del-btn" onclick="deletePredHistory(${i})">×</button>`;
+    list.appendChild(item);
+  });
+}
+function deletePredHistory(i){predHistory.splice(i,1);saveLS('predHistory_v1',predHistory);renderPredHistory()}
+function clearPredHistory(){
+  if(!predHistory.length){showToast('ℹ️','No history to clear');return}
+  askConfirm('Clear prediction history?','All saved predictions will be deleted.','Clear',()=>{
+    predHistory=[];saveLS('predHistory_v1',predHistory);renderPredHistory();showToast('🗑️','Cleared');
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   STUDY TIMETABLE
+══════════════════════════════════════════════════════ */
+const TT_DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const TT_SLOTS=['6–7 AM','7–8 AM','8–9 AM','9–10 AM','10–11 AM','11–12 PM','12–1 PM','2–3 PM','3–4 PM','4–5 PM','5–6 PM','6–7 PM','7–8 PM','8–9 PM','9–10 PM'];
+let ttData=loadLS('timetable_v1',{});
+let _ttPending={day:null,slot:null};
+
+function saveTT(){saveLS('timetable_v1',ttData)}
+function ttKey(day,slot){return day+'__'+slot}
+
+function renderTimetable(){
+  const grid=$('ttGrid');if(!grid)return;
+  grid.innerHTML='';
+  const todayDow=(new Date().getDay()+6)%7; // 0=Mon
+
+  // Header row
+  grid.appendChild(Object.assign(document.createElement('div'),{className:'tt-header',textContent:''}));
+  TT_DAYS.forEach((d,i)=>{
+    const h=document.createElement('div');
+    h.className='tt-header'+(i===todayDow?' today':'');
+    h.textContent=d;
+    grid.appendChild(h);
+  });
+
+  // Slot rows
+  TT_SLOTS.forEach(slot=>{
+    const timeEl=document.createElement('div');timeEl.className='tt-time';timeEl.textContent=slot;
+    grid.appendChild(timeEl);
+    TT_DAYS.forEach((day,di)=>{
+      const key=ttKey(day,slot);
+      const entry=ttData[key];
+      const cell=document.createElement('div');
+      cell.className='tt-cell'+(entry?' has-entry':'');
+      if(entry){
+        const subj=entry.subjId?SUBJECTS.find(s=>s.id===entry.subjId):null;
+        const color=subj?subj.color:'#7a91b8';
+        cell.style.background=color+'22';
+        cell.style.borderColor=color+'55';
+        cell.innerHTML=`<div class="tt-cell-inner" style="color:${color}">${subj?subj.emoji+' '+subj.name.slice(0,6):entry.label||''}</div>`;
+      } else {
+        cell.innerHTML='<div class="tt-add-hint">+ Add</div>';
+      }
+      cell.onclick=()=>openTtModal(day,slot,di===todayDow);
+      grid.appendChild(cell);
+    });
+  });
+
+  renderTtLegend();
+  renderTtDistribution();
+  renderTtToday();
+}
+
+function renderTtLegend(){
+  const leg=$('ttLegend');if(!leg)return;leg.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const used=Object.values(ttData).some(e=>e&&e.subjId===s.id);
+    if(!used)return;
+    const item=document.createElement('div');item.className='tt-legend-item';
+    item.innerHTML=`<div class="tt-legend-dot" style="background:${s.color}"></div>${s.emoji} ${s.name}`;
+    leg.appendChild(item);
+  });
+}
+
+function renderTtDistribution(){
+  const dist=$('ttDistribution');if(!dist)return;dist.innerHTML='';
+  const counts={};
+  Object.values(ttData).forEach(e=>{if(e&&e.subjId)counts[e.subjId]=(counts[e.subjId]||0)+1});
+  const total=Object.values(counts).reduce((a,b)=>a+b,0)||1;
+  if(!Object.keys(counts).length){dist.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:10px">No subjects assigned yet</div>';return}
+  SUBJECTS.forEach(s=>{
+    const c=counts[s.id]||0;if(!c)return;
+    const pct=Math.round(c/total*100);
+    const row=document.createElement('div');row.className='sbr';
+    row.innerHTML=`<div class="sbr-name">${s.emoji} ${s.name.slice(0,9)}</div><div class="sbr-track"><div class="sbr-fill" style="background:${s.color};width:0%" data-w="${pct}"></div></div><div class="sbr-val">${c} slots</div>`;
+    dist.appendChild(row);
+    setTimeout(()=>{const f=row.querySelector('.sbr-fill');if(f)f.style.width=f.dataset.w+'%'},60);
+  });
+}
+
+function renderTtToday(){
+  const todayEl=$('ttToday');if(!todayEl)return;todayEl.innerHTML='';
+  const dayName=TT_DAYS[(new Date().getDay()+6)%7];
+  const entries=TT_SLOTS.map(slot=>({slot,entry:ttData[ttKey(dayName,slot)]})).filter(x=>x.entry);
+  if(!entries.length){todayEl.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:12px">No sessions scheduled for today</div>';return}
+  entries.forEach(({slot,entry})=>{
+    const subj=entry.subjId?SUBJECTS.find(s=>s.id===entry.subjId):null;
+    const color=subj?subj.color:'#7a91b8';
+    const item=document.createElement('div');
+    item.style.cssText=`display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:10px;background:${color}18;border:1px solid ${color}44`;
+    item.innerHTML=`<span style="font-size:.9rem">${subj?subj.emoji:'📌'}</span><div style="flex:1"><div style="font-size:.74rem;font-weight:700;color:${color}">${subj?subj.name:entry.label}</div><div style="font-size:.62rem;color:var(--text2)">${slot}</div></div>`;
+    todayEl.appendChild(item);
+  });
+}
+
+function openTtModal(day,slot,isToday){
+  _ttPending={day,slot};
+  $('ttSlotTitle').textContent=`${day} · ${slot}`;
+  $('ttSlotSub').textContent=isToday?'📍 This is today!':'Assign a subject to this slot';
+  $('ttCustomLabel').value='';
+  const existing=ttData[ttKey(day,slot)];
+  if(existing&&!existing.subjId)$('ttCustomLabel').value=existing.label||'';
+
+  const wrap=$('ttSlotSubjects');wrap.innerHTML='';
+  SUBJECTS.forEach(s=>{
+    const btn=document.createElement('button');
+    const isSelected=existing&&existing.subjId===s.id;
+    btn.style.cssText=`display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;font-family:inherit;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .18s;border:1.5px solid ${isSelected?s.color:' #26385a'};background:${isSelected?s.color+'22':'#151d2e'};color:${isSelected?s.color:'#6b84aa'};width:100%`;
+    btn.innerHTML=`${s.emoji} ${s.name.slice(0,9)}`;
+    btn.dataset.subjId=s.id;
+    btn.onclick=()=>{
+      wrap.querySelectorAll('button').forEach(b=>{b.style.borderColor='#26385a';b.style.background='#151d2e';b.style.color='#6b84aa'});
+      btn.style.borderColor=s.color;btn.style.background=s.color+'22';btn.style.color=s.color;
+      btn.dataset.selected='1';$('ttCustomLabel').value='';
+    };
+    if(isSelected)btn.dataset.selected='1';
+    wrap.appendChild(btn);
+  });
+  $('ttSlotModal').classList.add('open');
+}
+
+function closeTtModal(){$('ttSlotModal').classList.remove('open');_ttPending={day:null,slot:null}}
+
+function ttSlotSave(){
+  const{day,slot}=_ttPending;if(!day)return;
+  const key=ttKey(day,slot);
+  const selected=$('ttSlotSubjects').querySelector('[data-selected="1"]');
+  const customLabel=$('ttCustomLabel').value.trim();
+  if(selected){ttData[key]={subjId:selected.dataset.subjId}}
+  else if(customLabel){ttData[key]={label:customLabel}}
+  else{delete ttData[key]}
+  saveTT();closeTtModal();renderTimetable();
+  checkAndAwardBadges();
+}
+
+function ttSlotClear(){
+  const{day,slot}=_ttPending;if(!day)return;
+  delete ttData[ttKey(day,slot)];
+  saveTT();closeTtModal();renderTimetable();
+}
+
+function resetTimetable(){
+  askConfirm('Reset timetable?','All scheduled slots will be cleared.','Reset',()=>{
+    ttData={};saveTT();renderTimetable();showToast('🗑️','Timetable cleared');
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   SUBJECT HEALTH DASHBOARD
+══════════════════════════════════════════════════════ */
+function renderHealth(){
+  const grid=$('healthGrid');if(!grid)return;grid.innerHTML='';
+  const rankData=[];
+
+  SUBJECTS.forEach(s=>{
+    // Syllabus %
+    const chs=getChapters(s.key)||[];
+    const done=chs.filter(c=>c.status===2).length;
+    const syllPct=chs.length?Math.round(done/chs.length*100):0;
+
+    // Mock avg
+    const mockScores=MOCK_DATA.filter(m=>m.subj===s.id).map(m=>m.total>0?Math.round(m.score/m.total*100):0);
+    const mockAvg=mockScores.length?Math.round(mockScores.reduce((a,b)=>a+b,0)/mockScores.length):null;
+
+    // Focus time (total mins)
+    const focusMin=D.sessions.filter(ss=>ss.subj===s.id&&ss.type==='focus').reduce((a,ss)=>a+ss.duration,0);
+
+    // Overall health score (weighted)
+    const mockScore=mockAvg!==null?mockAvg:60;
+    const healthScore=Math.round(syllPct*0.4+mockScore*0.4+(Math.min(focusMin,300)/300)*100*0.2);
+
+    // Grade
+    let grade,gradeColor,gradeBg;
+    if(healthScore>=85){grade='A+';gradeColor='var(--green)';gradeBg='var(--green-lo)'}
+    else if(healthScore>=70){grade='A';gradeColor='var(--blue)';gradeBg='var(--blue-lo)'}
+    else if(healthScore>=55){grade='B';gradeColor='var(--amber)';gradeBg='var(--amber-lo)'}
+    else if(healthScore>=40){grade='C';gradeColor='var(--coral)';gradeBg='var(--coral-lo)'}
+    else{grade='D';gradeColor='#6b84aa';gradeBg='var(--s3)'}
+
+    rankData.push({s,healthScore,grade,gradeColor,syllPct,mockAvg,focusMin});
+
+    const card=document.createElement('div');card.className='health-card';
+    card.style.cssText+=`--subj-color:${s.color}`;
+    card.querySelector&&null;
+    card.innerHTML=`
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r2) var(--r2) 0 0;background:${s.color}"></div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div class="health-icon">${s.emoji}</div>
+          <div class="health-subj">${s.name}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="health-score" style="color:${gradeColor}">${healthScore}</div>
+          <div class="health-grade-badge" style="background:${gradeBg};color:${gradeColor}">${grade}</div>
+        </div>
+      </div>
+      <div class="health-stat-row"><div class="health-stat-label">Syllabus</div><div class="health-stat-val" style="color:${syllPct>=80?'var(--green)':syllPct>=50?'var(--amber)':'var(--coral)'}">${syllPct}%</div></div>
+      <div class="health-mini-bar"><div class="health-mini-fill" style="background:${s.color};width:0%" data-w="${syllPct}"></div></div>
+      <div class="health-stat-row"><div class="health-stat-label">Mock Avg</div><div class="health-stat-val" style="color:${mockAvg!==null?(mockAvg>=80?'var(--green)':mockAvg>=60?'var(--amber)':'var(--coral)'):'var(--text3)'}">${mockAvg!==null?mockAvg+'%':'No data'}</div></div>
+      <div class="health-stat-row"><div class="health-stat-label">Focus Time</div><div class="health-stat-val" style="color:var(--blue)">${focusMin>=60?Math.floor(focusMin/60)+'h '+focusMin%60+'m':focusMin+'m'}</div></div>`;
+    grid.appendChild(card);
+    setTimeout(()=>{const f=card.querySelector('.health-mini-fill');if(f)f.style.width=f.dataset.w+'%'},60);
+  });
+
+  // Rank list
+  const rankList=$('healthRankList');rankList.innerHTML='';
+  rankData.sort((a,b)=>b.healthScore-a.healthScore).forEach((r,i)=>{
+    const item=document.createElement('div');
+    const medals=['🥇','🥈','🥉','4️⃣','5️⃣','6️⃣'];
+    item.style.cssText='display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--s2);border-radius:var(--r);border-left:3px solid '+r.s.color;
+    item.innerHTML=`<span style="font-size:1rem;flex-shrink:0">${medals[i]||'#'+(i+1)}</span>
+      <span style="font-size:.9rem">${r.s.emoji}</span>
+      <div style="flex:1"><div style="font-size:.76rem;font-weight:700;color:var(--text)">${r.s.name}</div><div style="font-size:.62rem;color:var(--text2)">Syllabus ${r.syllPct}% · ${r.mockAvg!==null?'Mock '+r.mockAvg+'%':'No mock data'}</div></div>
+      <div style="font-family:var(--mono);font-size:1rem;font-weight:700;color:${r.gradeColor}">${r.healthScore}</div>
+      <div class="health-grade-badge" style="background:${r.gradeColor}18;color:${r.gradeColor}">${r.grade}</div>`;
+    rankList.appendChild(item);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   EXAM DAY CHECKLIST
+══════════════════════════════════════════════════════ */
+const DEFAULT_CHECKLIST={
+  'Evening Before':[
+    {id:'ec1', text:'Pack admit card in bag',    priority:'must', checked:false},
+    {id:'ec2', text:'Sharpen pencils & pens',    priority:'must', checked:false},
+    {id:'ec3', text:'Pack geometry box',          priority:'must', checked:false},
+    {id:'ec4', text:'Pack eraser & sharpener',    priority:'must', checked:false},
+    {id:'ec5', text:'Keep water bottle ready',    priority:'good', checked:false},
+    {id:'ec6', text:'Set alarm (2 backups)',       priority:'must', checked:false},
+    {id:'ec7', text:'Revise formula sheet',        priority:'good', checked:false},
+    {id:'ec8', text:'Light dinner & sleep by 10', priority:'good', checked:false},
+  ],
+  'Morning of Exam':[
+    {id:'em1', text:'Eat a proper breakfast',     priority:'must', checked:false},
+    {id:'em2', text:'Check admit card in bag',    priority:'must', checked:false},
+    {id:'em3', text:'ID card / Aadhar card',       priority:'must', checked:false},
+    {id:'em4', text:'Extra pens (3 minimum)',      priority:'must', checked:false},
+    {id:'em5', text:'Water bottle & snack',        priority:'good', checked:false},
+    {id:'em6', text:'Watch or clock',              priority:'nice', checked:false},
+    {id:'em7', text:'Reach centre 30 min early',  priority:'must', checked:false},
+  ],
+  'At Exam Centre':[
+    {id:'ea1', text:'Locate your seat number',    priority:'must', checked:false},
+    {id:'ea2', text:'Read all instructions first',priority:'must', checked:false},
+    {id:'ea3', text:'Attempt easy questions first',priority:'good',checked:false},
+    {id:'ea4', text:'Keep eye on the clock',       priority:'good', checked:false},
+    {id:'ea5', text:'Review before submission',    priority:'good', checked:false},
+  ],
+};
+
+let checklistData=loadLS('checklist_v1',JSON.parse(JSON.stringify(DEFAULT_CHECKLIST)));
+let activeClTab=Object.keys(checklistData)[0]||'Evening Before';
+
+function renderChecklist(){
+  // Tabs
+  const tabs=$('clTabs');if(!tabs)return;tabs.innerHTML='';
+  Object.keys(checklistData).forEach(tab=>{
+    const btn=document.createElement('div');btn.className='checklist-tab'+(tab===activeClTab?' active':'');
+    btn.textContent=tab;btn.onclick=()=>{activeClTab=tab;renderChecklist()};
+    tabs.appendChild(btn);
+  });
+
+  // Progress ring
+  const allItems=Object.values(checklistData).flat();
+  const total=allItems.length,checked=allItems.filter(i=>i.checked).length;
+  const pct=total?Math.round(checked/total*100):0;
+  const circ=2*Math.PI*27;
+  $('clRingFill').style.strokeDashoffset=circ*(1-pct/100);
+  $('clRingFill').style.stroke=pct===100?'var(--green)':pct>=60?'var(--blue)':'var(--yellow)';
+  $('clRingPct').textContent=pct+'%';
+  $('clProgressTitle').textContent=pct===100?'🎉 All Ready!':pct>=60?'Almost There!':pct>=30?'Keep Going!':'Get Ready!';
+  $('clProgressSub').textContent=`${checked} of ${total} items checked`;
+
+  // Category pills
+  const pills=$('clProgressPills');pills.innerHTML='';
+  Object.entries(checklistData).forEach(([tab,items])=>{
+    const done=items.filter(i=>i.checked).length;
+    const pill=document.createElement('div');
+    pill.style.cssText=`padding:2px 8px;border-radius:99px;font-size:.6rem;font-weight:700;font-family:var(--mono);background:${done===items.length&&items.length>0?'var(--green-lo)':'var(--s2)'};color:${done===items.length&&items.length>0?'var(--green)':'var(--text2)'};border:1px solid ${done===items.length&&items.length>0?'rgba(52,211,153,.25)':'var(--border)'}`;
+    pill.textContent=tab+' '+done+'/'+items.length;
+    pills.appendChild(pill);
+  });
+
+  // Section title
+  $('clSectionTitle').textContent=activeClTab;
+
+  // Items
+  const cont=$('clItemsContainer');cont.innerHTML='';
+  const items=checklistData[activeClTab]||[];
+  items.forEach((item,i)=>{
+    const el=document.createElement('div');el.className='cl-item'+(item.checked?' checked':'');
+    el.innerHTML=`
+      <div class="cl-checkbox ${item.checked?'checked':''}" onclick="toggleClItem('${activeClTab}',${i})"></div>
+      <div class="cl-text">${item.text}</div>
+      <div class="cl-priority ${item.priority}">${item.priority}</div>
+      <button class="edit-btn" onclick="editClItem('${activeClTab}',${i})" title="Edit">✏️</button>
+      <button class="del-btn" onclick="deleteClItem('${activeClTab}',${i})">×</button>`;
+    cont.appendChild(el);
+  });
+  if(!items.length){cont.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">No items in this category. Add one above!</div>'}
+}
+
+function toggleClItem(tab,i){
+  checklistData[tab][i].checked=!checklistData[tab][i].checked;
+  saveLS('checklist_v1',checklistData);renderChecklist();
+  // Check all done for badge
+  const all=Object.values(checklistData).flat();
+  if(all.every(x=>x.checked))showToast('🎉','All checked! You are ready for the exam!');
+  checkAndAwardBadges();
+}
+
+function editClItem(tab,i){
+  const item=checklistData[tab][i];
+  showEditModal('Edit Checklist Item',[
+    {id:'text',label:'Item Text',type:'text',value:item.text,placeholder:'e.g. Pack admit card'},
+  ],(vals)=>{
+    if(!vals.text){showToast('⚠️','Text cannot be empty');return}
+    checklistData[tab][i].text=vals.text;
+    saveLS('checklist_v1',checklistData);renderChecklist();showToast('✏️','Item updated');
+  });
+}
+
+function deleteClItem(tab,i){
+  askConfirm('Delete item?',checklistData[tab][i].text+' will be removed.','Delete',()=>{
+    checklistData[tab].splice(i,1);saveLS('checklist_v1',checklistData);renderChecklist();
+  });
+}
+
+function addChecklistItem(){
+  showEditModal('Add Checklist Item',[
+    {id:'text',label:'Item Text',type:'text',value:'',placeholder:'e.g. Pack ruler'},
+    {id:'priority',label:'Priority (must/good/nice)',type:'text',value:'good',placeholder:'must / good / nice'},
+  ],(vals)=>{
+    if(!vals.text){showToast('⚠️','Enter item text');return}
+    const p=['must','good','nice'].includes(vals.priority)?vals.priority:'good';
+    if(!checklistData[activeClTab])checklistData[activeClTab]=[];
+    checklistData[activeClTab].push({id:'ci'+Date.now(),text:vals.text,priority:p,checked:false});
+    saveLS('checklist_v1',checklistData);renderChecklist();showToast('✅','Item added');
+  });
+}
+
+function resetChecklist(){
+  askConfirm('Reset checklist?','All checkmarks will be cleared (items kept).','Reset',()=>{
+    Object.values(checklistData).forEach(items=>items.forEach(i=>i.checked=false));
+    saveLS('checklist_v1',checklistData);renderChecklist();showToast('↺','Checklist reset');
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   ENHANCED BADGES & XP SYSTEM — FULL REBUILD
+══════════════════════════════════════════════════════ */
+
+const ALL_BADGES=[
+  // ── FOCUS ──
+  {id:'first_session', icon:'🌱', name:'First Step',       cat:'Focus',   xpReq:0,    desc:'Complete your first focus session',              check:()=>focusSessions()>=1},
+  {id:'sessions_5',    icon:'🔥', name:'Getting Warm',     cat:'Focus',   xpReq:0,    desc:'Complete 5 focus sessions',                       check:()=>focusSessions()>=5},
+  {id:'sessions_10',   icon:'💪', name:'In The Zone',      cat:'Focus',   xpReq:50,   desc:'Complete 10 focus sessions',                      check:()=>focusSessions()>=10},
+  {id:'sessions_25',   icon:'⚡', name:'Power Surge',      cat:'Focus',   xpReq:150,  desc:'Complete 25 focus sessions',                      check:()=>focusSessions()>=25},
+  {id:'sessions_50',   icon:'🌊', name:'Flow State',       cat:'Focus',   xpReq:300,  desc:'Complete 50 focus sessions',                      check:()=>focusSessions()>=50},
+  {id:'sessions_100',  icon:'💎', name:'Diamond Focus',    cat:'Focus',   xpReq:700,  desc:'Complete 100 focus sessions',                     check:()=>focusSessions()>=100},
+  {id:'sessions_200',  icon:'🚀', name:'Unstoppable',      cat:'Focus',   xpReq:1500, desc:'Complete 200 focus sessions',                     check:()=>focusSessions()>=200},
+  // ── STREAK ──
+  {id:'streak_2',      icon:'✨', name:'Two-Day Spark',    cat:'Streak',  xpReq:0,    desc:'Study 2 days in a row',                           check:()=>computeStreak()>=2},
+  {id:'streak_5',      icon:'🌿', name:'Habit Builder',    cat:'Streak',  xpReq:30,   desc:'5-day study streak',                              check:()=>computeStreak()>=5},
+  {id:'streak_7',      icon:'🗓️', name:'Week Warrior',     cat:'Streak',  xpReq:100,  desc:'7-day study streak',                              check:()=>computeStreak()>=7},
+  {id:'streak_14',     icon:'🏆', name:'Two-Week King',    cat:'Streak',  xpReq:250,  desc:'14-day study streak',                             check:()=>computeStreak()>=14},
+  {id:'streak_30',     icon:'👑', name:'Monthly Master',   cat:'Streak',  xpReq:600,  desc:'30-day study streak',                             check:()=>computeStreak()>=30},
+  {id:'streak_60',     icon:'🌟', name:'Elite Scholar',    cat:'Streak',  xpReq:1400, desc:'60-day study streak',                             check:()=>computeStreak()>=60},
+  // ── TIME ──
+  {id:'focus_1h',      icon:'⏱️', name:'Hour One',         cat:'Time',    xpReq:0,    desc:'Accumulate 1 hour of focus time',                 check:()=>totalFocusMin()>=60},
+  {id:'focus_5h',      icon:'🕔', name:'Five Hours In',    cat:'Time',    xpReq:100,  desc:'Accumulate 5 hours of focus time',                check:()=>totalFocusMin()>=300},
+  {id:'focus_10h',     icon:'🕰️', name:'10 Hour Club',     cat:'Time',    xpReq:250,  desc:'Accumulate 10 hours of focus time',               check:()=>totalFocusMin()>=600},
+  {id:'focus_25h',     icon:'🔮', name:'Quarter Century',  cat:'Time',    xpReq:550,  desc:'Accumulate 25 hours of focus time',               check:()=>totalFocusMin()>=1500},
+  {id:'focus_50h',     icon:'🌙', name:'Nighthawk',        cat:'Time',    xpReq:1200, desc:'Accumulate 50 hours of focus time',               check:()=>totalFocusMin()>=3000},
+  // ── PERFORMANCE ──
+  {id:'first_test',    icon:'📝', name:'Test Taker',       cat:'Perform', xpReq:0,    desc:'Log your first mock test',                        check:()=>MOCK_DATA.length>=1},
+  {id:'tests_3',       icon:'📋', name:'Triple Check',     cat:'Perform', xpReq:60,   desc:'Log 3 mock tests',                                check:()=>MOCK_DATA.length>=3},
+  {id:'tests_10',      icon:'📊', name:'Mock Machine',     cat:'Perform', xpReq:200,  desc:'Log 10 mock tests',                               check:()=>MOCK_DATA.length>=10},
+  {id:'score_80',      icon:'🎯', name:'80% Club',         cat:'Perform', xpReq:120,  desc:'Score 80%+ in any mock test',                     check:()=>MOCK_DATA.some(m=>m.total>0&&m.score/m.total>=.8)},
+  {id:'score_90',      icon:'🏹', name:'Sharpshooter',     cat:'Perform', xpReq:300,  desc:'Score 90%+ in any mock test',                     check:()=>MOCK_DATA.some(m=>m.total>0&&m.score/m.total>=.9)},
+  {id:'score_95',      icon:'💯', name:'Near Perfect',     cat:'Perform', xpReq:600,  desc:'Score 95%+ in any mock test',                     check:()=>MOCK_DATA.some(m=>m.total>0&&m.score/m.total>=.95)},
+  {id:'all_subjects',  icon:'📚', name:'All-Rounder',      cat:'Perform', xpReq:400,  desc:'Log a test for every single subject',             check:()=>SUBJECTS.every(s=>MOCK_DATA.some(m=>m.subj===s.id))},
+  {id:'improved',      icon:'📈', name:'Comeback Kid',     cat:'Perform', xpReq:180,  desc:'Score higher than your first test in any subject', check:()=>SUBJECTS.some(s=>{const v=MOCK_DATA.filter(m=>m.subj===s.id);return v.length>=2&&v[v.length-1].score>v[0].score})},
+  // ── SYLLABUS ──
+  {id:'first_chapter', icon:'📖', name:'Chapter One',      cat:'Syllabus',xpReq:0,    desc:'Complete your first chapter',                     check:()=>totalChaptersDone()>=1},
+  {id:'chapters_5',    icon:'📗', name:'Five Done',        cat:'Syllabus',xpReq:40,   desc:'Complete 5 chapters',                             check:()=>totalChaptersDone()>=5},
+  {id:'chapters_10',   icon:'📘', name:'Bookworm',         cat:'Syllabus',xpReq:120,  desc:'Complete 10 chapters',                            check:()=>totalChaptersDone()>=10},
+  {id:'chapters_25',   icon:'📙', name:'Power Reader',     cat:'Syllabus',xpReq:280,  desc:'Complete 25 chapters',                            check:()=>totalChaptersDone()>=25},
+  {id:'chapters_50',   icon:'📕', name:'Half Century',     cat:'Syllabus',xpReq:600,  desc:'Complete 50 chapters',                            check:()=>totalChaptersDone()>=50},
+  {id:'subject_done',  icon:'✅', name:'Subject Master',   cat:'Syllabus',xpReq:350,  desc:'Complete ALL chapters in one subject',            check:()=>SYLLABUS_DEF.some(s=>{const c=getChapters(s.key);return c.length>0&&c.every(x=>x.status===2)})},
+  {id:'criteria_5',    icon:'🔬', name:'Deep Diver',       cat:'Syllabus',xpReq:200,  desc:'Complete all criteria for 5 chapters',            check:()=>SYLLABUS_DEF.reduce((a,s)=>a+getChapters(s.key).filter(c=>c.criteria&&Object.values(c.criteria).filter(Boolean).length===5).length,0)>=5},
+  // ── TOOLS ──
+  {id:'first_pred',    icon:'🔮', name:'Fortune Teller',   cat:'Tools',   xpReq:0,    desc:'Run your first marks prediction',                 check:()=>predHistory.length>=1},
+  {id:'preds_5',       icon:'🧿', name:'Oracle',           cat:'Tools',   xpReq:250,  desc:'Run 5 marks predictions',                         check:()=>predHistory.length>=5},
+  {id:'first_exam',    icon:'📅', name:'Planner',          cat:'Tools',   xpReq:0,    desc:'Add your first exam to countdown',                check:()=>exams.length>=1},
+  {id:'timetable_full',icon:'🗺️', name:'Architect',        cat:'Tools',   xpReq:200,  desc:'Fill 10+ timetable slots',                        check:()=>Object.keys(ttData).filter(k=>ttData[k]).length>=10},
+  {id:'checklist_done',icon:'✔️', name:'Battle Ready',     cat:'Tools',   xpReq:100,  desc:'Check off all items in any checklist category',   check:()=>Object.values(checklistData).some(items=>items.length>0&&items.every(i=>i.checked))},
+  {id:'health_check',  icon:'💊', name:'Doctor of Study',  cat:'Tools',   xpReq:150,  desc:'Visit the Subject Health Dashboard',              check:()=>xpData._healthVisited===true},
+  // ── SPECIAL ──
+  {id:'goal_hit',      icon:'🏹', name:'Goal Getter',      cat:'Special', xpReq:0,    desc:'Hit your daily session goal for the first time',  check:()=>{const td=todayKey();return D.sessions.filter(s=>s.date===td&&s.type==='focus').length>=D.dailyGoal}},
+  {id:'night_owl',     icon:'🦉', name:'Night Owl',        cat:'Special', xpReq:80,   desc:'Log a session after 10 PM',                       check:()=>D.sessions.some(s=>{const h=new Date(s.completedAt).getHours();return h>=22||h<2})},
+  {id:'early_bird',    icon:'🐦', name:'Early Bird',       cat:'Special', xpReq:80,   desc:'Log a session before 7 AM',                       check:()=>D.sessions.some(s=>new Date(s.completedAt).getHours()<7)},
+  {id:'weekend_grind', icon:'💼', name:'Weekend Grind',    cat:'Special', xpReq:150,  desc:'Study on both Saturday and Sunday in one week',   check:()=>{const dates=new Set(D.sessions.filter(s=>s.type==='focus').map(s=>s.date));return [...dates].some(d=>{const dow=new Date(d+'T12:00:00').getDay();return dow===6&&dates.has(new Date(new Date(d+'T12:00:00').getTime()+86400000).toISOString().slice(0,10))})}},
+  {id:'marathon',      icon:'🏃', name:'Marathon',         cat:'Special', xpReq:400,  desc:'Complete 4+ sessions in a single day',            check:()=>{const c={};D.sessions.filter(s=>s.type==='focus').forEach(s=>{c[s.date]=(c[s.date]||0)+1});return Object.values(c).some(v=>v>=4)}},
+  {id:'legend',        icon:'🐉', name:'Legend',           cat:'Special', xpReq:5000, desc:'Reach 5000 XP — the highest rank',                check:()=>calcXP()>=5000},
+];
+
+// XP helper functions
+/* ── XP core data & helpers ── */
+const XP_TABLE={focus_session:10,streak_day:5,chapter_done:8,test_logged:15,prediction_run:10,badge_earned:20,timetable_slot:3,checklist_item:5};
+let xpData=loadLS('xpData_v1',{xp:0,log:[],earned:[],_healthVisited:false});
+
+function calcXP(){
+  const tt_slots=Object.keys(ttData).filter(k=>ttData[k]).length;
+  const cl_done=Object.values(checklistData).flat().filter(i=>i.checked).length;
+  return focusSessions()*XP_TABLE.focus_session
+    + computeStreak()*XP_TABLE.streak_day
+    + totalChaptersDone()*XP_TABLE.chapter_done
+    + MOCK_DATA.length*XP_TABLE.test_logged
+    + predHistory.length*XP_TABLE.prediction_run
+    + tt_slots*XP_TABLE.timetable_slot
+    + cl_done*XP_TABLE.checklist_item
+    + xpData.earned.length*XP_TABLE.badge_earned;
+}
+
+function getLevel(xp){
+  const L=[{min:0,name:'Beginner'},{min:100,name:'Student'},{min:250,name:'Learner'},{min:500,name:'Scholar'},{min:1000,name:'Expert'},{min:2000,name:'Master'},{min:5000,name:'Legend'}];
+  let lvl=1,lvlName='Beginner',nextXp=100,curMin=0;
+  L.forEach((l,i)=>{if(xp>=l.min){lvl=i+1;lvlName=l.name;curMin=l.min;nextXp=L[i+1]?L[i+1].min:9999}});
+  return{lvl,lvlName,nextXp,curMin};
+}
+
+function focusSessions(){return D.sessions.filter(s=>s.type==='focus').length}
+function totalFocusMin(){return D.sessions.filter(s=>s.type==='focus').reduce((a,s)=>a+s.duration,0)}
+function totalChaptersDone(){return SYLLABUS_DEF.reduce((a,s)=>a+getChapters(s.key).filter(c=>c.status===2).length,0)}
+
+// Active filter for badges page
+let _badgeFilter='All';
+
+function checkAndAwardBadges(){
+  let newEarned=false;
+  const totalXP=calcXP();
+  ALL_BADGES.forEach(b=>{
+    if(!xpData.earned.includes(b.id) && totalXP>=b.xpReq && b.check()){
+      xpData.earned.push(b.id);
+      xpData.log.unshift({text:'🏅 Unlocked: '+b.name+' ('+b.cat+')',date:todayKey()});
+      newEarned=true;
+      showToast('🏅','Badge unlocked: '+b.name+'!');
+    }
+  });
+  if(newEarned) saveLS('xpData_v1',xpData);
+}
+
+function renderBadges(){
+  // Mark health visited
+  if(!xpData._healthVisited) xpData._healthVisited=false;
+  checkAndAwardBadges();
+
+  const totalXP=calcXP();
+  const{lvl,lvlName,nextXp,curMin}=getLevel(totalXP);
+  const pct=Math.min(100,nextXp===9999?100:Math.round((totalXP-curMin)/(nextXp-curMin)*100));
+
+  // Level colours per tier
+  const lvlColors=['#7a91b8','#4f9eff','#34d399','#e8ff47','#fbbf24','#fb7185','#a78bfa'];
+  const lvlColor=lvlColors[Math.min(lvl-1,lvlColors.length-1)];
+
+  $('xpLevel').textContent=lvl;
+  $('xpLevelName').textContent=lvlName;
+  $('xpLevelName').style.color=lvlColor;
+  $('xpCurrent').textContent=totalXP;
+  $('xpNext').textContent=nextXp===9999?'MAX':nextXp;
+  $('xpBarFill').style.width=pct+'%';
+  $('xpBarFill').style.background=`linear-gradient(90deg,${lvlColor},${lvlColor}aa)`;
+
+  const earned=xpData.earned;
+  $('badgeCount').textContent=earned.length+'/'+ALL_BADGES.length+' earned';
+
+  // Filter buttons
+  const cats=['All',...new Set(ALL_BADGES.map(b=>b.cat))];
+  let filterWrap=document.getElementById('badgesFilterWrap');
+  if(!filterWrap){
+    filterWrap=document.createElement('div');filterWrap.id='badgesFilterWrap';filterWrap.className='badges-filter';
+    $('badgesGrid').before(filterWrap);
+  }
+  filterWrap.innerHTML='';
+  cats.forEach(c=>{
+    const btn=document.createElement('button');btn.className='badge-filter-btn'+(_badgeFilter===c?' active':'');
+    btn.textContent=c;btn.onclick=()=>{_badgeFilter=c;renderBadges()};
+    filterWrap.appendChild(btn);
+  });
+
+  // Badges grid
+  const grid=$('badgesGrid');grid.innerHTML='';
+  const filtered=_badgeFilter==='All'?ALL_BADGES:ALL_BADGES.filter(b=>b.cat===_badgeFilter);
+  const unlockable=filtered.filter(b=>!earned.includes(b.id)&&totalXP>=b.xpReq).length;
+
+  filtered.forEach(b=>{
+    const isEarned=earned.includes(b.id);
+    const isUnlockable=!isEarned&&totalXP>=b.xpReq;
+    const isLocked=!isEarned&&!isUnlockable;
+    const card=document.createElement('div');
+    card.className='badge-card '+(isEarned?'earned':isLocked?'locked':'');
+    if(!isLocked&&!isEarned) card.style.cssText='border-color:rgba(232,255,71,.25);background:linear-gradient(135deg,var(--s2),rgba(232,255,71,.04))';
+    card.title=b.desc+(isLocked?' (Requires '+b.xpReq+' XP)':'');
+    card.innerHTML=`
+      ${isEarned?'<div class="badge-earned-stamp">✓</div>':''}
+      ${isUnlockable?'<div class="badge-earned-stamp" style="color:var(--yellow);background:var(--yellow-lo);border-color:rgba(232,255,71,.2)">Ready!</div>':''}
+      <div class="badge-icon" style="${isLocked?'filter:grayscale(1)':''}">${isEarned||isUnlockable?b.icon:'🔒'}</div>
+      <div class="badge-name">${b.name}</div>
+      <div class="badge-desc">${b.desc}</div>
+      <div class="badge-category">${b.cat}</div>
+      ${isLocked?`<div class="badge-xp-req">⚡ ${b.xpReq} XP</div>`:''}`;
+    grid.appendChild(card);
+  });
+
+  // XP Milestones panel
+  let milestonesEl=document.getElementById('xpMilestones');
+  if(!milestonesEl){
+    milestonesEl=document.createElement('div');milestonesEl.id='xpMilestones';
+    milestonesEl.innerHTML='<div class="card-title" style="margin-bottom:12px">⚡ XP Milestones</div><div id="xpMilestonesList"></div>';
+    milestonesEl.style.cssText='background:var(--s1);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-top:0';
+    $('xpLog').closest('.card').after(milestonesEl);
+  }
+  const milestones=[
+    {xp:0,   icon:'🌱', name:'Beginner',  perk:'Access to all basic features'},
+    {xp:100, icon:'📚', name:'Student',   perk:'Badges filter unlocked'},
+    {xp:250, icon:'💡', name:'Learner',   perk:'Advanced performance graphs'},
+    {xp:500, icon:'🎓', name:'Scholar',   perk:'Marks predictor history (10 slots)'},
+    {xp:1000,icon:'⚡', name:'Expert',    perk:'Weekly report card export hint'},
+    {xp:2000,icon:'🏆', name:'Master',    perk:'Special badges unlocked'},
+    {xp:5000,icon:'🐉', name:'Legend',    perk:'The rarest badge — Legend status'},
+  ];
+  const mList=document.getElementById('xpMilestonesList');
+  if(mList){mList.innerHTML='';milestones.forEach(m=>{
+    const reached=totalXP>=m.xp;
+    const el=document.createElement('div');el.className='xp-milestone'+(reached?' reached':'');
+    el.innerHTML=`<div class="xp-milestone-icon">${m.icon}</div>
+      <div style="flex:1"><div class="xp-milestone-name" style="color:${reached?lvlColor:'var(--text)'}">${m.name}</div>
+      <div class="xp-milestone-xp">${m.xp===0?'Starting level':'Requires '+m.xp+' XP'} · ${m.perk}</div></div>
+      ${reached?'<div class="xp-milestone-check">✓</div>':totalXP>0?`<div style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">${m.xp-totalXP} more</div>`:''}`;
+    mList.appendChild(el);
+  })}
+
+  // XP Log
+  const log=$('xpLog');log.innerHTML='';
+  if(!xpData.log.length){log.innerHTML='<div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">Complete sessions to earn XP!</div>';return}
+  xpData.log.slice(0,20).forEach(e=>{
+    const item=document.createElement('div');
+    item.style.cssText='display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--s2);border-radius:8px;font-size:.72rem';
+    item.innerHTML=`<span style="flex:1">${e.text}</span><span style="font-family:var(--mono);font-size:.58rem;color:var(--text3)">${new Date(e.date+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</span>`;
+    log.appendChild(item);
+  });
+}
+
+// Mark health visited for badge
+function renderHealthAndTrack(){
+  if(xpData&&!xpData._healthVisited){xpData._healthVisited=true;saveLS('xpData_v1',xpData)}
+  renderHealth();
+}
+
+/* ══════════════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════════════ */
 initSettings();
@@ -1830,8 +3166,10 @@ totalMs=modeMs('focus');
 updateDisplay(totalMs);
 calcRRR();
 initPerfForm();
+initExColorPicker();
 if($('manDate'))$('manDate').value=todayKey();
 if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
+setTimeout(checkAndAwardBadges,800);
 </script>
 </body>
 </html>
