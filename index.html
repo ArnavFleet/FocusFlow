@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- FocusFlow 6.1: streamlined navigation; legacy pages retained internally for compatibility. -->
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FocusFlow — CBSE 10th</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>FocusFlow 6.3 — Exam Readiness</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -513,6 +514,197 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .mood-btn{font-size:1.4rem;cursor:pointer;border:2px solid transparent;border-radius:8px;padding:2px 4px;transition:all .15s;background:none}
 .mood-btn:hover{transform:scale(1.2)}
 .mood-btn.selected{border-color:var(--yellow);background:var(--yellow-lo)}
+
+/* ── FOCUSFLOW 2.0: RESPONSIVE / ANALYTICS REFINEMENT ── */
+:root{
+  --bg:#080d16;--bg2:#0c1320;--s1:#101a2a;--s2:#152238;--s3:#20324c;
+  --border:#263953;--border2:#355071;--blue:#5ca8ff;--cyan:#54d7e8;
+  --yellow:#b9f36a;--yellow-lo:rgba(185,243,106,.09);
+}
+html{scroll-behavior:smooth}
+body{overflow:hidden}
+.sidebar{width:224px}
+.logo{padding:20px 17px 16px}
+.logo-icon{border-radius:11px}
+.nav-item{padding:10px 15px;font-size:.76rem;border-radius:0 9px 9px 0;margin-right:8px}
+.nav-item.active{background:linear-gradient(90deg,rgba(185,243,106,.12),rgba(185,243,106,.025))}
+.topbar{padding:14px 26px}
+.content{padding:22px 26px 44px}
+.page{gap:18px}
+.card,.kpi,.ring-card,.health-card{box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.card{padding:18px}
+.card:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.card-label{color:#8298b8}
+.card-title{font-size:.88rem}
+.kpi{padding:17px}
+.kpi-val{font-size:1.85rem}
+.bar-chart{height:125px;gap:6px}
+.bc-bar{background:linear-gradient(180deg,#3e8fe8,#25476f)}
+.bc-bar.hi,.bc-bar.today-bar{background:linear-gradient(180deg,var(--yellow),#78b83b)!important}
+.prog-track{height:7px}
+.btn{letter-spacing:.035em}
+.inp:focus,.sel:focus{box-shadow:0 0 0 3px rgba(185,243,106,.09)}
+/* More legible dense data and a responsive navigation layout */
+.mock-table{font-variant-numeric:tabular-nums}
+.mock-table th{padding:9px 10px}
+.mock-table td{padding:10px}
+.sbr-track,.tpq-track,.pred-track{height:7px}
+.heatmap{gap:3px}
+.hm-col{gap:3px}
+.hm-cell{width:12px;height:12px}
+#page-command .g3{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) minmax(0,1fr)}
+#page-command .card{min-width:0}
+#page-stats .g2{align-items:stretch}
+#page-stats .card{min-width:0}
+#page-stats .heatmap{max-width:100%}
+button:focus-visible,.nav-item:focus-visible,.tab:focus-visible,.mode-tab:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:2px
+}
+@media(max-width:1100px){
+  .sidebar{width:190px}
+  .content{padding:18px}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #page-command .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #page-command .g3>.card:last-child{grid-column:1/-1}
+  .health-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  body{height:auto;min-height:100vh;overflow:auto;display:block}
+  .sidebar{width:100%;height:auto;position:relative;overflow:visible;border-right:0;border-bottom:1px solid var(--border)}
+  .logo{padding:12px 15px}
+  .nav{display:flex;overflow-x:auto;padding:7px;gap:4px;white-space:nowrap}
+  .nav-sec{display:none}
+  .nav-item{flex:0 0 auto;border-left:0;border-radius:9px;margin:0;padding:9px 11px}
+  .sidebar-footer{display:none}
+  .main{height:auto;min-height:calc(100vh - 60px);overflow:visible}
+  .topbar{padding:12px 16px;position:sticky;top:0;z-index:20}
+  .content{overflow:visible;padding:14px 12px 30px}
+  .g2,.g3,#page-command .g3{grid-template-columns:minmax(0,1fr)}
+  #page-command .g3>.card:last-child{grid-column:auto}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .health-grid{grid-template-columns:minmax(0,1fr)}
+  .ring-wrap{width:190px;height:190px}
+  .t-dig{font-size:2.5rem}
+  .report-grid{gap:3px}
+  .report-stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .predictor-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .badges-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .content .card{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+
+
+/* ══ FOCUSFLOW 3.0 — FULL VISUAL REDESIGN ══ */
+:root{--bg:#070c14;--bg2:#0a1220;--s1:#101b2b;--s2:#14243a;--s3:#203650;--border:#233954;--border2:#365575;--blue:#68b4ff;--cyan:#54d7e8;--yellow:#b9f36a;--green:#7ee2b8;--text:#edf4ff;--text2:#94a9c5;--text3:#5c7392;--r:14px;--r2:22px;--r3:28px}
+body{background:radial-gradient(ellipse at 78% 2%,rgba(37,99,150,.18),transparent 35%),radial-gradient(ellipse at 4% 92%,rgba(94,120,68,.08),transparent 34%),var(--bg)}
+body::before{background-image:linear-gradient(rgba(110,150,190,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(110,150,190,.025) 1px,transparent 1px),radial-gradient(ellipse at 60% 0%,rgba(84,215,232,.055),transparent 55%);background-size:36px 36px,36px 36px,auto;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+.sidebar{background:rgba(8,15,26,.92);border-right:1px solid rgba(83,120,159,.22);backdrop-filter:blur(24px)}
+.logo{padding:23px 18px 19px;border-bottom-color:rgba(83,120,159,.18)}.logo-icon{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#b9f36a 0%,#54d7e8 48%,#68b4ff 100%);color:#08111c;box-shadow:0 8px 28px rgba(84,215,232,.18);font-size:1.1rem}
+.logo-name{font-size:1.35rem;letter-spacing:-.03em}.logo-sub{color:#6c87a8;font-size:.55rem;letter-spacing:.2em}
+.nav-sec{padding:17px 17px 6px;color:#526c8d}.nav-item{padding:11px 15px;font-size:.77rem;margin:2px 10px 2px 0;border-radius:0 12px 12px 0;color:#8ca4c2}.nav-item.active{color:var(--yellow);background:linear-gradient(90deg,rgba(185,243,106,.15),rgba(185,243,106,.015));border-left-color:var(--yellow);box-shadow:inset 1px 0 0 rgba(185,243,106,.1)}.nav-item:hover{background:rgba(104,180,255,.07);border-left-color:rgba(104,180,255,.5)}
+.topbar{padding:16px 30px;background:rgba(8,15,26,.72);border-bottom-color:rgba(83,120,159,.2)}.topbar-title{font-size:1.5rem;letter-spacing:-.025em}.topbar-date{font-size:.64rem;color:#6882a2;letter-spacing:.04em}.content{padding:28px clamp(18px,3vw,42px) 52px}.page{gap:20px;max-width:1600px;width:100%;margin:0 auto}
+.card,.kpi,.health-card{background:linear-gradient(145deg,rgba(18,31,49,.95),rgba(12,23,38,.97));border:1px solid rgba(75,110,148,.25);border-radius:22px;box-shadow:0 12px 36px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.018)}.card{padding:21px}.card:hover{border-color:rgba(104,180,255,.35);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.2)}.card-glow{background:linear-gradient(120deg,rgba(24,48,70,.98),rgba(15,29,45,.98) 56%,rgba(27,42,44,.98));border-color:rgba(104,180,255,.25)}.card-label{font-size:.59rem;letter-spacing:.18em;color:#7893b4}.card-label::before{width:5px;height:5px;background:var(--cyan);box-shadow:0 0 9px rgba(84,215,232,.6)}.card-title{font-size:.9rem;letter-spacing:-.01em}.g2,.g3,.g4{gap:16px}
+.btn{border-radius:11px;transition:transform .18s,box-shadow .18s,background .18s}.btn:hover{transform:translateY(-1px)}.btn-y{background:linear-gradient(135deg,#c9ff7a,#91dc58);border:1px solid rgba(210,255,150,.7);color:#0b1712;box-shadow:0 6px 20px rgba(185,243,106,.12);font-weight:800}.btn-y:hover{box-shadow:0 8px 28px rgba(185,243,106,.23)}.btn-ghost{border-radius:9px}.inp,.sel{border-radius:11px;background:#0b1625;border-color:#2a425e;padding:10px 12px}.inp:focus,.sel:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(84,215,232,.09)}
+/* Command Center hero */
+#page-command>.card:first-child{min-height:290px;padding:30px 34px;position:relative;isolation:isolate;overflow:hidden;border-radius:28px;background:radial-gradient(ellipse at 75% 35%,rgba(84,215,232,.13),transparent 37%),linear-gradient(115deg,#12243a 0%,#101c2c 52%,#122332 100%);border-color:rgba(104,180,255,.28);box-shadow:0 20px 55px rgba(0,0,0,.22)}
+#page-command>.card:first-child:before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 0%,rgba(104,180,255,.04) 52%,rgba(185,243,106,.04) 100%);z-index:-1}
+.cc-hero-copy{position:relative;z-index:2;flex:1;min-width:260px;max-width:590px}.cc-eyebrow{display:flex;align-items:center;gap:9px;color:#8ca8c7;font:700 .59rem var(--mono);letter-spacing:.17em}.cc-live-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 12px rgba(185,243,106,.6);display:inline-block}.cc-eyebrow-slash{color:#46617e}.cc-hero-title{font-size:clamp(2.25rem,4vw,3.7rem);font-weight:800;letter-spacing:-.075em;line-height:.98;margin-top:19px;color:#f1f6ff}.cc-hero-title em{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.035em;color:var(--yellow)}.cc-hero-desc{font-size:.84rem;line-height:1.75;color:#9bb0ca;max-width:410px;margin-top:16px}.cc-hero-actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-top:22px}.cc-start-btn{padding:12px 17px;display:flex;align-items:center;gap:10px}.cc-start-btn span{font-size:.68rem}.cc-hero-hint{font-size:.63rem;color:#7089a7}.cc-hero-visual{width:min(43%,430px);min-width:280px;height:245px;position:relative;display:flex;align-items:center;justify-content:center}.cc-hero-svg{width:100%;height:100%;position:relative;z-index:1;overflow:visible;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))}.cc-orbit{position:absolute;border:1px solid rgba(104,180,255,.14);border-radius:50%;transform:rotate(-25deg)}.cc-orbit-a{width:290px;height:115px}.cc-orbit-b{width:340px;height:155px;transform:rotate(30deg);border-color:rgba(185,243,106,.1)}.cc-hero-metric{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(7,17,29,.82);border:1px solid rgba(84,123,161,.4);padding:8px 11px;border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 10px 24px rgba(0,0,0,.18)}.cc-hero-metric b{display:block;color:#eff6ff;font:700 .94rem var(--mono)}.cc-hero-metric small{display:block;font:600 .49rem var(--mono);letter-spacing:.12em;color:#718aa9;margin-top:3px}.cc-metric-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 9px rgba(84,215,232,.6)}.cc-metric-dot.lime{background:var(--yellow);box-shadow:0 0 9px rgba(185,243,106,.6)}.cc-metric-today{left:-4px;bottom:5px}.cc-metric-week{right:-4px;top:5px}
+/* Command Center layout and control cards */
+#page-command>.g3{grid-template-columns:1.08fr .88fr 1.04fr;align-items:stretch}#page-command>.g3>.card{min-height:250px}#page-command>.g3>.card:first-child{background:linear-gradient(155deg,#142b3c,#101b2b 70%)}#page-command>.g3>.card:nth-child(2){background:linear-gradient(155deg,#1d273b,#111b2a 72%)}#page-command>.g3>.card:nth-child(3){background:linear-gradient(155deg,#182d35,#101b2b 72%)}#page-command>.card:has(#syllabusContainer){background:linear-gradient(140deg,#111f31,#0e1928)}#syllabusContainer .subject-row{padding:12px 0;border-bottom:1px solid rgba(66,97,130,.18)}
+/* Analytics page */
+.stats-intro{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 4px 5px}.stats-intro h2{font-size:clamp(2rem,3.5vw,3rem);letter-spacing:-.07em;line-height:1.05;margin-top:12px;color:#f0f6ff}.stats-intro p{font-size:.79rem;line-height:1.7;color:#8ca4c2;margin-top:9px;max-width:560px}.stats-intro-mark{width:100px;height:100px;border:1px solid rgba(104,180,255,.23);border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 25% 20%,rgba(84,215,232,.12),transparent 60%),rgba(17,32,49,.5);transform:rotate(4deg);flex-shrink:0}.stats-intro-mark span{font:800 2rem var(--mono);letter-spacing:-.12em;color:var(--yellow)}.stats-intro-mark small{font:600 .45rem var(--mono);letter-spacing:.12em;color:#7088a5;margin-top:4px}.kpi{position:relative;min-height:132px;padding:20px;border-radius:20px;overflow:hidden}.kpi:after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;right:-35px;top:-42px;border:1px solid rgba(104,180,255,.15);box-shadow:0 0 0 12px rgba(104,180,255,.025),0 0 0 24px rgba(104,180,255,.02)}.kpi-lbl{font-size:.58rem;letter-spacing:.14em;color:#8299b7}.kpi-val{font-size:2.1rem;letter-spacing:-.07em;margin-top:9px}.kpi-sub{color:#748ba8;font-size:.64rem}.kpi.bl{border-top:2px solid #68b4ff}.kpi.gr{border-top:2px solid #b9f36a}.kpi.co{border-top:2px solid #f28f9d}.kpi.am{border-top:2px solid #e8bd6b}
+#page-stats .card{padding:22px}#page-stats .card-hd{margin-bottom:18px}#page-stats .bar-chart{height:155px;align-items:flex-end;padding:12px 6px 0;border-bottom:1px solid rgba(72,103,137,.25);background:repeating-linear-gradient(to bottom,transparent 0,transparent 37px,rgba(91,124,160,.09) 38px,transparent 39px);border-radius:12px 12px 0 0}#page-stats .bc-bar{border-radius:7px 7px 2px 2px;min-width:9px;box-shadow:0 0 18px rgba(104,180,255,.08)}#page-stats .bc-bar.hi,#page-stats .bc-bar.today-bar{box-shadow:0 0 20px rgba(185,243,106,.16)}#page-stats .heatmap{padding:8px 0}#page-stats .hm-cell{border-radius:3px;border:1px solid rgba(255,255,255,.025)}#page-stats #actLineSvg{height:145px}#page-stats .prog-track{height:8px}
+/* Other data views share the same visual language */
+#page-performance .card:first-child{background:linear-gradient(130deg,#13273a,#101b2b)}#page-report .card,#page-countdown .card,#page-timetable .card,#page-health .card{background:linear-gradient(145deg,#111f31,#0e1928)}.health-card{border-radius:20px}.health-card::before{height:3px}.health-score{letter-spacing:-.06em}.toast{border-radius:14px;background:#14243a;border-color:#365575}
+/* Responsive composition */
+@media(max-width:1100px){.cc-hero-visual{width:38%;min-width:245px}.cc-hero-svg{transform:scale(1.03)}#page-command>.g3{grid-template-columns:1fr 1fr}#page-command>.g3>.card:first-child{grid-column:span 2}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){body{height:100dvh}.sidebar{width:68px}.logo{padding:14px 12px;justify-content:center}.logo-name,.logo-sub,.nav-sec,.nav-item span,.sidebar-footer{display:none}.nav-item{margin:4px 7px;padding:12px 0;justify-content:center;border-radius:12px;border-left:0}.nav-item.active{border-left:0;box-shadow:inset 0 0 0 1px rgba(185,243,106,.2)}.nav-item svg{width:18px;height:18px}.topbar{padding:12px 16px}.content{padding:16px 12px 32px}.card{padding:16px;border-radius:18px}.g2,.g3{grid-template-columns:1fr}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.cc-hero-visual{width:100%;min-width:0;height:210px;margin-top:5px}.cc-hero-svg{max-width:340px}.cc-metric-today{left:0}.cc-metric-week{right:0}#page-command>.card:first-child{padding:22px 20px;gap:10px}#page-command>.g3{grid-template-columns:1fr}#page-command>.g3>.card:first-child{grid-column:auto}.stats-intro-mark{width:70px;height:70px;border-radius:20px}.stats-intro-mark span{font-size:1.5rem}.stats-intro-mark small{font-size:.36rem}.stats-intro{align-items:flex-start}#page-stats>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FOCUSFLOW 4.0 — IMMERSIVE TELEMETRY SYSTEM
+   Uses existing storage/data. Visuals are lightweight CSS + inline SVG.
+═══════════════════════════════════════════════════════════════ */
+:root{
+  --ff-void:#050913;--ff-panel:rgba(13,24,40,.84);--ff-glass:rgba(14,31,51,.72);
+  --ff-line:rgba(119,165,211,.17);--ff-line-hi:rgba(112,194,255,.42);
+  --ff-electric:#58c6ff;--ff-aqua:#5bf0e0;--ff-violet:#9b8cff;--ff-acid:#caff79;
+  --ff-pink:#ff83b4;--ff-amber:#ffc878;--ff-muted:#8da6c8;
+}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 77% 4%,rgba(29,130,203,.19),transparent 31%),radial-gradient(ellipse at 8% 93%,rgba(93,80,213,.11),transparent 34%),#050913}
+body::before{background-image:linear-gradient(rgba(107,161,218,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(107,161,218,.035) 1px,transparent 1px),radial-gradient(ellipse at 60% 10%,rgba(91,240,224,.045),transparent 54%);background-size:32px 32px,32px 32px,auto;mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 82%)}
+.sidebar{width:224px;background:linear-gradient(180deg,rgba(8,16,30,.97),rgba(6,12,23,.97));border-right:1px solid rgba(103,157,208,.18);box-shadow:12px 0 60px rgba(0,0,0,.12)}
+.logo{padding:23px 18px 20px}.logo-icon{position:relative;isolation:isolate;background:linear-gradient(135deg,#baff75,#53e6e0 52%,#7a92ff);box-shadow:0 0 28px rgba(91,240,224,.18),inset 0 1px rgba(255,255,255,.65)}.logo-icon::after{content:'';position:absolute;inset:-5px;border:1px solid rgba(91,240,224,.22);border-radius:16px;transform:rotate(12deg);z-index:-1}
+.logo-name{font-size:1.42rem;letter-spacing:-.06em}.logo-sub{color:#6e8baF;letter-spacing:.21em}
+.nav-sec{padding:18px 17px 6px;color:#486785}.nav-item{margin:3px 10px 3px 0;padding:11px 15px;border-radius:0 13px 13px 0;transition:color .22s,background .22s,transform .22s,box-shadow .22s}.nav-item:hover{transform:translateX(3px);background:linear-gradient(90deg,rgba(88,198,255,.09),transparent);border-left-color:var(--ff-electric)}.nav-item.active{color:var(--ff-aqua);background:linear-gradient(90deg,rgba(91,240,224,.13),rgba(91,240,224,.015));border-left-color:var(--ff-aqua);box-shadow:inset 1px 0 rgba(91,240,224,.3),0 0 22px rgba(91,240,224,.025)}
+.topbar{background:rgba(5,12,23,.76);border-bottom:1px solid rgba(103,157,208,.17);backdrop-filter:blur(24px);padding:17px clamp(18px,2.6vw,38px)}.topbar-title{font-size:1.6rem;letter-spacing:-.05em}.topbar-date{letter-spacing:.06em;color:#6686aa}
+.content{padding:26px clamp(16px,2.7vw,42px) 56px;overflow-x:hidden}.page{gap:21px}
+.card,.kpi,.health-card{background:linear-gradient(145deg,rgba(16,29,48,.89),rgba(9,19,34,.96));border-color:rgba(111,158,206,.17);box-shadow:0 16px 40px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.025);backdrop-filter:blur(18px);transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .28s,box-shadow .28s}
+.card{border-radius:24px;padding:22px}.card:hover{border-color:rgba(91,190,255,.32);transform:translateY(-3px);box-shadow:0 22px 54px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.04)}.card-glow{background:linear-gradient(135deg,rgba(17,40,63,.97),rgba(12,27,46,.94) 54%,rgba(17,31,50,.96));border-color:rgba(88,198,255,.28)}
+.card-title{font-size:.91rem;letter-spacing:-.025em}.card-label{color:#6f8cac}.btn{border-radius:12px;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,filter .2s}.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(1px) scale(.98)}.btn-y{background:linear-gradient(135deg,#d5ff87,#91e66e);color:#08131a;box-shadow:0 7px 23px rgba(202,255,121,.13),inset 0 1px rgba(255,255,255,.7)}.btn-y:hover{filter:saturate(1.12);box-shadow:0 10px 32px rgba(202,255,121,.23)}.btn-ghost{background:rgba(20,39,62,.72);border-color:rgba(108,154,201,.28)}.inp,.sel{background:rgba(5,14,26,.72);border-color:rgba(108,154,201,.25)}
+.kpi{border-radius:22px;overflow:hidden}.kpi::before{content:'';position:absolute;inset:auto -35% -82% 16%;height:120px;background:radial-gradient(ellipse,rgba(88,198,255,.12),transparent 68%);pointer-events:none}.kpi-val{letter-spacing:-.08em}.page.active{animation:ffPageIn .46s cubic-bezier(.2,.75,.25,1) both}@keyframes ffPageIn{from{opacity:0;transform:translateY(10px) scale(.996);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+/* Hero / command deck */
+#ffCommandDeck,#ffStatsDeck{display:flex;flex-direction:column;gap:16px;min-width:0;--ff-cyan:var(--ff-electric)}
+.ff-hero{position:relative;isolation:isolate;overflow:hidden;min-height:305px;border:1px solid rgba(100,187,247,.25);border-radius:30px;background:radial-gradient(ellipse at 77% 37%,rgba(56,156,222,.2),transparent 32%),radial-gradient(ellipse at 58% 120%,rgba(89,80,193,.15),transparent 45%),linear-gradient(128deg,rgba(15,34,56,.98),rgba(7,16,30,.98) 67%,rgba(10,23,39,.98));box-shadow:0 25px 75px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.055);padding:28px 30px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:18px;align-items:center;transform-style:preserve-3d}
+.ff-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(108deg,transparent 10%,rgba(88,198,255,.045) 48%,transparent 72%),repeating-linear-gradient(120deg,transparent 0 42px,rgba(110,173,228,.022) 43px 44px);pointer-events:none;z-index:-1}
+.ff-hero::after{content:'';position:absolute;left:-20%;right:-20%;height:1px;top:14%;background:linear-gradient(90deg,transparent,rgba(91,240,224,.38),transparent);filter:drop-shadow(0 0 7px rgba(91,240,224,.6));animation:ffScan 8s ease-in-out infinite;pointer-events:none;z-index:-1}@keyframes ffScan{0%,100%{transform:translateY(-20px);opacity:.25}50%{transform:translateY(230px);opacity:.7}}
+.ff-eyebrow{font:700 .59rem var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#87aacb;display:flex;align-items:center;gap:9px}.ff-live{height:7px;width:7px;border-radius:99px;background:var(--ff-aqua);box-shadow:0 0 14px var(--ff-aqua);animation:ffBlink 1.9s ease-in-out infinite}@keyframes ffBlink{50%{opacity:.38;box-shadow:0 0 3px var(--ff-aqua)}}
+.ff-hero-title{font-size:clamp(2.3rem,4.2vw,4.25rem);line-height:.92;letter-spacing:-.085em;font-weight:800;margin-top:22px;max-width:670px;color:#f3f8ff}.ff-hero-title em{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.045em;color:var(--ff-acid)}.ff-hero-copy{color:#94aecb;font-size:.82rem;line-height:1.75;max-width:500px;margin-top:18px}.ff-hero-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}.ff-btn-primary{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:13px;background:linear-gradient(135deg,#d5ff86,#88e78c);border:1px solid rgba(224,255,166,.68);color:#06141a;font:800 .7rem var(--sans);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 9px 30px rgba(202,255,121,.12),inset 0 1px rgba(255,255,255,.6);cursor:pointer;transition:transform .2s,box-shadow .2s}.ff-btn-primary:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(202,255,121,.22)}.ff-btn-secondary{padding:11px 14px;border-radius:13px;background:rgba(15,33,53,.68);border:1px solid rgba(117,164,209,.25);color:#b2c7df;font:700 .68rem var(--sans);cursor:pointer;transition:all .2s}.ff-btn-secondary:hover{border-color:rgba(91,240,224,.45);color:#eaffff;background:rgba(33,71,91,.46)}
+.ff-core-stage{height:255px;min-width:0;position:relative;display:flex;align-items:center;justify-content:center;perspective:900px;transform-style:preserve-3d;isolation:isolate}.ff-core-glow{position:absolute;width:185px;height:185px;border-radius:50%;background:radial-gradient(circle,rgba(83,232,236,.2),rgba(62,142,255,.08) 40%,transparent 70%);filter:blur(8px);animation:ffGlow 4s ease-in-out infinite alternate}@keyframes ffGlow{from{transform:scale(.8);opacity:.6}to{transform:scale(1.2);opacity:1}}
+.ff-core{position:relative;width:138px;height:138px;border-radius:44% 56% 54% 46% / 46% 41% 59% 54%;transform:rotateX(15deg) rotateY(-20deg);transform-style:preserve-3d;background:radial-gradient(circle at 30% 23%,rgba(226,255,255,.97),rgba(93,241,231,.85) 10%,rgba(41,164,220,.72) 29%,rgba(27,72,153,.76) 56%,rgba(19,26,67,.95) 74%);box-shadow:inset -14px -20px 34px rgba(1,8,25,.75),inset 9px 8px 22px rgba(201,255,255,.46),0 10px 40px rgba(28,175,255,.29),0 0 78px rgba(67,149,255,.26);animation:ffCoreFloat 6s ease-in-out infinite;z-index:2}@keyframes ffCoreFloat{0%,100%{transform:translateY(2px) rotateX(17deg) rotateY(-18deg) rotateZ(-4deg)}50%{transform:translateY(-9px) rotateX(-5deg) rotateY(19deg) rotateZ(7deg)}}
+.ff-core::before{content:'';position:absolute;inset:12px -5px 21px 15px;border-radius:50%;border:1px solid rgba(217,255,255,.65);transform:translateZ(16px) rotate(-23deg);box-shadow:0 0 18px rgba(96,238,255,.2)}.ff-core::after{content:'';position:absolute;width:40px;height:24px;left:23px;top:24px;border-radius:50%;background:rgba(255,255,255,.43);filter:blur(13px);transform:translateZ(28px) rotate(-35deg)}
+.ff-orbit{position:absolute;border:1px solid rgba(91,240,224,.36);border-radius:50%;transform-style:preserve-3d;pointer-events:none}.ff-orbit.one{width:260px;height:88px;transform:rotate(-29deg) rotateX(64deg);box-shadow:0 0 23px rgba(91,240,224,.06);animation:ffOrbitA 13s linear infinite}.ff-orbit.two{width:245px;height:155px;border-color:rgba(119,146,255,.33);transform:rotate(52deg) rotateX(67deg);animation:ffOrbitB 17s linear infinite}.ff-orbit.three{width:310px;height:118px;border-color:rgba(202,255,121,.21);transform:rotate(10deg) rotateX(69deg);animation:ffOrbitA 19s linear infinite reverse}@keyframes ffOrbitA{to{rotate:360deg}}@keyframes ffOrbitB{to{rotate:-360deg}}
+.ff-satellite{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%,white,#68cfff 48%,#2263a0);box-shadow:0 0 20px rgba(88,198,255,.9);transform:translate3d(100px,-77px,50px);animation:ffSatellite 7s ease-in-out infinite;z-index:3}.ff-satellite.s2{width:7px;height:7px;background:var(--ff-acid);box-shadow:0 0 16px rgba(202,255,121,.9);transform:translate3d(-112px,60px,75px);animation-delay:-3.4s}@keyframes ffSatellite{50%{translate:0 -11px;scale:1.2}}
+.ff-holo-chip{position:absolute;z-index:4;display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid rgba(106,163,213,.3);background:linear-gradient(130deg,rgba(9,25,42,.92),rgba(8,20,35,.78));backdrop-filter:blur(14px);border-radius:13px;box-shadow:0 12px 30px rgba(0,0,0,.25);transform:translateZ(55px);animation:ffChipFloat 5s ease-in-out infinite}.ff-holo-chip strong{display:block;font:700 .86rem var(--mono);color:#eef8ff}.ff-holo-chip small{display:block;font:600 .49rem var(--mono);color:#7192b7;letter-spacing:.13em;margin-top:3px}.ff-holo-chip .pin{width:7px;height:7px;border-radius:50%;background:var(--ff-aqua);box-shadow:0 0 10px var(--ff-aqua)}.ff-chip-left{left:-2px;bottom:10px}.ff-chip-right{right:-1px;top:9px;animation-delay:-2.4s}.ff-chip-right .pin{background:var(--ff-acid);box-shadow:0 0 10px var(--ff-acid)}@keyframes ffChipFloat{50%{translate:0 -5px}}
+.ff-grid{display:grid;gap:14px;min-width:0}.ff-four{grid-template-columns:repeat(4,minmax(0,1fr))}.ff-three{grid-template-columns:repeat(3,minmax(0,1fr))}.ff-two{grid-template-columns:repeat(2,minmax(0,1fr))}.ff-panel{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(145deg,rgba(14,29,48,.91),rgba(8,19,34,.95));border:1px solid rgba(111,158,206,.19);border-radius:24px;padding:20px;box-shadow:0 14px 34px rgba(0,0,0,.15),inset 0 1px rgba(255,255,255,.025);min-width:0;transition:border-color .25s,transform .25s,box-shadow .25s}.ff-panel:hover{border-color:rgba(88,198,255,.34);box-shadow:0 20px 44px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.04)}.ff-panel:before{content:'';position:absolute;right:-46px;top:-64px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(81,174,244,.085),transparent 68%);z-index:-1;pointer-events:none}.ff-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}.ff-panel-kicker{font:700 .54rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6e8cac}.ff-panel-title{font-size:.96rem;font-weight:800;letter-spacing:-.035em;color:#eaf4ff;margin-top:5px}.ff-panel-sub{font-size:.65rem;line-height:1.55;color:#7892b3;margin-top:5px}.ff-metric{padding:17px 18px;min-height:125px;display:flex;flex-direction:column;justify-content:space-between}.ff-metric-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.ff-metric-label{font:700 .54rem var(--mono);letter-spacing:.12em;color:#7d98b8;text-transform:uppercase}.ff-metric-icon{display:flex;align-items:center;justify-content:center;width:29px;height:29px;border:1px solid rgba(100,177,229,.23);border-radius:10px;color:var(--ff-electric);background:rgba(88,198,255,.07);font-size:.85rem}.ff-metric-value{font:700 clamp(1.42rem,2.2vw,2.1rem) var(--mono);letter-spacing:-.09em;color:#f2f8ff;margin-top:13px;white-space:nowrap}.ff-metric-foot{display:flex;align-items:center;gap:7px;font-size:.62rem;color:#7994b5;margin-top:7px}.ff-trend-up{color:var(--ff-acid)}.ff-trend-down{color:var(--ff-pink)}.ff-spark{width:78px;height:30px;opacity:.85;flex-shrink:0}
+.ff-window{display:flex;align-items:center;gap:3px;background:rgba(5,14,26,.7);border:1px solid rgba(111,158,206,.19);padding:3px;border-radius:10px}.ff-window button{border:0;background:transparent;color:#7893b3;font:700 .57rem var(--mono);padding:7px 9px;border-radius:7px;cursor:pointer;transition:all .2s}.ff-window button.active{color:#06131c;background:linear-gradient(135deg,#d4ff86,#80e5b0);box-shadow:0 3px 12px rgba(202,255,121,.1)}.ff-window button:hover:not(.active){color:#effaff;background:rgba(92,155,208,.12)}
+.ff-chart{width:100%;height:220px;display:block;overflow:visible}.ff-chart .ff-gridline{stroke:rgba(125,163,203,.14);stroke-width:1;stroke-dasharray:3 5}.ff-chart .ff-axis-label{fill:#617fa3;font:10px var(--mono)}.ff-chart .ff-line{fill:none;stroke:var(--ff-electric);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px rgba(88,198,255,.3));stroke-dasharray:1200;stroke-dashoffset:1200;animation:ffDrawLine 1.3s cubic-bezier(.15,.75,.2,1) forwards}.ff-chart .ff-area{opacity:0;animation:ffAreaIn .85s .22s ease forwards}@keyframes ffDrawLine{to{stroke-dashoffset:0}}@keyframes ffAreaIn{to{opacity:1}}.ff-chart .ff-dot{fill:#d4fff9;stroke:var(--ff-electric);stroke-width:2;cursor:crosshair;filter:drop-shadow(0 0 4px rgba(91,240,224,.6))}.ff-chart .ff-dot:hover{r:5}
+.ff-bars{height:180px;display:flex;align-items:flex-end;gap:clamp(3px,.6vw,8px);padding:12px 4px 0;border-bottom:1px solid rgba(108,151,194,.18);background:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,rgba(108,151,194,.08) 44px,transparent 45px);min-width:0}.ff-bar-col{height:100%;flex:1;min-width:3px;display:flex;align-items:stretch;justify-content:flex-end;flex-direction:column;position:relative}.ff-bar{width:100%;min-height:3px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#86e8ff,rgba(53,136,221,.56));box-shadow:0 0 16px rgba(88,198,255,.08);transform-origin:bottom;animation:ffBarIn .75s cubic-bezier(.16,.8,.25,1) both;transition:filter .2s,transform .2s;cursor:crosshair;position:relative}.ff-bar::after{content:'';position:absolute;inset:0 0 auto;height:2px;background:rgba(255,255,255,.55);border-radius:99px}.ff-bar.today{background:linear-gradient(180deg,#e1ff9d,#7ddd9a);box-shadow:0 0 21px rgba(202,255,121,.22)}.ff-bar:hover{filter:brightness(1.3);transform:scaleX(1.09) translateY(-2px)}@keyframes ffBarIn{from{transform:scaleY(.05);opacity:.2}to{transform:scaleY(1);opacity:1}}.ff-bar-labels{display:flex;gap:clamp(3px,.6vw,8px);padding-top:8px}.ff-bar-labels span{min-width:0;flex:1;text-align:center;font:500 .49rem var(--mono);color:#5d7b9f;white-space:nowrap;overflow:hidden}.ff-chart-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}.ff-legend-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;background:var(--ff-electric);box-shadow:0 0 9px rgba(88,198,255,.6)}.ff-meta-item{font-size:.61rem;color:#7893b5}.ff-meta-item strong{color:#e3f1ff;font-family:var(--mono);margin-left:4px}
+.ff-donut-wrap{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}.ff-donut{width:min(190px,45%);min-width:128px;max-width:210px;aspect-ratio:1;overflow:visible;filter:drop-shadow(0 8px 22px rgba(0,0,0,.23))}.ff-donut-ring{fill:none;stroke-width:13;stroke-linecap:round;transition:stroke-dasharray .6s ease,stroke-dashoffset .6s ease;transform:rotate(-90deg);transform-origin:60px 60px}.ff-donut-center{font:800 1rem var(--mono);fill:#edf7ff;text-anchor:middle}.ff-donut-sub{font:600 .42rem var(--mono);fill:#718eaf;text-anchor:middle;letter-spacing:.12em}.ff-legend{display:flex;flex-direction:column;gap:10px;flex:1;min-width:135px}.ff-legend-row{display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:8px;font-size:.65rem;color:#9bb2cf}.ff-legend-row .swatch{width:7px;height:7px;border-radius:2px;box-shadow:0 0 9px currentColor}.ff-legend-row strong{font:700 .62rem var(--mono);color:#e5f2ff}.ff-mini-track{height:4px;background:rgba(100,139,180,.16);border-radius:99px;overflow:hidden;margin-top:5px;grid-column:2/4}.ff-mini-fill{height:100%;border-radius:99px;transform-origin:left;animation:ffFillIn .7s cubic-bezier(.16,.8,.25,1) both}@keyframes ffFillIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ff-week-bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;align-items:end;height:145px;padding-top:10px}.ff-week-col{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;min-width:0}.ff-week-bar-track{width:100%;height:108px;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(to top,rgba(102,147,193,.07),transparent);border-radius:9px 9px 4px 4px;overflow:hidden}.ff-week-bar{width:100%;max-width:28px;border-radius:7px 7px 2px 2px;min-height:2px;background:linear-gradient(180deg,rgba(91,240,224,.92),rgba(67,129,221,.7));box-shadow:0 0 14px rgba(91,240,224,.09);transition:height .6s cubic-bezier(.16,.8,.25,1);position:relative}.ff-week-bar.current{background:linear-gradient(180deg,#d7ff8e,#6fe1a8);box-shadow:0 0 18px rgba(202,255,121,.19)}.ff-week-day{font:600 .54rem var(--mono);color:#6f8bab}.ff-week-value{font:600 .48rem var(--mono);color:#adc4de;white-space:nowrap}
+.ff-readout{display:flex;align-items:center;gap:12px;padding:12px 13px;border:1px solid rgba(112,164,208,.17);border-radius:14px;background:linear-gradient(110deg,rgba(18,39,60,.65),rgba(11,24,40,.55));margin-top:10px}.ff-readout-mark{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:rgba(91,240,224,.08);border:1px solid rgba(91,240,224,.19);color:var(--ff-aqua);font-size:.9rem;flex-shrink:0}.ff-readout-copy{flex:1;min-width:0}.ff-readout-copy strong{display:block;color:#e6f3ff;font-size:.68rem}.ff-readout-copy small{display:block;color:#7893b3;font-size:.61rem;line-height:1.5;margin-top:3px}.ff-readout-val{font:700 .85rem var(--mono);color:var(--ff-acid);white-space:nowrap}
+.ff-stream{display:flex;flex-direction:column;gap:7px}.ff-stream-row{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:14px;background:rgba(6,17,30,.47);border:1px solid rgba(111,158,206,.12);transition:background .2s,border-color .2s,transform .2s}.ff-stream-row:hover{background:rgba(20,43,65,.68);border-color:rgba(88,198,255,.26);transform:translateX(3px)}.ff-stream-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-shadow:0 0 10px currentColor}.ff-stream-main{flex:1;min-width:0}.ff-stream-main strong{display:block;color:#e5f2ff;font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ff-stream-main small{display:block;color:#6785a8;font:500 .52rem var(--mono);margin-top:4px}.ff-stream-dur{font:700 .72rem var(--mono);color:#c5faec;white-space:nowrap}.ff-empty{border:1px dashed rgba(117,163,209,.22);border-radius:16px;padding:20px;text-align:center;color:#6c87a7;font-size:.68rem;line-height:1.65}.ff-empty b{display:block;color:#b7cbe2;font-size:.78rem;margin-bottom:4px}
+.ff-dist-list{display:flex;flex-direction:column;gap:13px}.ff-dist-row{display:grid;grid-template-columns:minmax(85px,.7fr) minmax(50px,1.8fr) auto;align-items:center;gap:10px}.ff-dist-name{font-size:.63rem;color:#a1b9d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ff-dist-track{height:7px;border-radius:99px;background:rgba(102,147,193,.13);overflow:hidden}.ff-dist-fill{height:100%;border-radius:99px;box-shadow:0 0 11px currentColor;animation:ffFillIn .9s cubic-bezier(.16,.8,.25,1) both;transform-origin:left}.ff-dist-value{font:700 .6rem var(--mono);color:#dcecff;white-space:nowrap}.ff-pills{display:flex;gap:7px;flex-wrap:wrap}.ff-pill{padding:5px 8px;border:1px solid rgba(108,157,204,.2);border-radius:8px;background:rgba(6,18,32,.56);font:600 .52rem var(--mono);color:#7898ba}.ff-pill b{color:#d6eaff;margin-left:5px}.ff-tooltip{position:fixed;z-index:5000;pointer-events:none;display:none;max-width:210px;border:1px solid rgba(112,191,244,.4);border-radius:9px;padding:8px 10px;background:rgba(5,14,25,.96);box-shadow:0 10px 30px rgba(0,0,0,.35);color:#eaf6ff;font:600 .62rem var(--mono);backdrop-filter:blur(12px)}
+/* Existing app widgets harmonized with the new shell */
+#page-command>.card:first-child{min-height:unset;padding:24px 26px;border-radius:26px}#page-command .g3>.card,#page-command .g2>.card{border-radius:22px}#page-stats .stats-intro h2{font-size:clamp(2.1rem,3.5vw,3.4rem)}#page-stats .kpi{min-height:125px}#page-stats .card{border-radius:22px}#page-performance .card,#page-log .card,#page-countdown .card,#page-report .card,#page-timetable .card,#page-health .card{border-radius:23px}
+/* Responsive: preserve a clean dashboard even in a narrow viewport */
+@media(max-width:1200px){.ff-four{grid-template-columns:repeat(2,minmax(0,1fr))}.ff-hero{grid-template-columns:minmax(0,1.05fr) minmax(235px,.8fr);padding:24px}.ff-core-stage{transform:scale(.92)}}
+@media(max-width:850px){.sidebar{width:76px}.logo{justify-content:center;padding:16px 10px}.logo-name,.logo-sub,.nav-sec,.sidebar-footer{display:none}.nav-item{justify-content:center;margin:5px 7px;padding:12px 0;border-radius:12px;border-left:0}.nav-item.active{border-left:0;box-shadow:inset 0 0 0 1px rgba(91,240,224,.18)}.nav-item svg{width:18px;height:18px}.topbar{padding:13px 17px}.content{padding:17px 13px 35px}.ff-hero{grid-template-columns:1fr;gap:4px}.ff-hero-copy{max-width:100%}.ff-core-stage{height:225px;transform:none}.ff-two,.ff-three{grid-template-columns:1fr}.ff-four{grid-template-columns:repeat(2,minmax(0,1fr))}.ff-chart{height:190px}.ff-panel{padding:17px;border-radius:19px}}
+@media(max-width:520px){.topbar-title{font-size:1.25rem}.topbar-date{font-size:.54rem}.ff-hero{padding:21px 18px;border-radius:23px}.ff-hero-title{font-size:2.65rem}.ff-core-stage{height:195px;scale:.88;transform-origin:center}.ff-holo-chip{padding:8px 9px}.ff-chip-left{left:-7px}.ff-chip-right{right:-6px}.ff-four{gap:9px}.ff-metric{padding:13px;min-height:113px}.ff-metric-value{font-size:1.4rem}.ff-metric-label{font-size:.48rem}.ff-panel-head{gap:7px}.ff-window button{padding:7px 6px}.ff-bars{height:145px}.ff-week-bars{gap:5px}.ff-donut-wrap{gap:10px}.ff-donut{min-width:115px}.ff-dist-row{grid-template-columns:80px minmax(35px,1fr) auto;gap:7px}}
+@media(prefers-reduced-motion:reduce){.ff-hero::after,.ff-live,.ff-core-glow,.ff-core,.ff-orbit,.ff-satellite,.ff-holo-chip,.ff-chart .ff-line,.ff-chart .ff-area,.ff-bar,.ff-dist-fill,.ff-mini-fill,.ff-hero-title{animation:none!important;transition:none!important}.ff-chart .ff-line{stroke-dashoffset:0}}
+
+
+/* FocusFlow 6.0 additions */
+.field-label{display:block;font:600 .58rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin:0 0 5px}
+#page-stints .inp,#page-engineering .inp{width:100%;min-width:0}
+#page-stints .btn,#page-engineering .btn{font-size:.66rem;padding:8px 11px}
+@media(max-width:720px){#page-stints .g3,#page-engineering .g3,#page-engineering .g2{grid-template-columns:1fr}#page-stints .g2{grid-template-columns:1fr}}
+
+
+/* FocusFlow 6.3: bounded, independently scrollable syllabus list */
+.er-scroll{max-height:calc(100vh - 355px);min-height:220px;overflow-y:auto;overscroll-behavior:contain;padding:2px 5px 8px 0;scrollbar-width:thin;scrollbar-color:#38516b transparent}
+.er-scroll::-webkit-scrollbar{width:7px}.er-scroll::-webkit-scrollbar-thumb{background:#38516b;border-radius:8px}.er-scroll::-webkit-scrollbar-track{background:transparent}
+@media(max-width:700px){.er-scroll{max-height:calc(100vh - 320px);min-height:260px}}
+
+</style>
+<style id="focusflow-v5-race-strategy">
+:root{--rt-lime:#d8ff58;--rt-cyan:#57e7ff;--rt-orange:#ff9b62;--rt-glass:rgba(14,24,39,.76);--rt-line:rgba(119,165,214,.18)}
+body{background:radial-gradient(ellipse at 72% 4%,rgba(48,110,165,.16),transparent 35%),radial-gradient(ellipse at 14% 85%,rgba(92,60,160,.11),transparent 38%),#060a11;background-attachment:fixed}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.17;background-image:linear-gradient(rgba(90,145,190,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(90,145,190,.075) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.sidebar,.main{z-index:1}.sidebar{background:rgba(6,11,19,.88);backdrop-filter:blur(22px);border-right-color:rgba(100,155,208,.2);box-shadow:12px 0 40px rgba(0,0,0,.16)}.logo-icon{border-radius:11px;box-shadow:0 0 0 1px #b9f36a55,0 0 30px #58c6ff33;transform:translateZ(12px)}.topbar{background:rgba(7,13,23,.75);backdrop-filter:blur(24px);border-bottom-color:rgba(112,163,212,.19)}.topbar-title{letter-spacing:-.035em}.content{perspective:1200px}.card,.ff-panel,.race-telemetry{border:1px solid rgba(112,164,216,.18);background:linear-gradient(145deg,rgba(19,32,50,.86),rgba(8,16,27,.94));box-shadow:0 14px 38px rgba(0,0,0,.19),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(16px);transition:transform .32s cubic-bezier(.2,.8,.2,1),border-color .32s,box-shadow .32s}.card{position:relative;overflow:hidden}.card:hover{border-color:rgba(87,231,255,.27);box-shadow:0 22px 55px rgba(0,0,0,.26),0 0 24px rgba(87,231,255,.035),inset 0 1px rgba(255,255,255,.055)}button,.btn,.nav-item,.num-btn{transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,background .22s,border-color .22s}button:hover,.btn:hover{transform:translateY(-2px)}button:active,.btn:active{transform:translateY(0) scale(.985)}.nav-item{border-radius:0 12px 12px 0;margin-right:8px}.nav-item.active{box-shadow:inset 0 0 22px rgba(216,255,88,.055),0 0 20px rgba(216,255,88,.025)}
+/* Race strategist telemetry wall */
+.race-telemetry{position:relative;overflow:hidden;border-radius:26px;padding:clamp(18px,2.2vw,30px);margin:0 0 22px;isolation:isolate;background:radial-gradient(ellipse at 50% -15%,rgba(64,145,208,.17),transparent 55%),linear-gradient(140deg,rgba(13,26,42,.96),rgba(7,13,23,.98));box-shadow:0 24px 65px #0005,inset 0 1px #ffffff09}
+.race-telemetry:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.4;background:linear-gradient(110deg,transparent 0 40%,rgba(87,231,255,.045) 50%,transparent 60%),repeating-linear-gradient(0deg,transparent 0 35px,rgba(87,155,211,.045) 36px)}
+.race-telemetry:after{content:"FF / STRATEGY TELEMETRY";position:absolute;right:20px;bottom:9px;font:500 8px var(--mono);letter-spacing:.18em;color:#8ca9c766;pointer-events:none}
+.rt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px}.rt-kicker{font:700 .62rem var(--mono);letter-spacing:.16em;color:var(--rt-cyan);display:flex;align-items:center;gap:8px}.rt-live,.rt-signal{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--rt-lime);box-shadow:0 0 13px var(--rt-lime);animation:rtPulse 1.8s ease-in-out infinite}.rt-slash{color:#536a85}.rt-head h2{font-size:clamp(1.6rem,2.5vw,2.5rem);font-weight:800;letter-spacing:-.06em;margin:8px 0 5px;color:#edf6ff}.rt-head h2 i{font-family:'Instrument Serif',serif;font-weight:400;color:var(--rt-lime);letter-spacing:-.02em}.rt-head p{font-size:.74rem;color:#7f96b3;max-width:560px;line-height:1.6}.rt-session-badge{display:grid;grid-template-columns:8px auto;align-items:center;gap:5px 9px;padding:11px 13px;border:1px solid #4d7b8550;background:#0a1d25aa;border-radius:12px;font:600 .56rem var(--mono);letter-spacing:.09em;color:#8aa6bd;white-space:nowrap}.rt-session-badge .rt-signal{grid-row:span 2;background:var(--rt-cyan);box-shadow:0 0 12px var(--rt-cyan)}.rt-session-badge b{grid-column:2;color:var(--rt-lime);font-size:.63rem}.rt-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.9fr) minmax(230px,.85fr);gap:12px;perspective:1400px}.rt-panel{min-width:0;position:relative;overflow:hidden;border-radius:19px;padding:17px;background:linear-gradient(150deg,rgba(22,38,58,.86),rgba(9,17,29,.92));border:1px solid rgba(108,161,211,.19);box-shadow:inset 0 1px #ffffff08,0 12px 24px #0002;transform-style:preserve-3d;transition:transform .22s ease,border-color .25s,box-shadow .25s}.rt-panel:before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,var(--rt-cyan),transparent 72%);opacity:.65}.rt-panel:hover{border-color:#57e7ff55;box-shadow:0 20px 45px #0004,0 0 26px #57e7ff0b}.rt-panel-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 .55rem var(--mono);letter-spacing:.1em;color:#7893b3}.rt-chip{font-size:.48rem;color:#a5bdd6;border:1px solid #40587377;border-radius:5px;padding:4px 6px;background:#0a1421}.rt-bigline{display:flex;align-items:flex-end;gap:clamp(14px,2vw,28px);margin:20px 0 7px}.rt-bigline small{display:block;font:600 .53rem var(--mono);letter-spacing:.12em;color:#7892ad;margin-bottom:6px}.rt-bigline strong{display:block;font:600 clamp(1.8rem,3vw,2.8rem) var(--mono);letter-spacing:-.07em;color:#f2f7ff;text-shadow:0 0 28px #57e7ff1c}.rt-secondary-stat{padding-bottom:4px}.rt-secondary-stat b{font:600 .95rem var(--mono);color:var(--rt-lime)}.rt-chart{height:122px;display:flex;align-items:stretch;gap:5px;padding:8px 2px 0;border-bottom:1px solid #40587355;background:repeating-linear-gradient(to bottom,transparent 0 29px,#7392b31a 30px,transparent 31px);transform:translateZ(16px)}.rt-bar-slot{flex:1;min-width:3px;display:flex;align-items:flex-end;position:relative}.rt-bar{width:100%;min-height:2px;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#57e7ff,#3379b7);box-shadow:0 0 13px #57e7ff1a;transform-origin:bottom;animation:rtBarIn .8s cubic-bezier(.2,.8,.2,1) both;transition:filter .2s,transform .2s}.rt-bar.today{background:linear-gradient(180deg,#e5ff82,#a4cc3b);box-shadow:0 0 16px #d8ff5838}.rt-bar-slot:hover .rt-bar{filter:brightness(1.4);transform:scaleX(1.12)}.rt-axis{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font:500 .47rem var(--mono);letter-spacing:.08em;color:#526a86}.rt-donut-wrap{display:flex;align-items:center;justify-content:center;gap:8px;margin:17px 0 14px}.rt-donut{width:min(48%,150px);height:auto;overflow:visible;filter:drop-shadow(0 0 15px #57e7ff0b)}.rt-donut-ring{fill:none;stroke-width:12;transform:rotate(-90deg);transform-origin:60px 60px;stroke-linecap:round;animation:rtRingIn 1.1s ease both}.rt-donut-center{fill:#eef6ff;font:600 12px var(--mono);text-anchor:middle}.rt-donut-sub{fill:#6e88a6;font:500 5px var(--mono);text-anchor:middle;letter-spacing:.1em}.rt-legend{flex:1;min-width:0;display:grid;gap:9px}.rt-legend-row{display:grid;grid-template-columns:7px minmax(0,1fr) auto;gap:6px;align-items:center;font-size:.59rem;color:#9ab0ca}.rt-legend-row i{width:7px;height:7px;border-radius:2px}.rt-legend-row b{font:600 .58rem var(--mono);color:#dceaff}.rt-insight{font-size:.62rem;line-height:1.55;color:#7994b1;padding:10px 11px;border-radius:9px;background:#0b1625;border:1px solid #36516c44}.rt-insight strong{color:var(--rt-lime);font-weight:700}.rt-weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;height:124px;margin:20px 0 12px;padding-bottom:4px;border-bottom:1px solid #40587355;background:repeating-linear-gradient(to bottom,transparent 0 29px,#7392b31a 30px,transparent 31px)}.rt-weekday{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:7px;min-width:0}.rt-weekday-bar{width:min(100%,18px);min-height:3px;border-radius:4px 4px 1px 1px;background:linear-gradient(180deg,#a78bfa,#506fc0);box-shadow:0 0 12px #8b8aff19;animation:rtBarIn .7s ease both}.rt-weekday:nth-child(2n) .rt-weekday-bar{background:linear-gradient(180deg,#57e7ff,#2b679f)}.rt-weekday span{font:500 .48rem var(--mono);color:#7188a6}.rt-pace-note{display:flex;gap:10px;align-items:flex-start;padding:10px;background:#0b1625;border:1px solid #36516c44;border-radius:10px}.rt-note-icon{color:var(--rt-lime);font-size:1.2rem}.rt-pace-note b{font-size:.65rem;color:#dceaff}.rt-pace-note p{font-size:.57rem;color:#7892ad;line-height:1.5;margin-top:3px}.rt-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid #38516b44;font:500 .48rem var(--mono);letter-spacing:.08em;color:#526b86}.rt-foot span:first-child{color:#8ca6bf}.rt-foot span:first-child::first-letter{color:var(--rt-lime)}
+@keyframes rtPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.78)}}@keyframes rtBarIn{from{transform:scaleY(.08);opacity:.25}to{transform:scaleY(1);opacity:1}}@keyframes rtRingIn{from{stroke-dasharray:0 280}to{opacity:1}}
+@media(max-width:1250px){.rt-grid{grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr)}.rt-pace{grid-column:1/-1}.rt-weekdays{height:90px}}@media(max-width:760px){.rt-head{flex-direction:column}.rt-session-badge{align-self:flex-start}.rt-grid{grid-template-columns:minmax(0,1fr)}.rt-pace{grid-column:auto}.rt-panel{padding:14px}.rt-bigline{gap:16px}.rt-foot{padding-right:6px}.rt-foot span{max-width:100%}.race-telemetry{padding:17px;border-radius:20px}.rt-donut-wrap{justify-content:flex-start}.rt-donut{width:130px}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.rt-panel[data-rt-tilt]{will-change:transform}.cc-hero-svg{animation:rtFloat 7s ease-in-out infinite}.cc-orbit-a{animation:rtOrbit 24s linear infinite}.cc-orbit-b{animation:rtOrbit 31s linear infinite reverse}.card-glow:after{content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 20%,#57e7ff0a 45%,transparent 68%);transform:translateX(-110%);animation:rtSweep 9s ease-in-out infinite}}@keyframes rtFloat{0%,100%{translate:0 0}50%{translate:0 -7px}}@keyframes rtOrbit{to{transform:rotate(360deg)}}@keyframes rtSweep{0%,70%,100%{transform:translateX(-110%)}85%{transform:translateX(110%)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -559,34 +751,15 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <div class="nav-item" onclick="showPage('stats')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Statistics
     </div>
-    <div class="nav-item" onclick="showPage('performance')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Performance
-    </div>
-    <div class="nav-item" onclick="showPage('log')">
+    <div class="nav-item" onclick="showPage('stints')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>Stint Planner</div>
+    <div class="nav-item" onclick="showPage('engineering')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-7"/></svg>Performance Engineering</div>
+    <div class="nav-item" onclick="showPage('readiness')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 4v18M8 7h8M8 11h8"/></svg>Exam Readiness</div>
+        <div class="nav-item" onclick="showPage('log')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Session Log
     </div>
     <div class="nav-sec">Extras</div>
     <div class="nav-item" onclick="showPage('countdown')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>Exam Countdown
-    </div>
-    <div class="nav-item" onclick="showPage('report')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Weekly Report
-    </div>
-    <div class="nav-item" onclick="showPage('journal')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Study Journal
-    </div>
-    <div class="nav-item" onclick="showPage('badges')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Badges
-    </div>
-    <div class="nav-sec">Tools</div>
-    <div class="nav-item" onclick="showPage('timetable')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Timetable
-    </div>
-    <div class="nav-item" onclick="showPage('health')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Subject Health
-    </div>
-    <div class="nav-item" onclick="showPage('checklist')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Exam Checklist
     </div>
   </nav>
   <div class="sidebar-footer">
@@ -665,6 +838,38 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 <!-- ══ COMMAND CENTER PAGE ══ -->
 <div class="page" id="page-command">
+  <div class="card card-glow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:linear-gradient(115deg,rgba(92,168,255,.10),rgba(185,243,106,.035) 62%,transparent)">
+    <div class="cc-hero-copy">
+      <div class="cc-eyebrow"><span class="cc-live-dot"></span> FOCUSFLOW <span class="cc-eyebrow-slash">/</span> STUDY OPERATIONS</div>
+      <div class="cc-hero-title">Make every<br><em>session count.</em></div>
+      <div class="cc-hero-desc">Your personal study control room. Track execution, syllabus coverage and test readiness in one place.</div>
+      <div class="cc-hero-actions"><span class="cc-hero-hint">STRATEGY MODE · REVIEW THE DATA, THEN CHOOSE YOUR NEXT MOVE</span></div>
+    </div>
+    <div class="cc-hero-visual" aria-hidden="true">
+      <div class="cc-orbit cc-orbit-a"></div><div class="cc-orbit cc-orbit-b"></div>
+      <svg class="cc-hero-svg" viewBox="0 0 320 250" role="img" aria-label="Abstract focus and progress illustration">
+        <defs><linearGradient id="ccOrb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9f36a"/><stop offset="1" stop-color="#54d7e8"/></linearGradient><linearGradient id="ccGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b3450"/><stop offset="1" stop-color="#101b2b"/></linearGradient></defs>
+        <circle cx="164" cy="124" r="88" fill="none" stroke="#29425e" stroke-width="1" stroke-dasharray="3 8"/><circle cx="164" cy="124" r="66" fill="none" stroke="#355071" stroke-width="1"/>
+        <path d="M164 58 A66 66 0 1 1 107 157" fill="none" stroke="url(#ccOrb)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="164" cy="124" r="48" fill="url(#ccGlass)" stroke="#355071"/><path d="M164 87 L164 124 L190 140" stroke="#b9f36a" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="164" cy="124" r="5" fill="#b9f36a"/>
+        <rect x="15" y="42" width="92" height="52" rx="10" fill="#12243a" stroke="#2c4664"/><text x="28" y="60" fill="#8298b8" font-size="8" font-family="monospace" letter-spacing="1.5">FOCUS MODE</text><text x="28" y="80" fill="#e9f2ff" font-size="15" font-weight="700" font-family="sans-serif">ON TRACK</text>
+        <rect x="211" y="156" width="94" height="58" rx="10" fill="#12243a" stroke="#2c4664"/><text x="224" y="174" fill="#8298b8" font-size="8" font-family="monospace" letter-spacing="1.3">PROGRESS</text><rect x="224" y="184" width="66" height="5" rx="3" fill="#29425e"/><rect x="224" y="184" width="48" height="5" rx="3" fill="#b9f36a"/><text x="224" y="204" fill="#b9f36a" font-size="10" font-family="monospace">BUILDING MOMENTUM</text>
+        <circle cx="73" cy="174" r="4" fill="#54d7e8"/><circle cx="258" cy="54" r="3" fill="#b9f36a"/><path d="M75 177 L90 192 L109 192" stroke="#355071" stroke-width="1.5" fill="none"/><path d="M248 57 L230 70 L216 70" stroke="#355071" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div class="cc-hero-metric cc-metric-today"><span class="cc-metric-dot"></span><div><b id="ccTodayFocus">0m</b><small>FOCUS TODAY</small></div></div>
+      <div class="cc-hero-metric cc-metric-week"><span class="cc-metric-dot lime"></span><div><b id="ccWeekFocus">0h</b><small>THIS WEEK</small></div></div>
+    </div>
+  </div>
+  
+  <section class="race-telemetry" id="raceTelemetry" aria-label="Race strategy telemetry">
+    <div class="rt-head"><div><div class="rt-kicker"><span class="rt-live"></span> STRATEGY WALL <span class="rt-slash">/</span> SESSION TELEMETRY</div><h2>Race pace <i>analysis</i></h2><p>Study data translated into a race-engineering workflow. No simulated laps, no invented telemetry.</p></div><div class="rt-session-badge"><span class="rt-signal"></span><span>LOCAL DATA LINK</span><b id="rt-data-status">SYNCING</b></div></div>
+    <div class="rt-grid">
+      <article class="rt-panel rt-primary" data-rt-tilt><div class="rt-panel-top"><span>01 / PERFORMANCE TRACE</span><span class="rt-chip">LAST 14 DAYS</span></div><div class="rt-bigline"><div><small>FOCUS TIME</small><strong id="rt-total">—</strong></div><div class="rt-secondary-stat"><small>DAILY AVG</small><b id="rt-average">—</b></div><div class="rt-secondary-stat"><small>ACTIVE DAYS</small><b id="rt-active">—</b></div></div><div class="rt-chart" id="rt-chart" aria-label="Daily study time chart"></div><div class="rt-axis"><span>14 DAYS AGO</span><span>DAILY FOCUS MINUTES</span><span>TODAY</span></div></article>
+      <article class="rt-panel rt-radar" data-rt-tilt><div class="rt-panel-top"><span>02 / SUBJECT STRATEGY</span><span class="rt-chip">TIME SHARE</span></div><div class="rt-donut-wrap"><div id="rt-donut"></div><div class="rt-legend" id="rt-legend"></div></div><div class="rt-insight" id="rt-subject-insight">Waiting for saved focus sessions…</div></article>
+      <article class="rt-panel rt-pace" data-rt-tilt><div class="rt-panel-top"><span>03 / STINT CONSISTENCY</span><span class="rt-chip">WEEKDAY PROFILE</span></div><div id="rt-weekdays" class="rt-weekdays"></div><div class="rt-pace-note"><span class="rt-note-icon">⌁</span><div><b id="rt-pace-title">Building baseline</b><p id="rt-pace-copy">As more sessions are recorded, this panel will reveal your strongest study days.</p></div></div></article>
+    </div>
+    <div class="rt-foot"><span>● DATA SOURCE: EXISTING FOCUS SESSIONS</span><span>METRICS UPDATE FROM YOUR SAVED HISTORY</span><span id="rt-last-updated">—</span></div>
+  </section>
   <div class="g3">
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -769,6 +974,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 <!-- ══ STATS PAGE ══ -->
 <div class="page" id="page-stats">
+  <div class="stats-intro"><div><div class="cc-eyebrow"><span class="cc-live-dot"></span> PERFORMANCE INTELLIGENCE</div><h2>Study, measured.</h2><p>Patterns matter more than one productive day. Use these signals to adjust the next week.</p></div><div class="stats-intro-mark"><span>FF</span><small>ANALYTICS / 03</small></div></div>
   <div class="g4">
     <div class="kpi bl"><div class="kpi-lbl">Today's Focus</div><div class="kpi-val bl" id="kpiToday">0m</div><div class="kpi-sub" id="kpiTodaySub">0 sessions</div></div>
     <div class="kpi gr"><div class="kpi-lbl">This Week</div><div class="kpi-val gr" id="kpiWeek">0h</div><div class="row"><div class="kpi-sub">vs last week</div><div class="delta up" id="kpiWeekDelta">—</div></div></div>
@@ -1077,88 +1283,6 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </div>
 
 <!-- ══ STUDY JOURNAL PAGE ══ -->
-<div class="page" id="page-journal">
-  <!-- Write today's entry -->
-  <div class="card card-glow">
-    <div class="card-hd">
-      <div>
-        <div class="card-title">📓 Today's Entry</div>
-        <div style="font-size:.62rem;color:var(--text2);margin-top:2px" id="journalTodayDate"></div>
-      </div>
-      <div class="row" style="gap:8px">
-        <div id="journalMoodRow" style="display:flex;gap:4px"></div>
-      </div>
-    </div>
-    <!-- Stats auto-pulled from today -->
-    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="journalTodayStats"></div>
-    <div style="margin-bottom:10px">
-      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">What did you study today?</div>
-      <textarea id="journalWhat" placeholder="e.g. Finished Ch6 Triangles, practised 20 PYQs from Science…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:64px;transition:border-color .2s" onfocus="this.style.borderColor='var(--yellow)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-    </div>
-    <div style="margin-bottom:10px">
-      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Doubts / Problems faced</div>
-      <textarea id="journalDoubts" placeholder="e.g. Confused about coordinate geometry formula, need to revise…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:48px;transition:border-color .2s" onfocus="this.style.borderColor='var(--coral)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-    </div>
-    <div style="margin-bottom:12px">
-      <div style="font-family:var(--mono);font-size:.54rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Tomorrow's targets</div>
-      <textarea id="journalTargets" placeholder="e.g. Complete Ch7 Coordinate Geometry, solve 3 maths papers…" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:var(--sans);font-size:.76rem;color:var(--text);outline:none;resize:vertical;min-height:48px;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-    </div>
-    <div class="row" style="gap:10px">
-      <button class="btn btn-y" onclick="saveJournalEntry()" style="flex:1">💾 Save Entry</button>
-      <button class="btn btn-ghost btn-sm" onclick="clearJournalForm()">Clear</button>
-    </div>
-  </div>
-
-  <!-- Streak + stats banner -->
-  <div class="g2">
-    <div class="card" style="background:linear-gradient(135deg,var(--s1),rgba(232,255,71,.04));border-color:rgba(232,255,71,.15)">
-      <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Journal Streak</div>
-      <div style="font-family:var(--mono);font-size:3rem;font-weight:700;color:var(--yellow);line-height:1" id="journalStreak">0</div>
-      <div style="font-size:.66rem;color:var(--text2);margin-top:4px">days written 📓</div>
-    </div>
-    <div class="card">
-      <div style="font-family:var(--mono);font-size:.56rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">This Week's Mood</div>
-      <div id="journalWeekMoods" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-    </div>
-  </div>
-
-  <!-- Past entries -->
-  <div class="card">
-    <div class="card-hd">
-      <div class="card-title">📚 Past Entries</div>
-      <div class="row" style="gap:8px">
-        <input class="inp" id="journalSearch" placeholder="Search entries…" style="width:140px;flex:none" oninput="renderJournal()"/>
-        <button class="btn btn-ghost btn-sm" onclick="clearAllJournal()" style="color:var(--coral);border-color:rgba(251,113,133,.25)">Clear All</button>
-      </div>
-    </div>
-    <div id="journalList" style="display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto"></div>
-  </div>
-</div>
-
-<!-- ══ BADGES PAGE ══ -->
-<div class="page" id="page-badges">
-  <div class="xp-bar-wrap">
-    <div class="row" style="justify-content:space-between;margin-bottom:2px">
-      <div style="font-size:.78rem;font-weight:700;color:var(--text)">Level <span id="xpLevel">1</span> — <span id="xpLevelName" style="color:var(--yellow)">Beginner</span></div>
-      <div style="font-family:var(--mono);font-size:.72rem;color:var(--text2)"><span id="xpCurrent">0</span> / <span id="xpNext">100</span> XP</div>
-    </div>
-    <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div></div>
-    <div style="font-size:.62rem;color:var(--text3)">Earn XP by completing focus sessions, finishing chapters, logging tests, and building streaks</div>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-title">🏅 Achievements</div><div class="pill pill-green" id="badgeCount">0 earned</div></div>
-    <div class="badges-grid" id="badgesGrid"></div>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-title">📋 XP Activity Log</div></div>
-    <div style="display:flex;flex-direction:column;gap:5px;max-height:240px;overflow-y:auto" id="xpLog"><div style="color:var(--text3);font-size:.74rem;text-align:center;padding:16px">Complete sessions to earn XP!</div></div>
-  </div>
-</div>
-
-<!-- ══ EXAM COUNTDOWN PAGE ══ -->
-<!-- inserted via JS into page-countdown -->
-
-<!-- ══ STUDY TIMETABLE PAGE ══ -->
 <div class="page" id="page-timetable">
   <div class="card card-glow">
     <div class="card-hd">
@@ -1199,38 +1323,42 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </div>
 
 <!-- ══ EXAM DAY CHECKLIST PAGE ══ -->
-<div class="page" id="page-checklist">
-  <div class="cl-progress">
-    <div class="cl-progress-ring">
-      <svg class="cl-ring-svg" width="64" height="64" viewBox="0 0 64 64">
-        <circle class="cl-ring-track" cx="32" cy="32" r="27"/>
-        <circle class="cl-ring-fill" id="clRingFill" cx="32" cy="32" r="27"/>
-      </svg>
-      <div class="cl-ring-center" id="clRingPct">0%</div>
-    </div>
-    <div style="flex:1">
-      <div style="font-size:.9rem;font-weight:800;color:var(--text)" id="clProgressTitle">Get Ready!</div>
-      <div style="font-size:.7rem;color:var(--text2);margin-top:3px" id="clProgressSub">Start checking off items below</div>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap" id="clProgressPills"></div>
-    </div>
-    <div style="text-align:center">
-      <button class="btn btn-ghost btn-sm" onclick="resetChecklist()">Reset All</button>
-    </div>
-  </div>
 
-  <div class="checklist-tabs" id="clTabs"></div>
 
-  <div class="card">
-    <div class="card-hd">
-      <div class="card-title" id="clSectionTitle">Evening Before</div>
-      <button class="btn btn-ghost btn-sm" onclick="addChecklistItem()" style="white-space:nowrap">+ Add Item</button>
-    </div>
-    <div id="clItemsContainer"></div>
+<!-- FOCUSFLOW 6.0: additive Stint Planner page -->
+<div class="page" id="page-stints">
+  <div class="card" style="background:linear-gradient(130deg,#12283a,#101827);border-color:rgba(87,231,255,.25)">
+    <div class="card-title">🏁 STINT PLANNER / DAILY STRATEGY</div><div style="font-size:.76rem;color:var(--text2);margin-bottom:14px">Plan manually. Track execution. Review proposed recovery before applying it.</div>
+    <div class="g3" style="margin-bottom:12px"><div><label class="field-label">Subject</label><select class="inp" id="sp-subject"><option value="math">Mathematics</option><option value="sci">Science</option><option value="sst">Social Science</option><option value="eng">English</option><option value="hindi">Hindi</option><option value="ai">AI / CS</option></select></div><div><label class="field-label">Chapter / topic</label><input class="inp" id="sp-chapter" placeholder="e.g. Electricity" /></div><div><label class="field-label">Resource / task</label><input class="inp" id="sp-task" placeholder="NCERT, Exemplar, PYQs…" /></div></div>
+    <div class="g3" style="margin-bottom:12px"><div><label class="field-label">Duration preset</label><select class="inp" id="sp-preset" onchange="spPresetChanged()"><option value="50">50 min focus</option><option value="90">90 min focus</option><option value="25">25 min focus</option><option value="custom">Custom duration</option></select></div><div><label class="field-label">Duration (minutes)</label><input class="inp" id="sp-duration" type="number" min="1" max="360" value="50" /></div><div><label class="field-label">Question target (optional)</label><input class="inp" id="sp-questions" type="number" min="0" placeholder="e.g. 20" /></div></div>
+    <div class="g2" style="margin-bottom:12px"><div><label class="field-label">Priority</label><select class="inp" id="sp-priority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></div><div><label class="field-label">Break after (minutes)</label><input class="inp" id="sp-break" type="number" min="0" max="90" value="10" /></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-y" onclick="spAdd()">＋ Add stint</button><button class="btn btn-ghost" onclick="spSaveTemplate()">Save as template</button><button class="btn btn-ghost" onclick="spAddTemplate()">Add from template</button></div>
   </div>
+  <div class="g3" style="margin-bottom:12px"><div class="card"><div class="card-title">PLANNED TODAY</div><div class="kpi-value" id="sp-planned">0m</div></div><div class="card"><div class="card-title">COMPLETED</div><div class="kpi-value" id="sp-completed">0m</div></div><div class="card"><div class="card-title">STINTS LEFT</div><div class="kpi-value" id="sp-remaining">0</div></div></div>
+  <div class="card"><div class="card-title">TODAY'S TIMELINE</div><div id="sp-timeline" style="display:flex;flex-direction:column;gap:8px"></div><div style="font-size:.64rem;color:var(--text3);margin-top:12px">Completed stints stay recorded. Recovery proposals require your approval and do not automatically rewrite the timeline.</div></div>
+  <div class="card" id="sp-recovery-card" style="display:none;border-color:rgba(87,231,255,.35)"><div class="card-title">🛠 RECOVERY PROPOSAL</div><div id="sp-recovery-copy" style="font-size:.75rem;color:var(--text2);margin-bottom:12px"></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-y" onclick="spApproveRecovery()">Approve proposal</button><button class="btn btn-ghost" onclick="spDismissRecovery()">Keep current plan</button></div></div>
 </div>
-
+<!-- FOCUSFLOW 6.0: additive Performance Engineering page -->
+<div class="page" id="page-engineering">
+  <div class="card" style="background:linear-gradient(130deg,#12283a,#101827);border-color:rgba(87,231,255,.25)"><div class="card-title">📈 PERFORMANCE ENGINEERING / EVIDENCE LAB</div><div style="font-size:.76rem;color:var(--text2)">Minimal inputs. Real results. Recommendations explain their evidence and uncertainty.</div></div>
+  <div class="card"><div class="card-title">LOG A TEST RESULT</div><div class="g3" style="margin-bottom:10px"><div><label class="field-label">Subject</label><select class="inp" id="pe-subject"><option value="math">Mathematics</option><option value="sci">Science</option><option value="sst">Social Science</option><option value="eng">English</option><option value="hindi">Hindi</option><option value="ai">AI / CS</option></select></div><div><label class="field-label">Score</label><input class="inp" id="pe-score" type="number" min="0" step="any" placeholder="e.g. 26" /></div><div><label class="field-label">Maximum marks</label><input class="inp" id="pe-max" type="number" min="1" step="any" placeholder="e.g. 30" /></div></div><div class="g2" style="margin-bottom:10px"><div><label class="field-label">Chapter / topic (optional)</label><input class="inp" id="pe-chapter" placeholder="e.g. Electricity" /></div><div><label class="field-label">Revision time in minutes (optional)</label><input class="inp" id="pe-revision" type="number" min="0" placeholder="e.g. 120" /></div></div><button class="btn btn-y" onclick="peAddTest()">＋ Save test result</button></div>
+  <div class="card"><div class="card-title">CHAPTER MASTERY & PRACTICE</div><div class="g3" style="margin-bottom:10px"><div><label class="field-label">Subject</label><select class="inp" id="pe-m-subject"><option value="math">Mathematics</option><option value="sci">Science</option><option value="sst">Social Science</option><option value="eng">English</option><option value="hindi">Hindi</option><option value="ai">AI / CS</option></select></div><div><label class="field-label">Chapter / topic</label><input class="inp" id="pe-m-chapter" placeholder="Chapter name" /></div><div><label class="field-label">Self-rating (1–5)</label><select class="inp" id="pe-rating"><option value="">Not rated</option><option value="1">1 · Needs support</option><option value="2">2 · Weak</option><option value="3">3 · Developing</option><option value="4">4 · Strong</option><option value="5">5 · Confident</option></select></div></div><div class="g3" style="margin-bottom:10px"><div><label class="field-label">Questions attempted</label><input class="inp" id="pe-attempted" type="number" min="0" placeholder="e.g. 20" /></div><div><label class="field-label">Correct answers</label><input class="inp" id="pe-correct" type="number" min="0" placeholder="e.g. 16" /></div><div><label class="field-label">Mistake category (optional)</label><select class="inp" id="pe-mistake"><option value="">No mistake logged</option><option value="silly">Silly / calculation</option><option value="concept">Conceptual</option><option value="time">Time management</option><option value="recall">Recall / facts / formulas</option><option value="reading">Misread question</option><option value="presentation">Presentation / steps / diagrams</option></select></div></div><button class="btn btn-y" onclick="peAddPractice()">＋ Save practice check-in</button></div>
+  <div class="g3"><div class="card"><div class="card-title">LATEST TEST</div><div class="kpi-value" id="pe-latest">—</div><div id="pe-latest-meta" style="font-size:.64rem;color:var(--text3)">No test results logged yet</div></div><div class="card"><div class="card-title">PRACTICE ACCURACY</div><div class="kpi-value" id="pe-accuracy">—</div><div style="font-size:.64rem;color:var(--text3)">From recorded question attempts</div></div><div class="card"><div class="card-title">RECORDED MISTAKES</div><div class="kpi-value" id="pe-mistakes">0</div><div style="font-size:.64rem;color:var(--text3)">Only explicitly logged errors</div></div></div>
+  <div class="g2"><div class="card"><div class="card-title">TEST SCORE TREND</div><div id="pe-score-chart" style="display:flex;align-items:end;gap:8px;min-height:130px;overflow-x:auto"></div><div id="pe-score-caption" style="font-size:.64rem;color:var(--text3);margin-top:8px">Add results to establish a trend.</div></div><div class="card"><div class="card-title">CHAPTER HEALTH MAP</div><div id="pe-heatmap" style="display:flex;flex-wrap:wrap;gap:7px"></div><div style="font-size:.64rem;color:var(--text3);margin-top:8px">Unlogged chapters are not assumed to be weak or strong.</div></div></div>
+  <div class="card"><div class="card-title">MISTAKE PROFILE</div><div id="pe-mistake-profile" style="display:flex;flex-direction:column;gap:8px"></div></div>
+  <div class="card"><div class="card-title">ENGINEERING REPORT</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><button class="btn btn-ghost" onclick="peRenderReport('daily')">Daily snapshot</button><button class="btn btn-ghost" onclick="peRenderReport('weekly')">Weekly report</button></div><div id="pe-report" style="font-size:.75rem;color:var(--text2);line-height:1.7"></div></div>
+  <div class="card"><div class="card-title">RECENT ACADEMIC RECORDS</div><div id="pe-records" style="display:flex;flex-direction:column;gap:7px"></div></div>
+</div>
   </div><!-- /content -->
 </div><!-- /main -->
+
+<!-- FocusFlow 6.3: Exam Readiness -->
+<div class="page" id="page-readiness">
+  <div class="card" style="background:linear-gradient(130deg,#12283a,#101827);border-color:rgba(87,231,255,.25)"><div class="card-title">📚 EXAM READINESS / SYLLABUS MAP</div><div style="font-size:.76rem;color:var(--text2)">Class X · 2026–27. Track learning, practice, revision and timed questions separately. English, Hindi and AI use named syllabus topics; Hindi A and Hindi B are kept separate.</div></div>
+  <div class="g3" style="margin-bottom:12px"><div class="card"><div class="card-title">TOPICS TRACKED</div><div class="kpi-value" id="er-total">0</div></div><div class="card"><div class="card-title">FULLY READY</div><div class="kpi-value" id="er-ready">0</div></div><div class="card"><div class="card-title">CHECKLIST COMPLETION</div><div class="kpi-value" id="er-pct">0%</div></div></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div class="card-title" style="margin:0">CHAPTER / UNIT READINESS</div><select class="inp" id="er-filter" style="max-width:220px" onchange="erRender()"><option value="all">All subjects</option><option value="math">Mathematics</option><option value="sci">Science</option><option value="sst">Social Science</option><option value="eng">English Language & Literature</option><option value="hindiA">Hindi Course A</option><option value="hindiB">Hindi Course B</option><option value="ai">Artificial Intelligence (417)</option></select></div>
+  <div id="er-list" class="er-scroll" style="display:flex;flex-direction:column;gap:9px;margin-top:14px"></div><div style="font-size:.63rem;color:var(--text3);margin-top:12px">Your checklist is stored separately from the existing syllabus tracker. Confirm the prescribed Hindi course and any school-specific syllabus circular with your school.</div></div>
+</div>
 
 <!-- ══ TIMETABLE SLOT MODAL ══ -->
 <div class="tt-slot-modal" id="ttSlotModal">
@@ -1395,7 +1523,7 @@ let D=loadD();
 /* ══════════════════════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════════════════════ */
-const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log',countdown:'Exam Countdown',report:'Weekly Report',journal:'Study Journal',badges:'Badges & XP',timetable:'Study Timetable',health:'Subject Health Dashboard',checklist:'Exam Day Checklist'};
+const PAGE_TITLES={timer:'Pomodoro Timer',command:'Command Center',stats:'Statistics',performance:'Performance Analytics',log:'Session Log',countdown:'Exam Countdown',report:'Weekly Report',timetable:'Study Timetable',health:'Subject Health Dashboard',stints:'Stint Planner',engineering:'Performance Engineering',readiness:'Exam Readiness'};
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1406,13 +1534,11 @@ function showPage(id){
   if(id==='performance')renderPerformance();
   if(id==='log'){if($('manDate'))$('manDate').value=todayKey();renderLog()}
   if(id==='command'){renderTasks();renderSyllabus();renderWeak();renderRevisions();calcRRR();renderMockLog()}
+  if(id==='readiness')erRender();
   if(id==='countdown'){renderCountdown()}
   if(id==='report'){renderReport()}
-  if(id==='journal'){renderJournal()}
-  if(id==='badges'){renderBadges()}
   if(id==='timetable'){renderTimetable()}
   if(id==='health'){renderHealthAndTrack()}
-  if(id==='checklist'){renderChecklist()}
 }
 function updateDate(){const n=new Date();$('pageDate').textContent=n.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 updateDate();setInterval(updateDate,60000);
@@ -2465,6 +2591,7 @@ function clearLog(){
    SIDEBAR
 ══════════════════════════════════════════════════════ */
 function refreshSidebar(){
+  if(typeof updateCommandMetrics==='function')updateCommandMetrics();
   $('sideStreak').textContent=computeStreak();
   const tm=D.sessions.filter(s=>s.type==='focus').reduce((a,s)=>a+s.duration,0);
   $('sideFocus').textContent=tm>=60?Math.floor(tm/60)+'h':tm+'m';
@@ -3388,6 +3515,19 @@ function renderHealthAndTrack(){
   renderHealth();
 }
 
+
+function updateCommandMetrics(){
+  const sessions = (D.sessions||[]).filter(s=>s.mode==='focus');
+  const today = todayKey();
+  const todayMin = sessions.filter(s=>s.date===today).reduce((a,s)=>a+(Number(s.duration)||0),0);
+  const now = new Date();
+  const start = new Date(now); start.setDate(now.getDate()-((now.getDay()+6)%7)); start.setHours(0,0,0,0);
+  const weekMin = sessions.filter(s=>{const d=new Date((s.date||'')+'T12:00:00');return !isNaN(d)&&d>=start;}).reduce((a,s)=>a+(Number(s.duration)||0),0);
+  const a=$('ccTodayFocus'), b=$('ccWeekFocus');
+  if(a)a.textContent=todayMin>=60?`${Math.floor(todayMin/60)}h ${todayMin%60}m`:`${todayMin}m`;
+  if(b)b.textContent=(weekMin/60).toFixed(1)+'h';
+}
+
 /* ══════════════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════════════ */
@@ -3395,6 +3535,7 @@ initSettings();
 renderSubjectGrid();
 updateSessionDots();
 refreshSidebar();
+updateCommandMetrics();
 totalMs=modeMs('focus');
 updateDisplay(totalMs);
 calcRRR();
@@ -3403,6 +3544,279 @@ initExColorPicker();
 if($('manDate'))$('manDate').value=todayKey();
 if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
 setTimeout(checkAndAwardBadges,800);
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FOCUSFLOW 4.0 — LIVE TELEMETRY / DATA-SAFE RENDER LAYER
+   Important: this layer reads existing D.sessions/subject metadata.
+   It does not clear, migrate, seed, or rewrite the user's stored data.
+═══════════════════════════════════════════════════════════════ */
+const FF4 = {days:28, mounted:false};
+const ffColorBySubject = Object.fromEntries((typeof SUBJECTS!=='undefined'?SUBJECTS:[]).map(x=>[x.id,x.color]));
+const ffEsc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function ffSessions(){
+  return (D.sessions||[]).filter(s=>(s.type==='focus'||s.mode==='focus')&&Number.isFinite(Number(s.duration))&&Number(s.duration)>0).map((s,i)=>({...s,_ffId:i,_ffMin:Number(s.duration),_ffDate:String(s.date||'')})).sort((a,b)=>{
+    const ta=Date.parse(a.completedAt||a._ffDate||'')||0,tb=Date.parse(b.completedAt||b._ffDate||'')||0;return ta-tb;
+  });
+}
+function ffLocalDateKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function ffDateFromKey(k){const p=String(k||'').split('-').map(Number);return p.length===3&&p.every(Number.isFinite)?new Date(p[0],p[1]-1,p[2],12,0,0,0):null}
+function ffFmtMin(m){m=Math.max(0,Math.round(Number(m)||0));if(m<60)return `${m}m`;const h=Math.floor(m/60),r=m%60;return r?`${h}h ${r}m`:`${h}h`}
+function ffFmtHours(m){return `${((Number(m)||0)/60).toFixed(1)}h`}
+function ffSubj(id){return (SUBJECTS||[]).find(x=>x.id===id)||{id:id||'unknown',name:id||'Uncategorised',emoji:'◉',color:'#7792b7'}}
+function ffToday(){return typeof todayKey==='function'?todayKey():ffLocalDateKey(new Date())}
+function ffRange(days, sessions=ffSessions()){
+  const now=new Date();now.setHours(0,0,0,0);const start=new Date(now);start.setDate(start.getDate()-days+1);
+  const items=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=start&&d<=now;});
+  const map={};for(let i=0;i<days;i++){const d=new Date(start);d.setDate(start.getDate()+i);map[ffLocalDateKey(d)]=0;}
+  items.forEach(s=>map[s._ffDate]=(map[s._ffDate]||0)+s._ffMin);
+  return {now,start,items,map,days,values:Object.values(map),total:items.reduce((a,s)=>a+s._ffMin,0),count:items.length,active:Object.values(map).filter(v=>v>0).length};
+}
+function ffWeekStart(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
+function ffWeekTotals(sessions=ffSessions(),weeks=8){
+ const today=new Date();today.setHours(12,0,0,0);const cur=ffWeekStart(today),out=[];
+ for(let i=weeks-1;i>=0;i--){const st=new Date(cur);st.setDate(st.getDate()-i*7);const en=new Date(st);en.setDate(en.getDate()+7);const mins=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=st&&d<en}).reduce((a,s)=>a+s._ffMin,0);out.push({start:st,minutes:mins,label:st.toLocaleDateString('en-IN',{day:'numeric',month:'short'}),current:i===0});}
+ return out;
+}
+function ffPct(v,total){return total>0?Math.round(v/total*100):0}
+function ffDayLabel(k,days){const d=ffDateFromKey(k);if(!d)return '';return days<=10?d.toLocaleDateString('en-IN',{weekday:'short'}):days<=35?d.toLocaleDateString('en-IN',{day:'numeric',month:'short'}):d.toLocaleDateString('en-IN',{day:'numeric'})}
+function ffStatPill(txt,val){return `<span class="ff-pill">${ffEsc(txt)} <b>${ffEsc(val)}</b></span>`}
+function ffSpark(id, values, color='#58c6ff'){
+ const v=values.length?values:[0],max=Math.max(1,...v),w=100,h=30,p=3;const pts=v.map((n,i)=>`${p+i*(w-2*p)/Math.max(1,v.length-1)},${h-p-(n/max)*(h-2*p)}`).join(' ');
+ return `<svg class="ff-spark" viewBox="0 0 100 30" role="img" aria-label="Recent activity sparkline"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+function ffMetric(label,value,sub,icon,color,values){
+ return `<div class="ff-panel ff-metric" data-ff-tilt><div class="ff-metric-top"><span class="ff-metric-label">${ffEsc(label)}</span><span class="ff-metric-icon" style="color:${color};border-color:${color}44;background:${color}12">${icon}</span></div><div><div class="ff-metric-value" data-count-target="${ffEsc(value)}">${ffEsc(value)}</div><div class="ff-metric-foot"><span>${ffEsc(sub)}</span>${ffSpark('s',values,color)}</div></div></div>`;
+}
+function ffRingMarkup(subjectRows,total){
+ const r=44,c=2*Math.PI*r;let offset=0;
+ const rings=subjectRows.filter(x=>x.minutes>0).map(x=>{const len=total?c*x.minutes/total:0;const html=`<circle class="ff-donut-ring" cx="60" cy="60" r="${r}" stroke="${x.color}" stroke-dasharray="${Math.max(0,len-2)} ${Math.max(0,c-len+2)}" stroke-dashoffset="${-offset}"/>`;offset+=len;return html}).join('');
+ return `<svg class="ff-donut" viewBox="0 0 120 120" role="img" aria-label="Study time by subject"><circle cx="60" cy="60" r="44" fill="none" stroke="rgba(110,153,197,.12)" stroke-width="13"/>${rings}<circle cx="60" cy="60" r="31" fill="rgba(7,17,30,.75)" stroke="rgba(111,158,206,.1)"/><text class="ff-donut-center" x="60" y="58">${ffFmtHours(total)}</text><text class="ff-donut-sub" x="60" y="70">FOCUS TIME</text></svg>`;
+}
+function ffSubjectRows(sessions){
+ const rows=(SUBJECTS||[]).map(s=>({...s,minutes:0,count:0}));const index=Object.fromEntries(rows.map((x,i)=>[x.id,i]));
+ sessions.forEach(s=>{let i=index[s.subj];if(i===undefined){const x=ffSubj(s.subj);rows.push({...x,minutes:0,count:0});i=rows.length-1;}rows[i].minutes+=s._ffMin;rows[i].count++;});
+ return rows.sort((a,b)=>b.minutes-a.minutes);
+}
+function ffCmdMarkup(){
+ return `<section id="ffCommandDeck" aria-label="FocusFlow command deck">
+  <div class="ff-hero" data-ff-tilt>
+   <div class="ff-hero-text"><div class="ff-eyebrow"><span class="ff-live"></span> FOCUSFLOW / LIVE STUDY TELEMETRY</div><h1 class="ff-hero-title">Your focus.<br><em>In full signal.</em></h1><p class="ff-hero-copy">A live command deck for your study system. Track what happened, spot the patterns, and turn the next session into a deliberate move.</p><div class="ff-hero-actions"><button class="ff-btn-secondary" onclick="showPage('log')">Review session stream ↗</button><button class="ff-btn-secondary" onclick="downloadFFTelemetryCSV()">Export telemetry ↓</button></div><div class="ff-pills" id="ff-cmd-quickpills" style="margin-top:19px"></div></div>
+   <div class="ff-core-stage" aria-hidden="true"><div class="ff-core-glow"></div><div class="ff-orbit one"></div><div class="ff-orbit two"></div><div class="ff-orbit three"></div><div class="ff-core"></div><div class="ff-satellite"></div><div class="ff-satellite s2"></div><div class="ff-holo-chip ff-chip-left"><span class="pin"></span><div><strong id="ff-cmd-hero-today">0m</strong><small>FOCUS TODAY</small></div></div><div class="ff-holo-chip ff-chip-right"><span class="pin"></span><div><strong id="ff-cmd-hero-week">0.0h</strong><small>THIS WEEK</small></div></div></div>
+  </div>
+  <div class="ff-grid ff-four" id="ff-cmd-metrics"></div>
+  <div class="ff-grid ff-two">
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">01 / Focus trajectory</div><div class="ff-panel-title">The output curve</div><div class="ff-panel-sub">Completed focus minutes by day. Hover a bar to inspect the recorded total.</div></div><div class="ff-window" data-ff-scope="cmd"><button data-days="7">7D</button><button data-days="28" class="active">28D</button><button data-days="90">90D</button></div></div><div class="ff-bars" id="ff-cmd-bars"></div><div class="ff-bar-labels" id="ff-cmd-bar-labels"></div><div class="ff-chart-meta" id="ff-cmd-trend-meta"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">02 / Allocation model</div><div class="ff-panel-title">Subject energy map</div><div class="ff-panel-sub">Where recorded focus minutes have gone in the selected window.</div></div><span class="ff-metric-icon">◌</span></div><div class="ff-donut-wrap" id="ff-cmd-donut"></div><div class="ff-readout" id="ff-cmd-subj-readout"></div></div>
+  </div>
+  <div class="ff-grid ff-three">
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">03 / Consistency</div><div class="ff-panel-title">Weekday profile</div><div class="ff-panel-sub">Minutes grouped by day of week across your recorded history.</div></div></div><div class="ff-week-bars" id="ff-cmd-weekdays"></div><div class="ff-readout" id="ff-cmd-weekday-readout"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">04 / Completion rhythm</div><div class="ff-panel-title">Time-of-day signal</div><div class="ff-panel-sub">Session completion times, from recorded timestamps. This is not a start-time estimate.</div></div></div><div class="ff-week-bars" id="ff-cmd-hours"></div><div class="ff-readout" id="ff-cmd-hour-readout"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">05 / Recent events</div><div class="ff-panel-title">Session stream</div><div class="ff-panel-sub">Latest saved focus sessions, read directly from your existing log.</div></div><button class="ff-btn-secondary" onclick="showPage('log')">Open log ↗</button></div><div class="ff-stream" id="ff-cmd-stream"></div></div>
+  </div>
+ </section>`;
+}
+function ffStatsMarkup(){
+ return `<section id="ffStatsDeck" aria-label="Advanced study telemetry">
+  <div class="ff-hero" style="min-height:228px;grid-template-columns:minmax(0,1.3fr) minmax(210px,.7fr);padding:25px 28px" data-ff-tilt><div><div class="ff-eyebrow"><span class="ff-live"></span> ANALYTICS ENGINE / TELEMETRY SUITE</div><h1 class="ff-hero-title" style="font-size:clamp(2.1rem,3.4vw,3.5rem)">Measure the<br><em>work behind it.</em></h1><p class="ff-hero-copy" style="max-width:620px;margin-top:12px">No invented scores. Every chart below is calculated from your existing saved focus sessions, with empty states when the log has no evidence.</p></div><div class="ff-panel" style="padding:17px;background:rgba(4,14,25,.6);border-color:rgba(91,240,224,.2)"><div class="ff-panel-kicker">WINDOW / ANALYSIS RANGE</div><div class="ff-panel-title" id="ff-stats-range-title" style="font-size:1.45rem;margin-top:12px">Last 28 days</div><div class="ff-panel-sub" id="ff-stats-range-sub">No sessions are changed by this view.</div><div class="ff-window" data-ff-scope="stats" style="margin-top:18px;width:max-content"><button data-days="7">7D</button><button data-days="28" class="active">28D</button><button data-days="90">90D</button></div><button class="ff-btn-secondary" style="margin-top:12px;width:100%" onclick="downloadFFTelemetryCSV()">↓ Export session telemetry CSV</button></div></div>
+  <div class="ff-grid ff-four" id="ff-stats-metrics"></div>
+  <div class="ff-grid ff-two">
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">06 / Signal curve</div><div class="ff-panel-title">Daily focus trace</div><div class="ff-panel-sub">Actual recorded minutes across the selected window. The line is not smoothed or forecast.</div></div><span class="ff-pill">LOCAL DATA <b id="ff-stats-days">28 days</b></span></div><svg class="ff-chart" id="ff-stats-line" viewBox="0 0 720 220" preserveAspectRatio="none" aria-label="Daily focus minute trend"></svg><div class="ff-chart-meta" id="ff-stats-line-meta"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">07 / Distribution</div><div class="ff-panel-title">Time by subject</div><div class="ff-panel-sub">Subject shares use only the selected period's focus minutes.</div></div></div><div class="ff-donut-wrap" id="ff-stats-donut"></div><div class="ff-readout" id="ff-stats-subject-insight"></div></div>
+  </div>
+  <div class="ff-grid ff-three">
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">08 / Weekly cadence</div><div class="ff-panel-title">Last eight weeks</div><div class="ff-panel-sub">Full-week totals; current week is highlighted and may be incomplete.</div></div></div><div class="ff-bars" id="ff-stats-weeks"></div><div class="ff-bar-labels" id="ff-stats-week-labels"></div><div class="ff-chart-meta" id="ff-stats-week-meta"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">09 / Session mix</div><div class="ff-panel-title">Session duration profile</div><div class="ff-panel-sub">Counts by recorded session length. Partial sessions are included as saved.</div></div></div><div class="ff-dist-list" id="ff-stats-duration-dist"></div><div class="ff-readout" id="ff-stats-duration-insight"></div></div>
+   <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">10 / Time signature</div><div class="ff-panel-title">Completion by hour</div><div class="ff-panel-sub">Completion timestamp distribution. Shown only where timestamps exist.</div></div></div><div class="ff-week-bars" id="ff-stats-hours"></div><div class="ff-readout" id="ff-stats-hours-insight"></div></div>
+  </div>
+  <div class="ff-panel"><div class="ff-panel-head"><div><div class="ff-panel-kicker">11 / Raw evidence</div><div class="ff-panel-title">Telemetry ledger</div><div class="ff-panel-sub">Latest stored focus events. Use the session log for editing or deleting entries.</div></div><button class="ff-btn-secondary" onclick="showPage('log')">Manage session log ↗</button></div><div class="ff-stream" id="ff-stats-stream"></div></div>
+ </section>`;
+}
+function mountFF4(){
+ if(FF4.mounted)return;
+ const cmd=$('page-command'),stats=$('page-stats');if(!cmd||!stats)return;
+ const c=document.createElement('div');c.innerHTML=ffCmdMarkup();cmd.insertBefore(c.firstElementChild,cmd.firstElementChild);
+ const st=document.createElement('div');st.innerHTML=ffStatsMarkup();stats.insertBefore(st.firstElementChild,stats.firstElementChild);
+ const tooltip=document.createElement('div');tooltip.id='ff-global-tooltip';tooltip.className='ff-tooltip';tooltip.setAttribute('aria-hidden','true');document.body.appendChild(tooltip);
+ document.querySelectorAll('[data-ff-scope] button').forEach(b=>b.addEventListener('click',()=>{
+   FF4.days=Math.max(1,Math.min(365,Number(b.dataset.days)||28));
+   document.querySelectorAll('[data-ff-scope]').forEach(w=>w.querySelectorAll('button').forEach(x=>x.classList.toggle('active',Number(x.dataset.days)===FF4.days)));
+   renderFF4();
+ }));
+ FF4.mounted=true;window.__ff4Ready=true;renderFF4();
+ // Subtle pointer parallax. It does not affect app data or the timer.
+ const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(!reduce){document.querySelectorAll('[data-ff-tilt]').forEach(el=>{
+   el.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--ff-pointer-x',(x*2).toFixed(3));el.style.setProperty('--ff-pointer-y',(y*2).toFixed(3));if(el.classList.contains('ff-hero')){const core=el.querySelector('.ff-core-stage');if(core)core.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${-y*4}deg)`;}});
+   el.addEventListener('pointerleave',()=>{const core=el.querySelector('.ff-core-stage');if(core)core.style.transform='';});
+  });}
+}
+function ffRenderBars(containerId,labelId,days,range){
+ const root=$(containerId),labels=$(labelId);if(!root||!labels)return;
+ const keys=Object.keys(range.map),vals=keys.map(k=>range.map[k]||0),max=Math.max(1,...vals);root.innerHTML='';labels.innerHTML='';
+ keys.forEach((k,i)=>{const v=vals[i],col=document.createElement('div');col.className='ff-bar-col';const bar=document.createElement('div');bar.className='ff-bar'+(k===ffToday()?' today':'');bar.style.height=`${v?Math.max(3,v/max*100):1.5}%`;bar.style.animationDelay=`${Math.min(i*7,260)}ms`;bar.title=`${k} · ${ffFmtMin(v)} · ${range.items.filter(s=>s._ffDate===k).length} sessions`;bar.setAttribute('aria-label',bar.title);col.appendChild(bar);root.appendChild(col);
+   const lab=document.createElement('span');const show=days<=10||i===0||i===keys.length-1||(days<=35&&i%4===0)||(days>35&&i%14===0);lab.textContent=show?ffDayLabel(k,days):'';lab.title=k;labels.appendChild(lab);
+ });
+}
+function ffRenderLineSvg(svgId,days,range){
+ const svg=$(svgId);if(!svg)return;const W=720,H=220,L=18,R=10,T=13,B=28,iw=W-L-R,ih=H-T-B;const keys=Object.keys(range.map),vals=keys.map(k=>range.map[k]||0),max=Math.max(30,...vals),n=Math.max(1,vals.length-1);
+ const pts=vals.map((v,i)=>({x:L+i*iw/n,y:T+ih-(v/max)*ih,v,k:keys[i]}));const d=pts.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ');const area=`${d} L${pts[pts.length-1].x},${T+ih} L${pts[0].x},${T+ih} Z`;
+ const grids=[0,.25,.5,.75,1].map(f=>{const y=T+ih-f*ih;return `<line class="ff-gridline" x1="${L}" x2="${W-R}" y1="${y}" y2="${y}"/><text class="ff-axis-label" x="${L}" y="${Math.max(9,y-4)}">${Math.round(max*f)}m</text>`}).join('');
+ const chosen=new Set([0,Math.floor((pts.length-1)*.25),Math.floor((pts.length-1)*.5),Math.floor((pts.length-1)*.75),pts.length-1]);const labels=[...chosen].map(i=>`<text class="ff-axis-label" x="${pts[i].x}" y="${H-6}" text-anchor="${i===0?'start':i===pts.length-1?'end':'middle'}">${ffEsc(ffDayLabel(pts[i].k,days))}</text>`).join('');
+ const dots=pts.map((p,i)=>((days<=35||i%3===0||i===pts.length-1)?`<circle class="ff-dot" cx="${p.x}" cy="${p.y}" r="2.3"><title>${p.k}: ${ffFmtMin(p.v)}</title></circle>`:'')).join('');
+ svg.innerHTML=`<defs><linearGradient id="ffLineArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#58c6ff" stop-opacity=".3"/><stop offset="100%" stop-color="#58c6ff" stop-opacity="0"/></linearGradient></defs>${grids}<path class="ff-area" d="${area}" fill="url(#ffLineArea)"/><path class="ff-line" d="${d}"/>${dots}${labels}`;
+}
+function ffRenderDonut(targetId,readoutId,sessions){
+ const target=$(targetId),readout=$(readoutId);if(!target)return;const rows=ffSubjectRows(sessions).filter(x=>x.minutes>0),total=rows.reduce((a,s)=>a+s.minutes,0);
+ if(!total){target.innerHTML='<div class="ff-empty" style="width:100%"><b>No subject signal yet</b>Complete or save a focus session to populate this allocation map.</div>';if(readout)readout.innerHTML='<div class="ff-readout-mark">◌</div><div class="ff-readout-copy"><strong>Waiting for recorded focus</strong><small>Existing data remains untouched.</small></div>';return;}
+ target.innerHTML=ffRingMarkup(rows,total)+`<div class="ff-legend">${rows.map(s=>`<div><div class="ff-legend-row"><span class="swatch" style="color:${s.color};background:${s.color}"></span><span>${ffEsc(s.emoji||'')} ${ffEsc(s.name)}</span><strong>${ffPct(s.minutes,total)}%</strong></div><div class="ff-mini-track"><div class="ff-mini-fill" style="width:${ffPct(s.minutes,total)}%;background:${s.color}"></div></div></div>`).join('')}</div>`;
+ if(readout){const top=rows[0],share=ffPct(top.minutes,total);readout.innerHTML=`<div class="ff-readout-mark">↗</div><div class="ff-readout-copy"><strong>Largest recorded allocation: ${ffEsc(top.name)}</strong><small>${ffFmtMin(top.minutes)} across ${top.count} session${top.count===1?'':'s'} in this window.</small></div><div class="ff-readout-val">${share}%</div>`;}
+}
+function ffRenderWeekday(id,sessions,readoutId){
+ const root=$(id);if(!root)return;const names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],mins=Array(7).fill(0),counts=Array(7).fill(0);sessions.forEach(s=>{const d=ffDateFromKey(s._ffDate);if(d){mins[d.getDay()]+=s._ffMin;counts[d.getDay()]++;}});const max=Math.max(1,...mins);
+ root.innerHTML=names.map((n,i)=>`<div class="ff-week-col" title="${n}: ${ffFmtMin(mins[i])}, ${counts[i]} sessions"><div class="ff-week-value">${mins[i]?ffFmtMin(mins[i]):'—'}</div><div class="ff-week-bar-track"><div class="ff-week-bar ${i===new Date().getDay()?'current':''}" style="height:${mins[i]?Math.max(3,mins[i]/max*100):1.5}%"></div></div><div class="ff-week-day">${n}</div></div>`).join('');
+ const maxI=mins.indexOf(Math.max(...mins)),out=$(readoutId);if(out)out.innerHTML=mins.some(Boolean)?`<div class="ff-readout-mark">⌁</div><div class="ff-readout-copy"><strong>Highest weekday in this view: ${names[maxI]}</strong><small>${ffFmtMin(mins[maxI])} across ${counts[maxI]} saved sessions on that weekday.</small></div>`:'<div class="ff-readout-mark">⌁</div><div class="ff-readout-copy"><strong>No weekday pattern yet</strong><small>Once sessions are recorded, weekday comparisons appear here.</small></div>';
+}
+function ffRenderHours(id,sessions,readoutId){
+ const root=$(id);if(!root)return;const labels=['6a','8a','10a','12p','2p','4p','6p','8p','10p','12a'];const hours=Array(10).fill(0);let timestamped=0;
+ sessions.forEach(s=>{const t=Date.parse(s.completedAt||'');if(!Number.isNaN(t)){timestamped++;const h=new Date(t).getHours();const bucket=h<6?9:h<8?0:h<10?1:h<12?2:h<14?3:h<16?4:h<18?5:h<20?6:h<22?7:h<24?8:9;hours[bucket]++;}});
+ const max=Math.max(1,...hours);root.innerHTML=labels.map((n,i)=>`<div class="ff-week-col" title="${n}: ${hours[i]} completion${hours[i]===1?'':'s'}"><div class="ff-week-value">${hours[i]||'—'}</div><div class="ff-week-bar-track"><div class="ff-week-bar ${hours[i]&&hours[i]===Math.max(...hours)?'current':''}" style="height:${hours[i]?Math.max(3,hours[i]/max*100):1.5}%;background:linear-gradient(180deg,${i<3?'#9b8cff':'#58c6ff'},rgba(61,119,211,.55))"></div></div><div class="ff-week-day">${n}</div></div>`).join('');
+ const mi=hours.indexOf(Math.max(...hours)),out=$(readoutId);if(out)out.innerHTML=timestamped?`<div class="ff-readout-mark">◷</div><div class="ff-readout-copy"><strong>Most common completion band: ${labels[mi]}</strong><small>${hours[mi]} completion timestamps in this view; completion is not the same as session start time.</small></div>`:'<div class="ff-readout-mark">◷</div><div class="ff-readout-copy"><strong>No timestamp data available</strong><small>Sessions without a completedAt value are omitted from this chart.</small></div>';
+}
+function ffRenderStream(id,sessions,limit=6){
+ const root=$(id);if(!root)return;const items=[...sessions].sort((a,b)=>(Date.parse(b.completedAt||b._ffDate)||0)-(Date.parse(a.completedAt||a._ffDate)||0)).slice(0,limit);
+ if(!items.length){root.innerHTML='<div class="ff-empty"><b>No recorded focus sessions</b>Saved session history will appear here automatically. No sample values are being added.</div>';return;}
+ root.innerHTML=items.map(s=>{const sub=ffSubj(s.subj),date=ffDateFromKey(s._ffDate),day=date?date.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'}):'Date unavailable',time=Date.parse(s.completedAt||'');const ts=!Number.isNaN(time)?new Date(time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):'time unavailable';return `<div class="ff-stream-row"><span class="ff-stream-dot" style="color:${sub.color};background:${sub.color}"></span><div class="ff-stream-main"><strong>${ffEsc(sub.emoji||'◉')} ${ffEsc(sub.name)}${s.partial?' · Partial':''}</strong><small>${ffEsc(day)} · ${ffEsc(ts)}</small></div><span class="ff-stream-dur">${ffFmtMin(s._ffMin)}</span></div>`;}).join('');
+}
+function ffRenderCmdMetrics(sessions,range){
+ const today=ffToday(),todayItems=sessions.filter(s=>s._ffDate===today),todayM=todayItems.reduce((a,s)=>a+s._ffMin,0);const week=ffRange(7,sessions),prev=[];const currentStart=ffWeekStart(new Date());const thisWeek=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=currentStart;});const previousStart=new Date(currentStart);previousStart.setDate(previousStart.getDate()-7);const lastWeek=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=previousStart&&d<currentStart;});const wkM=thisWeek.reduce((a,s)=>a+s._ffMin,0),lastM=lastWeek.reduce((a,s)=>a+s._ffMin,0);const allM=sessions.reduce((a,s)=>a+s._ffMin,0);const avg=sessions.length?allM/sessions.length:0;const activeDays=new Set(sessions.map(s=>s._ffDate)).size;const vals=Object.values(range.map);
+ $('ff-cmd-hero-today').textContent=ffFmtMin(todayM);$('ff-cmd-hero-week').textContent=ffFmtHours(wkM);
+ $('ff-cmd-metrics').innerHTML=ffMetric('Focus today',ffFmtMin(todayM),`${todayItems.length} saved session${todayItems.length===1?'':'s'}`,'◷','#58c6ff',vals.slice(-7))+ffMetric('This week',ffFmtHours(wkM),`${wkM-lastM>=0?'+':''}${ffFmtMin(wkM-lastM)} vs previous calendar week`,'↗','#caff79',ffWeekTotals(sessions,7).map(x=>x.minutes))+ffMetric('Active days',String(range.active),`in the last ${range.days} days`,'▦','#5bf0e0',vals.slice(-7))+ffMetric('Average session',sessions.length?ffFmtMin(avg):'—',`${sessions.length} focus sessions recorded`,'◎','#9b8cff',sessions.slice(-7).map(x=>x._ffMin));
+ $('ff-cmd-quickpills').innerHTML=ffStatPill('LIFETIME',ffFmtHours(allM))+ffStatPill('ALL-TIME SESSIONS',String(sessions.length))+ffStatPill('ACTIVE DAYS',String(activeDays));
+}
+function ffRenderStatsMetrics(sessions,range){
+ const prevStart=new Date(range.start);prevStart.setDate(prevStart.getDate()-range.days);const prevItems=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=prevStart&&d<range.start;});const diff=range.total-prevItems.reduce((a,s)=>a+s._ffMin,0);const avg=range.count?range.total/range.count:0;const duration=[...range.items].sort((a,b)=>b._ffMin-a._ffMin)[0];const pct=range.days?Math.round(range.active/range.days*100):0;
+ $('ff-stats-metrics').innerHTML=ffMetric('Focus volume',ffFmtHours(range.total),`${range.count} saved sessions in window`,'◈','#58c6ff',range.values.slice(-7))+ffMetric('vs previous window',`${diff>=0?'+':''}${ffFmtMin(diff)}`,`${diff>=0?'More':'Less'} focus time than the prior ${range.days} days`,'↗',diff>=0?'#caff79':'#ff83b4',ffWeekTotals(sessions,7).map(x=>x.minutes))+ffMetric('Active-day rate',`${pct}%`,`${range.active} of ${range.days} calendar days had focus`,'▦','#5bf0e0',range.values.slice(-7))+ffMetric('Typical session',range.count?ffFmtMin(avg):'—',duration?`Longest saved session: ${ffFmtMin(duration._ffMin)}`:'No session length yet','◎','#9b8cff',range.items.slice(-7).map(x=>x._ffMin));
+ $('ff-stats-range-title').textContent=`Last ${range.days} days`;$('ff-stats-range-sub').textContent=`${range.count} sessions · ${ffFmtMin(range.total)} recorded · no imported estimates`;$('ff-stats-days').textContent=`${range.days} days`;
+}
+function ffRenderWeekHistory(sessions){
+ const week=ffWeekTotals(sessions,8),root=$('ff-stats-weeks'),labels=$('ff-stats-week-labels');if(!root||!labels)return;const max=Math.max(1,...week.map(x=>x.minutes));root.innerHTML='';labels.innerHTML='';week.forEach((x,i)=>{const col=document.createElement('div');col.className='ff-bar-col';const bar=document.createElement('div');bar.className='ff-bar'+(x.current?' today':'');bar.style.height=`${x.minutes?Math.max(3,x.minutes/max*100):1.5}%`;bar.title=`Week of ${x.label} · ${ffFmtMin(x.minutes)}${x.current?' · current week':''}`;bar.style.animationDelay=`${i*35}ms`;col.appendChild(bar);root.appendChild(col);const l=document.createElement('span');l.textContent=i%2===0||i===7?x.label:'';labels.appendChild(l);});const current=week[7],prior=week[6],diff=current.minutes-prior.minutes;$('ff-stats-week-meta').innerHTML=ffStatPill('CURRENT WEEK',ffFmtMin(current.minutes))+ffStatPill('PREVIOUS WEEK',ffFmtMin(prior.minutes))+ffStatPill('WEEK-ON-WEEK',`${diff>=0?'+':''}${ffFmtMin(diff)}`);
+}
+function ffRenderDurationDistribution(range){
+ const root=$('ff-stats-duration-dist');if(!root)return;const bins=[{name:'Under 15m',lo:0,hi:15,color:'#9b8cff'},{name:'15–24m',lo:15,hi:25,color:'#58c6ff'},{name:'25–39m',lo:25,hi:40,color:'#5bf0e0'},{name:'40–59m',lo:40,hi:60,color:'#caff79'},{name:'60m+',lo:60,hi:Infinity,color:'#ffbf78'}];const vals=bins.map(b=>({...b,count:range.items.filter(s=>s._ffMin>=b.lo&&s._ffMin<b.hi).length})),max=Math.max(1,...vals.map(x=>x.count));root.innerHTML=vals.map(b=>`<div class="ff-dist-row"><div class="ff-dist-name">${b.name}</div><div class="ff-dist-track"><div class="ff-dist-fill" style="width:${b.count/max*100}%;background:${b.color};color:${b.color}"></div></div><div class="ff-dist-value">${b.count}</div></div>`).join('');const mids=range.items.filter(s=>s._ffMin>=25&&s._ffMin<40).length;const dominant=vals.reduce((a,b)=>b.count>a.count?b:a,vals[0]);$('ff-stats-duration-insight').innerHTML=range.count?`<div class="ff-readout-mark">⌁</div><div class="ff-readout-copy"><strong>Most common length bucket: ${dominant.name}</strong><small>${dominant.count} of ${range.count} sessions fall in this band; this is descriptive, not a score.</small></div>`:'<div class="ff-readout-mark">⌁</div><div class="ff-readout-copy"><strong>No duration pattern yet</strong><small>Session-length distribution will populate from saved records.</small></div>';
+}
+function ffRenderTelemetry(){
+ if(!FF4.mounted)return;const sessions=ffSessions(),range=ffRange(FF4.days,sessions),all=ffRange(FF4.days,sessions);
+ ffRenderCmdMetrics(sessions,range);ffRenderBars('ff-cmd-bars','ff-cmd-bar-labels',FF4.days,range);const avg=range.count?range.total/range.count:0,peak=Math.max(0,...range.values);$('ff-cmd-trend-meta').innerHTML=ffStatPill('TOTAL',ffFmtMin(range.total))+ffStatPill('DAILY AVG',ffFmtMin(range.total/range.days))+ffStatPill('PEAK DAY',ffFmtMin(peak))+ffStatPill('ACTIVE DAYS',`${range.active}/${range.days}`);
+ ffRenderDonut('ff-cmd-donut','ff-cmd-subj-readout',range.items);ffRenderWeekday('ff-cmd-weekdays',sessions,'ff-cmd-weekday-readout');ffRenderHours('ff-cmd-hours',range.items,'ff-cmd-hour-readout');ffRenderStream('ff-cmd-stream',sessions,5);
+ ffRenderStatsMetrics(sessions,range);ffRenderLineSvg('ff-stats-line',FF4.days,range);$('ff-stats-line-meta').innerHTML=ffStatPill('TOTAL FOCUS',ffFmtMin(range.total))+ffStatPill('DAILY AVERAGE',ffFmtMin(range.total/range.days))+ffStatPill('LONGEST SESSION',range.items.length?ffFmtMin(Math.max(...range.items.map(s=>s._ffMin))):'—')+ffStatPill('SESSION COUNT',String(range.count));ffRenderDonut('ff-stats-donut','ff-stats-subject-insight',range.items);ffRenderWeekHistory(sessions);ffRenderDurationDistribution(range);ffRenderHours('ff-stats-hours',range.items,'ff-stats-hours-insight');ffRenderStream('ff-stats-stream',sessions,8);
+}
+function renderFF4(){try{ffRenderTelemetry();}catch(e){console.error('FocusFlow telemetry render issue:',e)}}
+function downloadFFTelemetryCSV(){
+ const sessions=ffSessions();if(!sessions.length){showToast('ℹ️','No focus sessions available to export');return;}
+ const header=['date','completedAt','subjectId','subject','durationMinutes','partial'];const rows=sessions.map(s=>[s._ffDate,s.completedAt||'',s.subj||'',ffSubj(s.subj).name,s._ffMin,s.partial?'true':'false']);const csv=[header,...rows].map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=`focusflow-telemetry-${ffToday()}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);showToast('📡','Telemetry CSV exported');
+}
+// Existing summary updater had checked s.mode; original records use s.type='focus'.
+// Override only the displayed summary; the saved storage is untouched.
+function updateCommandMetrics(){
+ const sessions=ffSessions(),today=ffToday(),todayM=sessions.filter(s=>s._ffDate===today).reduce((a,s)=>a+s._ffMin,0),ws=ffWeekStart(new Date()),weekM=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=ws}).reduce((a,s)=>a+s._ffMin,0);const a=$('ccTodayFocus'),b=$('ccWeekFocus');if(a)a.textContent=ffFmtMin(todayM);if(b)b.textContent=ffFmtHours(weekM);if(window.__ff4Ready)renderFF4();
+}
+// Keep the custom telemetry in sync with page navigation and the existing event flow.
+const ffPreviousShowPage=showPage;
+showPage=function(id){ffPreviousShowPage(id);if(id==='command'||id==='stats'){renderFF4();rtRenderStrategy();rtBindTilt();}};
+const ffPreviousRefreshSidebar=refreshSidebar;
+refreshSidebar=function(){ffPreviousRefreshSidebar();updateCommandMetrics();};
+
+/* FOCUSFLOW 5.0 — Race-strategy telemetry. Read-only: never writes or migrates session records. */
+function rtRenderStrategy(){
+ const root=$('raceTelemetry');if(!root||typeof ffSessions!=='function')return;
+ const sessions=ffSessions(),today=ffToday(),now=new Date();const start=new Date(now);start.setHours(0,0,0,0);start.setDate(start.getDate()-13);
+ const recent=sessions.filter(s=>{const d=ffDateFromKey(s._ffDate);return d&&d>=start&&d<=now;});
+ const map={};for(let i=0;i<14;i++){const d=new Date(start);d.setDate(start.getDate()+i);map[ffLocalDateKey(d)]=0}recent.forEach(s=>map[s._ffDate]=(map[s._ffDate]||0)+s._ffMin);
+ const vals=Object.values(map),total=recent.reduce((a,s)=>a+s._ffMin,0),active=vals.filter(v=>v>0).length;
+ $('rt-total').textContent=ffFmtMin(total);$('rt-average').textContent=ffFmtMin(total/14);$('rt-active').textContent=active+'/14';
+ $('rt-data-status').textContent=sessions.length?'LINKED · '+sessions.length+' SESSIONS':'NO SESSIONS';$('rt-last-updated').textContent='UPDATED '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+ const max=Math.max(1,...vals);$('rt-chart').innerHTML=Object.entries(map).map(([day,v],i)=>`<div class="rt-bar-slot" title="${ffEsc(day)} · ${ffEsc(ffFmtMin(v))}"><div class="rt-bar ${day===today?'today':''}" style="height:${Math.max(v?5:2,v/max*100)}%;animation-delay:${Math.min(i*22,260)}ms"></div></div>`).join('');
+ const by={};recent.forEach(s=>{const id=s.subj||'unknown';by[id]=(by[id]||0)+s._ffMin});const rows=Object.entries(by).sort((a,b)=>b[1]-a[1]);const colors=['#d8ff58','#57e7ff','#a78bfa','#ff9b62','#fb7185','#6ee7b7','#8ab4ff'];let off=0;const circumference=2*Math.PI*43;
+ const rings=rows.map(([id,m],i)=>{const len=total?circumference*m/total:0;const dash=`${Math.max(0,len-2)} ${Math.max(0,circumference-len+2)}`;const el=`<circle class="rt-donut-ring" cx="60" cy="60" r="43" stroke="${colors[i%colors.length]}" stroke-dasharray="${dash}" stroke-dashoffset="${-off}"/>`;off+=len;return el}).join('');
+ $('rt-donut').innerHTML=`<svg class="rt-donut" viewBox="0 0 120 120" role="img" aria-label="Saved study time by subject"><circle cx="60" cy="60" r="43" fill="none" stroke="#29405a" stroke-width="12"/>${rings}<circle cx="60" cy="60" r="31" fill="#0b1726"/><text class="rt-donut-center" x="60" y="58">${ffFmtHours(total)}</text><text class="rt-donut-sub" x="60" y="70">14D FOCUS</text></svg>`;
+ $('rt-legend').innerHTML=rows.length?rows.slice(0,5).map(([id,m],i)=>`<div class="rt-legend-row"><i style="background:${colors[i%colors.length]}"></i><span>${ffEsc(ffSubj(id).name)}</span><b>${total?Math.round(m/total*100):0}%</b></div>`).join(''):'<div class="rt-legend-row">No saved focus sessions in range</div>';
+ const top=rows[0];$('rt-subject-insight').innerHTML=top?`Leading time allocation: <strong>${ffEsc(ffSubj(top[0]).name)}</strong> at ${Math.round(top[1]/Math.max(1,total)*100)}% of recorded focus time. This shows time spent, not mastery or effectiveness.`:'No focus sessions in the last 14 days. Existing data is untouched; charts will populate as sessions are recorded.';
+ const weekdayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],wd=Array(7).fill(0);recent.forEach(s=>{const d=ffDateFromKey(s._ffDate);if(d)wd[d.getDay()]+=s._ffMin});const wmax=Math.max(1,...wd);$('rt-weekdays').innerHTML=wd.map((v,i)=>`<div class="rt-weekday" title="${weekdayNames[i]} · ${ffFmtMin(v)}"><div class="rt-weekday-bar" style="height:${Math.max(v?5:2,v/wmax*100)}%;animation-delay:${i*55}ms"></div><span>${weekdayNames[i]}</span></div>`).join('');
+ const best=wd.indexOf(Math.max(...wd));if(total){$('rt-pace-title').textContent=`Strongest recent day: ${weekdayNames[best]}`;$('rt-pace-copy').textContent=`${ffFmtMin(wd[best])} logged across that weekday in the last 14 days. Based on saved session dates and durations only.`}else{$('rt-pace-title').textContent='Baseline not established';$('rt-pace-copy').textContent='Record focus sessions to reveal weekday patterns. No estimates are fabricated.'}
+}
+function rtBindTilt(){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;document.querySelectorAll('[data-rt-tilt]').forEach(el=>{if(el.dataset.rtBound)return;el.dataset.rtBound='1';el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(900px) rotateX(${-y*3.2}deg) rotateY(${x*3.8}deg) translateY(-2px)`});el.addEventListener('pointerleave',()=>{el.style.transform='perspective(900px) rotateX(0) rotateY(0) translateY(0)'})})}
+const rtOldRenderFF4=renderFF4;renderFF4=function(){rtOldRenderFF4();try{rtRenderStrategy();rtBindTilt()}catch(e){console.error('Strategy telemetry:',e)}};
+
+/* FOCUSFLOW 6.0 — additive data layer. Never mutates ff_v5 or existing keys. */
+const FF6_STINT_KEY='ff_stints_v1', FF6_ACADEMIC_KEY='ff_academic_v1';
+function ff6Read(key, fallback){try{const v=JSON.parse(localStorage.getItem(key));return v&&typeof v==='object'?v:fallback}catch(e){return fallback}}
+function ff6Write(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){showToast('⚠️','Could not save: browser storage unavailable or full');return false}}
+function ff6Day(){return new Date().toLocaleDateString('en-CA')}
+function ff6Id(){return 'x'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function ff6Esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function ff6Stints(){let d=ff6Read(FF6_STINT_KEY,{version:1,stints:[],templates:[]});if(!Array.isArray(d.stints))d.stints=[];if(!Array.isArray(d.templates))d.templates=[];return d}
+function spPresetChanged(){const p=$('sp-preset').value;if(p!=='custom')$('sp-duration').value=p}
+function spAdd(template){const d=ff6Stints(),v=template||{subject:$('sp-subject').value,chapter:$('sp-chapter').value.trim(),task:$('sp-task').value.trim(),duration:Number($('sp-duration').value),questions:$('sp-questions').value===''?null:Number($('sp-questions').value),priority:$('sp-priority').value,breakMin:Number($('sp-break').value)||0};if(!v.chapter&&!v.task){showToast('ℹ️','Add a chapter or task first');return}if(!Number.isFinite(v.duration)||v.duration<1||v.duration>360){showToast('⚠️','Duration must be 1–360 minutes');return}d.stints.push({id:ff6Id(),date:ff6Day(),...v,status:'planned',actualMin:null,doneQuestions:null,createdAt:new Date().toISOString()});if(ff6Write(FF6_STINT_KEY,d)){spRender();showToast('🏁','Stint added to today’s timeline')}}
+function spSaveTemplate(){const d=ff6Stints(),t={subject:$('sp-subject').value,chapter:$('sp-chapter').value.trim(),task:$('sp-task').value.trim(),duration:Number($('sp-duration').value),questions:$('sp-questions').value===''?null:Number($('sp-questions').value),priority:$('sp-priority').value,breakMin:Number($('sp-break').value)||0};if(!t.chapter&&!t.task){showToast('ℹ️','Enter a chapter or task to save');return}d.templates.push(t);if(ff6Write(FF6_STINT_KEY,d))showToast('✓','Template saved')}
+function spAddTemplate(){const d=ff6Stints();if(!d.templates.length){showToast('ℹ️','No templates yet — configure a stint and save it as a template');return}const names=d.templates.map((t,i)=>`${i+1}. ${t.subject.toUpperCase()} · ${t.chapter||t.task} · ${t.duration}m`).join('\n');const ans=prompt('Choose a template number:\n'+names);if(ans===null)return;const i=Number(ans)-1;if(!Number.isInteger(i)||!d.templates[i]){showToast('⚠️','Invalid template number');return}spAdd(d.templates[i])}
+function spComplete(id){const d=ff6Stints(),s=d.stints.find(x=>x.id===id);if(!s)return;const actual=prompt('Actual focused minutes? (planned '+s.duration+')',String(s.duration));if(actual===null)return;const n=Number(actual);if(!Number.isFinite(n)||n<0||n>720){showToast('⚠️','Enter a valid duration');return}let q=s.questions;if(q!==null){const a=prompt('Questions completed? (optional; leave blank to skip)',String(q));if(a!==null&&a.trim()!==''){const nQ=Number(a);if(Number.isFinite(nQ)&&nQ>=0)s.doneQuestions=nQ}}s.status='completed';s.actualMin=n;s.completedAt=new Date().toISOString();if(ff6Write(FF6_STINT_KEY,d)){spRender();showToast('✓','Stint completion saved')}}
+function spSkip(id){const d=ff6Stints(),s=d.stints.find(x=>x.id===id);if(!s)return;s.status='missed';s.missedAt=new Date().toISOString();if(ff6Write(FF6_STINT_KEY,d))spRender()}
+function spDelete(id){const d=ff6Stints();d.stints=d.stints.filter(s=>s.id!==id);if(ff6Write(FF6_STINT_KEY,d))spRender()}
+function spRecovery(){const d=ff6Stints(),today=d.stints.filter(s=>s.date===ff6Day()),missed=today.filter(s=>s.status==='missed'),pending=today.filter(s=>s.status==='planned');if(!missed.length&&!pending.length){showToast('ℹ️','No unfinished stints to recover');return}const carry=missed.concat(pending).sort((a,b)=>({high:0,medium:1,low:2}[a.priority]??1)-({high:0,medium:1,low:2}[b.priority]??1));d.recovery={date:ff6Day(),proposedAt:new Date().toISOString(),stintIds:carry.map(s=>s.id),note:'Reorder unfinished stints by priority. No changes applied until approved.'};if(ff6Write(FF6_STINT_KEY,d)){const c=$('sp-recovery-card');c.style.display='block';$('sp-recovery-copy').textContent=`Proposal: ${carry.length} unfinished stint(s), ordered High → Medium → Low priority. Current plan remains unchanged until you approve.`}}
+function spApproveRecovery(){const d=ff6Stints(),r=d.recovery;if(!r||r.date!==ff6Day()){showToast('ℹ️','Create a fresh recovery proposal first');return}const rank={high:0,medium:1,low:2},ids=r.stintIds||[];const list=d.stints.filter(s=>ids.includes(s.id)&&s.date===ff6Day()&&s.status!=='completed').sort((a,b)=>(rank[a.priority]??1)-(rank[b.priority]??1));list.forEach((s,i)=>s.order=i);d.stints=d.stints.map(s=>s.date===ff6Day()&&list.includes(s)?list[list.indexOf(s)]:s);d.recovery=null;if(ff6Write(FF6_STINT_KEY,d)){spRender();$('sp-recovery-card').style.display='none';showToast('✓','Recovery order approved')}}
+function spDismissRecovery(){const d=ff6Stints();d.recovery=null;ff6Write(FF6_STINT_KEY,d);$('sp-recovery-card').style.display='none'}
+function spRender(){if(!$('sp-timeline'))return;const d=ff6Stints(),today=d.stints.filter(s=>s.date===ff6Day()).sort((a,b)=>(a.order??999)-(b.order??999)),planned=today.reduce((a,s)=>a+(s.duration||0),0),completed=today.filter(s=>s.status==='completed').reduce((a,s)=>a+(s.actualMin??s.duration),0);$('sp-planned').textContent=planned+'m';$('sp-completed').textContent=completed+'m';$('sp-remaining').textContent=String(today.filter(s=>s.status==='planned'||s.status==='missed').length);$('sp-timeline').innerHTML=today.length?today.map((s,i)=>`<div style="display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:13px;background:var(--s1)"><div style="font:700 .68rem var(--mono);color:#57e7ff">${String(i+1).padStart(2,'0')}</div><div><div style="font-weight:700;font-size:.78rem">${ff6Esc(s.chapter||s.task)} <span style="font-size:.6rem;color:var(--text3)">· ${ff6Esc(s.subject)}</span></div><div style="font-size:.64rem;color:var(--text2);margin-top:3px">${ff6Esc(s.task||'Study block')} · ${s.duration}m · ${ff6Esc(s.priority)} priority${s.questions!==null&&s.questions!==undefined?' · target '+s.questions+' questions':''}${s.status==='completed'?' · actual '+(s.actualMin??s.duration)+'m':''}</div></div><div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">${s.status==='planned'?`<button class="btn btn-y" onclick="spComplete('${s.id}')">Complete</button><button class="btn btn-ghost" onclick="spSkip('${s.id}')">Missed</button>`:`<span style="font-size:.62rem;color:${s.status==='completed'?'#6ee7b7':'#ffb86b'}">${s.status.toUpperCase()}</span>`}<button class="btn btn-ghost" onclick="spDelete('${s.id}')" title="Remove stint">×</button></div></div>`).join(''):'<div style="font-size:.74rem;color:var(--text3);padding:18px;text-align:center">No stints planned for today. Add the first one above.</div>';const r=d.recovery;if(r&&r.date===ff6Day()){$('sp-recovery-card').style.display='block';$('sp-recovery-copy').textContent='A recovery proposal is saved for today. Review and approve it to reorder unfinished work.'}else $('sp-recovery-card').style.display='none'}
+function ff6Academic(){const d=ff6Read(FF6_ACADEMIC_KEY,{version:1,tests:[],practice:[],mistakes:[]});['tests','practice','mistakes'].forEach(k=>{if(!Array.isArray(d[k]))d[k]=[]});return d}
+function peAddTest(){const d=ff6Academic(),subject=$('pe-subject').value,score=Number($('pe-score').value),max=Number($('pe-max').value);if($('pe-score').value===''||$('pe-max').value===''||!Number.isFinite(score)||!Number.isFinite(max)||max<=0||score<0||score>max){showToast('⚠️','Enter a valid score and maximum marks');return}d.tests.push({id:ff6Id(),date:ff6Day(),subject,score,max,chapter:$('pe-chapter').value.trim(),revisionMin:$('pe-revision').value===''?null:Number($('pe-revision').value),createdAt:new Date().toISOString()});if(ff6Write(FF6_ACADEMIC_KEY,d)){['pe-score','pe-max','pe-chapter','pe-revision'].forEach(id=>$(id).value='');peRender();showToast('✓','Test result saved')}}
+function peAddPractice(){const d=ff6Academic(),subject=$('pe-m-subject').value,chapter=$('pe-m-chapter').value.trim(),attempted=$('pe-attempted').value===''?null:Number($('pe-attempted').value),correct=$('pe-correct').value===''?null:Number($('pe-correct').value),rating=$('pe-rating').value===''?null:Number($('pe-rating').value),mistake=$('pe-mistake').value;if(!chapter){showToast('ℹ️','Enter a chapter or topic');return}if(attempted!==null&&(!Number.isFinite(attempted)||attempted<0||!Number.isInteger(attempted))||correct!==null&&(!Number.isFinite(correct)||correct<0||!Number.isInteger(correct))||attempted!==null&&correct!==null&&correct>attempted){showToast('⚠️','Check attempted/correct question counts');return}const rec={id:ff6Id(),date:ff6Day(),subject,chapter,attempted,correct,rating,createdAt:new Date().toISOString()};d.practice.push(rec);if(mistake)d.mistakes.push({id:ff6Id(),date:ff6Day(),subject,chapter,category:mistake});if(ff6Write(FF6_ACADEMIC_KEY,d)){['pe-m-chapter','pe-attempted','pe-correct'].forEach(id=>$(id).value='');$('pe-rating').value='';$('pe-mistake').value='';peRender();showToast('✓','Practice check-in saved')}}
+function peRender(){if(!$('pe-report'))return;const d=ff6Academic(),tests=d.tests,practice=d.practice,mistakes=d.mistakes,latest=tests[tests.length-1];$('pe-latest').textContent=latest?`${(latest.score/latest.max*100).toFixed(1)}%`:'—';$('pe-latest-meta').textContent=latest?`${latest.subject.toUpperCase()} · ${latest.score}/${latest.max} · ${latest.date}`:'No test results logged yet';const att=practice.reduce((a,p)=>a+(p.attempted||0),0),cor=practice.reduce((a,p)=>a+(p.correct||0),0);$('pe-accuracy').textContent=att?`${(cor/att*100).toFixed(1)}%`:'—';$('pe-mistakes').textContent=String(mistakes.length);
+ const last=tests.slice(-8);const maxPct=Math.max(100,...last.map(t=>t.score/t.max*100));$('pe-score-chart').innerHTML=last.length?last.map(t=>`<div title="${ff6Esc(t.date)} · ${ff6Esc(t.subject)} · ${(t.score/t.max*100).toFixed(1)}%" style="min-width:38px;flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><div style="font-size:.58rem;color:var(--text2)">${(t.score/t.max*100).toFixed(0)}%</div><div style="height:${Math.max(5,t.score/t.max*100/maxPct*82)}px;width:100%;max-width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#57e7ff,#3976a5);animation:rise .45s ease both"></div><div style="font-size:.52rem;color:var(--text3)">${ff6Esc(t.subject.slice(0,3))}</div></div>`).join(''):'<span style="font-size:.7rem;color:var(--text3)">No test data yet</span>';$('pe-score-caption').textContent=tests.length>1?'Recorded test results only; compare like-for-like subjects and maximum marks.':tests.length===1?'One result recorded; a trend needs more tests.':'Add results to establish a trend.';
+ const by={};practice.forEach(p=>{const k=p.subject+'|'+p.chapter;const x=by[k]||(by[k]={subject:p.subject,chapter:p.chapter,attempted:0,correct:0,rating:null});x.attempted+=p.attempted||0;x.correct+=p.correct||0;if(p.rating!==null)x.rating=p.rating});$('pe-heatmap').innerHTML=Object.values(by).length?Object.values(by).map(x=>{const pct=x.attempted?x.correct/x.attempted*100:null;const bg=pct===null?'#243247':pct>=80?'rgba(110,231,183,.22)':pct>=60?'rgba(255,184,107,.22)':'rgba(251,113,133,.22)';return `<div title="${ff6Esc(x.subject)} · ${ff6Esc(x.chapter)} · ${pct===null?'No accuracy data':pct.toFixed(1)+'% accuracy'} · ${x.rating===null?'No rating':'rating '+x.rating+'/5'}" style="padding:9px 10px;border-radius:9px;border:1px solid ${bg};background:${bg};font-size:.62rem;max-width:100%"><b>${ff6Esc(x.chapter)}</b><div style="color:var(--text2);margin-top:3px">${x.attempted?pct.toFixed(0)+'% accuracy':'Accuracy n/a'}${x.rating===null?'':' · '+x.rating+'/5'}</div></div>`}).join(''):'<span style="font-size:.7rem;color:var(--text3)">Log chapter check-ins to build the heatmap.</span>';
+ const cats=['silly','concept','time','recall','reading','presentation'],labels={silly:'Silly / calculation',concept:'Conceptual',time:'Time management',recall:'Recall / facts / formulas',reading:'Misread question',presentation:'Presentation / steps / diagrams'},counts={};mistakes.forEach(m=>counts[m.category]=(counts[m.category]||0)+1);const peak=Math.max(1,...cats.map(c=>counts[c]||0));$('pe-mistake-profile').innerHTML=cats.map(c=>`<div><div style="display:flex;justify-content:space-between;font-size:.66rem;margin-bottom:4px"><span>${labels[c]}</span><b>${counts[c]||0}</b></div><div style="height:5px;background:var(--s2);border-radius:8px;overflow:hidden"><div style="height:100%;width:${(counts[c]||0)/peak*100}%;background:#57e7ff;border-radius:8px"></div></div></div>`).join('');$('pe-records').innerHTML=tests.length||practice.length?tests.slice(-4).reverse().map(t=>`<div style="padding:9px;border:1px solid var(--border);border-radius:9px;font-size:.67rem">TEST · ${ff6Esc(t.date)} · ${ff6Esc(t.subject)} · ${t.score}/${t.max} (${(t.score/t.max*100).toFixed(1)}%)${t.chapter?' · '+ff6Esc(t.chapter):''}</div>`).concat(practice.slice(-4).reverse().map(p=>`<div style="padding:9px;border:1px solid var(--border);border-radius:9px;font-size:.67rem">PRACTICE · ${ff6Esc(p.date)} · ${ff6Esc(p.subject)} · ${ff6Esc(p.chapter)} · ${p.attempted===null?'accuracy n/a':p.correct+'/'+p.attempted+' correct'}${p.rating===null?'':' · rating '+p.rating+'/5'}</div>`)).join(''):'<span style="font-size:.7rem;color:var(--text3)">No academic records yet.</span>';peRenderReport('daily')}
+function peRenderReport(period){if(!$('pe-report'))return;const d=ff6Academic(),cut=new Date();cut.setDate(cut.getDate()-(period==='weekly'?6:0));const key=cut.toLocaleDateString('en-CA'),tests=d.tests.filter(t=>period==='weekly'?t.date>=key:t.date===ff6Day()),pr=d.practice.filter(p=>period==='weekly'?p.date>=key:p.date===ff6Day()),mis=d.mistakes.filter(m=>period==='weekly'?m.date>=key:m.date===ff6Day());const att=pr.reduce((a,p)=>a+(p.attempted||0),0),cor=pr.reduce((a,p)=>a+(p.correct||0),0);let html=`<b>${period==='weekly'?'Weekly engineering report':'Daily performance snapshot'}</b><br>${tests.length} test result(s), ${pr.length} practice check-in(s), and ${mis.length} explicitly logged mistake(s) in this period.<br>`;if(att)html+=`Recorded practice accuracy: <b>${(cor/att*100).toFixed(1)}%</b> (${cor}/${att} questions).<br>`;if(tests.length){const avg=tests.reduce((a,t)=>a+t.score/t.max*100,0)/tests.length;html+=`Mean percentage across recorded tests in this period: <b>${avg.toFixed(1)}%</b>. Different subjects/tests may not be directly comparable.<br>`}if(mis.length){const c={};mis.forEach(m=>c[m.category]=(c[m.category]||0)+1);const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];const names={silly:'silly/calculation errors',concept:'conceptual errors',time:'time-management errors',recall:'recall errors',reading:'question-reading errors',presentation:'presentation errors'};html+=`Most frequently logged mistake category: <b>${names[top[0]]||top[0]}</b> (${top[1]}). Review those examples before the next test.<br>`}if(!tests.length&&!pr.length&&!mis.length)html+='No records for this period yet. The report does not infer performance from focus time alone.<br>';if(pr.length){const weak=pr.filter(p=>p.attempted&&p.correct!==null).sort((a,b)=>a.correct/a.attempted-b.correct/b.attempted)[0];if(weak)html+=`Lowest recorded chapter accuracy in this period: <b>${ff6Esc(weak.chapter)}</b> (${(weak.correct/weak.attempted*100).toFixed(1)}%). Consider a targeted practice stint.<br>`}html+='<span style="color:var(--text3);font-size:.65rem">Evidence limits: correlations require enough comparable records. Revision time and test scores alone do not establish causation; missing data is not treated as zero.</span>';$('pe-report').innerHTML=html}
+const ff6OldShowPage=showPage;showPage=function(id){ff6OldShowPage(id);if(id==='stints')spRender();if(id==='engineering')peRender()};
+
+// FocusFlow 6.3: independent exam-readiness checklist. Existing ff_v5 data is untouched.
+const FF62_READINESS_KEY='ff_readiness_v1';
+const ER_FIXED_SYLLABUS={
+  eng:{label:'English L&L',topics:[
+    'First Flight · A Letter to God','First Flight · Nelson Mandela: Long Walk to Freedom','First Flight · Two Stories about Flying','First Flight · From the Diary of Anne Frank','First Flight · Glimpses of India','First Flight · Mijbil the Otter','First Flight · Madam Rides the Bus','First Flight · The Sermon at Benares','First Flight · The Proposal',
+    'Poem · Dust of Snow','Poem · Fire and Ice','Poem · A Tiger in the Zoo','Poem · How to Tell Wild Animals','Poem · The Ball Poem','Poem · Amanda!','Poem · The Trees','Poem · Fog','Poem · The Tale of Custard the Dragon','Poem · For Anne Gregory',
+    'Footprints Without Feet · A Triumph of Surgery','Footprints Without Feet · The Thief’s Story','Footprints Without Feet · The Midnight Visitor','Footprints Without Feet · A Question of Trust','Footprints Without Feet · Footprints Without Feet','Footprints Without Feet · The Making of a Scientist','Footprints Without Feet · The Necklace','Footprints Without Feet · Bholi','Footprints Without Feet · The Book That Saved the Earth',
+    'Reading · Discursive and case-based factual passages','Writing · Formal letter','Writing · Analytical paragraph','Grammar · Determiners, tenses, modals, subject–verb concord','Grammar · Reported speech','Words and Expressions II · prescribed workbook units'
+  ]},
+  hindiA:{label:'Hindi Course A',topics:[
+    'क्षितिज भाग 2 · सूरदास के पद','क्षितिज भाग 2 · राम-लक्ष्मण-परशुराम संवाद','क्षितिज भाग 2 · सवैया और कवित्त (देव)','क्षितिज भाग 2 · आत्मकथ्य','क्षितिज भाग 2 · उत्साह और अट नहीं रही है','क्षितिज भाग 2 · यह दंतुरित मुसकान और फसल','क्षितिज भाग 2 · छाया मत छूना','क्षितिज भाग 2 · कन्यादान','क्षितिज भाग 2 · संगतकार',
+    'क्षितिज भाग 2 · नेताजी का चश्मा','क्षितिज भाग 2 · बालगोबिन भगत','क्षितिज भाग 2 · लखनवी अंदाज़','क्षितिज भाग 2 · मानवीय करुणा की दिव्य चमक','क्षितिज भाग 2 · एक कहानी यह भी','क्षितिज भाग 2 · स्त्री शिक्षा के विरोधी कुतर्कों का खंडन','क्षितिज भाग 2 · नौबतखाने में इबादत','क्षितिज भाग 2 · संस्कृति',
+    'कृतिका भाग 2 · माता का अँचल','कृतिका भाग 2 · जॉर्ज पंचम की नाक','कृतिका भाग 2 · साना-साना हाथ जोड़ि','कृतिका भाग 2 · एही ठैयाँ झुलनी हेरानी हो रामा!','कृतिका भाग 2 · मैं क्यों लिखता हूँ',
+    'व्याकरण · रचना के आधार पर वाक्य भेद','व्याकरण · वाच्य','व्याकरण · पद-परिचय','व्याकरण · अलंकार','लेखन · अनुच्छेद, पत्र, स्ववृत्त/ई-मेल और विज्ञापन (prescribed formats)'
+  ]},
+  hindiB:{label:'Hindi Course B',topics:[
+    'स्पर्श भाग 2 · साखी (कबीर)','स्पर्श भाग 2 · पद (मीरा)','स्पर्श भाग 2 · मनुष्यता (मैथिलीशरण गुप्त)','स्पर्श भाग 2 · पर्वत प्रदेश में पावस (सुमित्रानंदन पंत)','स्पर्श भाग 2 · तोप (वीरेन डंगवाल)','स्पर्श भाग 2 · कर चले हम फ़िदा (कैफ़ी आज़मी)','स्पर्श भाग 2 · आत्मत्राण (रवींद्रनाथ ठाकुर)',
+    'स्पर्श भाग 2 · बड़े भाई साहब','स्पर्श भाग 2 · डायरी का एक पन्ना','स्पर्श भाग 2 · तताँरा-वामीरो कथा','स्पर्श भाग 2 · तीसरी कसम के शिल्पकार शैलेंद्र','स्पर्श भाग 2 · अब कहाँ दूसरे के दुख से दुखी होने वाले','स्पर्श भाग 2 · पतझर में टूटी पत्तियाँ','स्पर्श भाग 2 · कारतूस',
+    'संचयन भाग 2 · हरिहर काका','संचयन भाग 2 · सपनों के-से दिन','संचयन भाग 2 · टोपी शुक्ला',
+    'व्याकरण · पदबंध','व्याकरण · रचना के आधार पर वाक्य रूपांतरण','व्याकरण · समास','व्याकरण · मुहावरे','लेखन · अनुच्छेद लेखन','लेखन · औपचारिक पत्र','लेखन · सूचना / विज्ञापन / ई-मेल (as prescribed by school)'
+  ]},
+  ai:{label:'Artificial Intelligence (417)',topics:[
+    'Employability Skills II · Communication Skills','Employability Skills II · Self-Management Skills','Employability Skills II · ICT Skills','Employability Skills II · Entrepreneurial Skills','Employability Skills II · Green Skills',
+    'Subject-Specific · Revisiting AI Project Cycle and Ethical Frameworks for AI','Subject-Specific · Advanced Concepts of Modeling in AI','Subject-Specific · Evaluating Models','Subject-Specific · Statistical Data','Subject-Specific · Computer Vision','Subject-Specific · Natural Language Processing','Subject-Specific · Advanced Python','Practical / Project Work · prescribed practical file and practical examination'
+  ]}
+};
+function erData(){const d=loadLS(FF62_READINESS_KEY,{});return d&&typeof d==='object'?d:{}}
+function erRender(){if(!$('er-list'))return;const filter=$('er-filter')?.value||'all',data=erData(),rows=[];
+  const pushRows=(key,label,topics)=>topics.forEach(name=>{const id=key+'::'+name,r=data[id]||{};rows.push({id,sub:label,name,learned:!!r.learned,practice:!!r.practice,revised:!!r.revised,tested:!!r.tested})});
+  ['math','sci','sst'].forEach(key=>{if(filter!=='all'&&filter!==key)return;const sub=SYLLABUS_DEF.find(x=>x.key===key);if(sub)pushRows(key,sub.name,getChapters(key).map(ch=>ch.name));});
+  Object.entries(ER_FIXED_SYLLABUS).forEach(([key,sub])=>{if(filter==='all'||filter===key)pushRows(key,sub.label,sub.topics)});
+  const total=rows.length,ready=rows.filter(r=>r.learned&&r.practice&&r.revised&&r.tested).length,checks=rows.reduce((n,r)=>n+[r.learned,r.practice,r.revised,r.tested].filter(Boolean).length,0);
+  $('er-total').textContent=total;$('er-ready').textContent=ready;$('er-pct').textContent=total?Math.round(checks/(total*4)*100)+'%':'0%';
+  $('er-list').innerHTML=rows.length?rows.map(r=>`<div style="padding:11px;border:1px solid var(--border);border-radius:11px;background:var(--s1)"><div style="display:flex;justify-content:space-between;gap:8px;align-items:start;margin-bottom:9px"><b style="font-size:.75rem;line-height:1.5">${ff6Esc(r.name)}</b><span style="font:600 .58rem var(--mono);color:var(--text3);white-space:nowrap">${ff6Esc(r.sub.toUpperCase())}</span></div><div style="display:flex;gap:12px;flex-wrap:wrap">${[['learned','Learned'],['practice','Practised'],['revised','Revised'],['tested','Timed questions']].map(([k,label])=>`<label style="font-size:.66rem;display:flex;align-items:center;gap:5px"><input type="checkbox" ${r[k]?'checked':''} onchange="erToggle('${r.id.replace(/'/g,"\\'")}','${k}',this.checked)"/>${label}</label>`).join('')}</div><div style="font-size:.6rem;color:${r.learned&&r.practice&&r.revised&&r.tested?'var(--green)':'var(--text3)'};margin-top:7px">${r.learned&&r.practice&&r.revised&&r.tested?'READY · all four checks complete':'IN PROGRESS · '+[r.learned,r.practice,r.revised,r.tested].filter(Boolean).length+'/4 checks'}</div></div>`).join(''):'<div style="font-size:.72rem;color:var(--text3)">No topics found for this subject.</div>';
+}
+function erToggle(id,field,value){const d=erData();d[id]=d[id]||{};d[id][field]=value;saveLS(FF62_READINESS_KEY,d);erRender()}
+mountFF4();
+rtRenderStrategy();
+rtBindTilt();
+
 </script>
 </body>
 </html>
